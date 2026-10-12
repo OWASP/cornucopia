@@ -37,5 +37,6 @@ defmodule Copi.Cornucopia.Player do
     |> cast(attrs, [:name, :game_id])
     |> validate_required([:name])
     |> validate_length(:name, min: 1, max: 50)
+            |> validate_format(:name, ~r/^[\p{L}\p{M}\p{N}. _-]+$/u, message: "contains invalid characters. Only letters, numbers, spaces, and ._- are allowed.")
   end
 end

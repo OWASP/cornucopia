@@ -22,7 +22,7 @@
         </a>
     </p>
 {:else}
-    <p>{$t('cards.attacks.p1')}</p>
+    <p>{$t('cards.mappings.no_attacks')}</p>
 {/each}
 
 <style>

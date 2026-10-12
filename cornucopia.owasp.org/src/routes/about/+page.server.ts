@@ -1,9 +1,8 @@
+import { getPageMetadata } from '$lib/utils/pageMetadata.js';
 import { FileSystemHelper } from "$lib/filesystem/fileSystemHelper.js";
 
-
-export async function load({ params: _params }) {
+export async function load(_event) {
+    const metadata = getPageMetadata('about', 'https://cornucopia.owasp.org/about');
     const content = FileSystemHelper.getDataFromPath('data/website/pages/about');
-    return {
-        content: content
-    };
+    return { metadata, content };
 }

@@ -2,6 +2,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
   use CopiWeb.ConnCase, async: false
 
   import Phoenix.LiveViewTest
+  import Ecto.Query
 
   alias Copi.Cornucopia
   alias Copi.Cornucopia.Game
@@ -37,6 +38,18 @@ defmodule CopiWeb.PlayerLive.ShowTest do
           case Copi.Cornucopia.DealtCard.find(id) do
             {:ok, dealt_card} -> {:ok, %{dealt_card | votes: []}}
             other -> other
+          end
+
+        :vote_removed_race ->
+          case Copi.Cornucopia.DealtCard.find(id) do
+            {:ok, dealt_card} ->
+              fake_player_id =
+                Application.get_env(:copi, :player_live_show_dealt_card_stub_race_player_id)
+
+              {:ok, %{dealt_card | votes: [%{player_id: fake_player_id}]}}
+
+            other ->
+              other
           end
       end
     end
@@ -208,6 +221,7 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert Show.display_game_session("cumulus")   == "OWASP Cumulus Session:"
       assert Show.display_game_session("mlsec")     == "Elevation of MLSec Session:"
       assert Show.display_game_session("eop")       == "EoP Session:"
+      assert Show.display_game_session("dbd")       == "Digital Benefits Deck Session:"
     end
 
     test "player_first/2 places current player first in list", %{conn: _conn, player: player} do
@@ -450,6 +464,32 @@ defmodule CopiWeb.PlayerLive.ShowTest do
                }}} = live(conn, "/games/#{original_game_id}/players/#{player.id}")
     end
 
+    test "redirects to game summary when URL targets a finished game but player belongs to a different game", %{
+      conn: conn,
+      player: player
+    } do
+      {:ok, finished_game} = Cornucopia.create_game(%{name: "Finished Game"})
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(finished_game,
+          finished_at: DateTime.truncate(DateTime.utc_now(), :second)
+        )
+      )
+
+      expected_path = "/games/#{finished_game.id}"
+
+      assert {:error,
+              {:redirect,
+               %{
+                 to: ^expected_path,
+                 flash: %{"info" => "This game has finished. Showing the game summary."}
+               }}} =
+               live(
+                 authorize_player(conn, finished_game.id, player.id),
+                 player_url(finished_game.id, player.id)
+               )
+    end
+
     test "toggle_vote hits insert error branch when vote conflicts", %{conn: conn} do
       {game, player, dealt} = create_game_with_dealt_card("Vote Conflict", "VC_1")
 
@@ -462,6 +502,103 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
 
       assert render(view) =~ game.name
+    end
+
+    test "toggle_continue_vote handles race where vote was already removed", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      Copi.Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      Copi.Repo.delete_all(
+        where(Copi.Cornucopia.ContinueVote,
+          player_id: ^player.id,
+          game_id: ^game_id
+        )
+      )
+
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert length(updated_game.continue_votes) == 0
+    end
+
+    test "toggle_continue_vote handles race where vote already exists", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: DateTime.truncate(DateTime.utc_now(), :second))
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      Copi.Repo.insert!(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
+
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert length(updated_game.continue_votes) == 1
+    end
+
+    test "toggle_vote hits already-exists race branch when a concurrent vote already landed",
+         %{conn: conn} do
+      {game, _owner, dealt} = create_game_with_dealt_card("Vote Race Insert", "VRI_1")
+      {:ok, voter} = Cornucopia.create_player(%{name: "Voter", game_id: game.id})
+
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{player_id: voter.id, dealt_card_id: dealt.id})
+
+      Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :vote_conflict)
+
+      {:ok, view, _html} =
+        live(authorize_player(conn, game.id, voter.id), player_url(game.id, voter.id))
+
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 1
+    end
+
+    test "toggle_vote hits already-removed race branch when a concurrent removal already happened",
+         %{conn: conn} do
+      {game, _owner, dealt} = create_game_with_dealt_card("Vote Race Remove", "VRR_1")
+      {:ok, voter} = Cornucopia.create_player(%{name: "Voter2", game_id: game.id})
+      old_race_player_id =
+        Application.get_env(:copi, :player_live_show_dealt_card_stub_race_player_id)
+
+      on_exit(fn ->
+        Application.put_env(
+        :copi,
+        :player_live_show_dealt_card_stub_race_player_id,
+        old_race_player_id
+       )
+      end)
+
+
+      Application.put_env(:copi, :player_live_show_dealt_card_module, DealtCardStub)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_mode, :vote_removed_race)
+      Application.put_env(:copi, :player_live_show_dealt_card_stub_race_player_id, voter.id)
+
+      {:ok, view, _html} =
+        live(authorize_player(conn, game.id, voter.id), player_url(game.id, voter.id))
+
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dealt.id)})
+
+      {:ok, updated_dealt} = Copi.Cornucopia.DealtCard.find(to_string(dealt.id))
+      assert length(updated_dealt.votes) == 0
     end
   end
 
@@ -563,6 +700,12 @@ defmodule CopiWeb.PlayerLive.ShowTest do
     test "returns 400 when player id has invalid characters", %{conn: conn} do
       assert_error_sent 400, fn ->
         get(conn, "/games/00000000000000000000000001/players/invalid!@#$%^&*()1234567890")
+      end
+    end
+
+    test "returns 400 when player id is 26 chars but not a valid ULID encoding", %{conn: conn} do
+      assert_error_sent 400, fn ->
+        get(conn, "/games/00000000000000000000000001/players/IIIIIIIIIIIIIIIIIIIIIIIIII")
       end
     end
   end

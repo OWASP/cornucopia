@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SCRIBUSUTF8NEW Version="1.6.6">
+    <DOCUMENT ANZPAGES="2" PAGEWIDTH="158.740157480315" PAGEHEIGHT="246.614173228346" BORDERLEFT="14.1732283464567" BORDERRIGHT="14.1732283464567" BORDERTOP="14.1732283464567" BORDERBOTTOM="14.1732283464567" PRESET="0" BleedTop="8.50393700787402" BleedLeft="8.50393700787402" BleedRight="8.50393700787402" BleedBottom="8.50393700787402" ORIENTATION="0" PAGESIZE="Custom" FIRSTNUM="1" BOOK="0" AUTOSPALTEN="1" ABSTSPALTEN="279.432" UNITS="1" DFONT="Arial Regular" DSIZE="12" DCOL="1" DGAP="0" TabFill="" TabWidth="36" TextDistLeft="0" TextDistRight="0" TextDistBottom="0" TextDistTop="0" FirstLineOffset="1" AUTHOR="" COMMENTS="" KEYWORDS="" PUBLISHER="" DOCDATE="" DOCTYPE="" DOCFORMAT="" DOCIDENT="" DOCSOURCE="" DOCLANGINFO="" DOCRELATION="" DOCCOVER="" DOCRIGHTS="" DOCCONTRIB="" TITLE="" SUBJECT="" VHOCH="33" VHOCHSC="66" VTIEF="33" VTIEFSC="66" VKAPIT="75" BASEGRID="14.4" BASEO="0" AUTOL="100" UnderlinePos="-1" UnderlineWidth="-1" StrikeThruPos="-1" StrikeThruWidth="-1" GROUPC="1" HCMS="1" DPSo="0" DPSFo="0" DPuse="1" DPgam="0" DPbla="1" DPPr="ISO Coated v2 300% (basICColor)" DPIn="sRGB display profile (ICC v2.2)" DPInCMYK="ISO Coated v2 300% (basICColor)" DPIn2="sRGB display profile (ICC v2.2)" DPIn3="ISO Coated v2 300% (basICColor)" DISc="1" DIIm="0" ALAYER="4" LANGUAGE="en_US" AUTOMATIC="1" AUTOCHECK="0" GUIDELOCK="0" SnapToGuides="0" SnapToGrid="0" SnapToElement="0" MINGRID="20" MAJGRID="100" SHOWGRID="0" SHOWGUIDES="1" showcolborders="1" SHOWFRAME="1" SHOWControl="0" SHOWLAYERM="0" SHOWMARGIN="1" SHOWBASE="0" SHOWPICT="1" SHOWLINK="0" rulerMode="1" showrulers="1" showBleed="1" rulerXoffset="0" rulerYoffset="0" GuideRad="10" GRAB="4" POLYC="4" POLYF="0.5" POLYR="0" POLYIR="0" POLYCUR="0" POLYOCUR="0" POLYS="0" arcStartAngle="30" arcSweepAngle="300" spiralStartAngle="0" spiralEndAngle="1080" spiralFactor="1.2" AutoSave="1" AutoSaveTime="600000" AutoSaveCount="1" AutoSaveKeep="0" AUtoSaveInDocDir="1" AutoSaveDir="" ScratchBottom="20" ScratchLeft="100" ScratchRight="100" ScratchTop="20" GapHorizontal="0" GapVertical="40" StartArrow="0" EndArrow="0" PEN="Black" BRUSH="None" PENLINE="Black" PENTEXT="Black" StrokeText="Black" TextBackGround="None" TextLineColor="None" TextBackGroundShade="100" TextLineShade="100" TextPenShade="100" TextStrokeShade="100" STIL="1" STILLINE="1" WIDTH="1" WIDTHLINE="1" PENSHADE="100" LINESHADE="100" BRUSHSHADE="100" CPICT="None" PICTSHADE="100" CSPICT="None" PICTSSHADE="100" PICTSCX="1" PICTSCY="1" PSCALE="1" PASPECT="1" EmbeddedPath="0" HalfRes="1" dispX="10" dispY="10" constrain="15" MINORC="#00ff00" MAJORC="#00ff00" GuideC="#000080" BaseC="#c0c0c0" renderStack="2 0 4 1 3" GridType="0" PAGEC="#ffffff" MARGC="#0000ff" RANDF="0" currentProfile="PDF 1.4" calligraphicPenFillColor="Black" calligraphicPenLineColor="Black" calligraphicPenFillColorShade="100" calligraphicPenLineColorShade="100" calligraphicPenLineWidth="1" calligraphicPenAngle="0" calligraphicPenWidth="10" calligraphicPenStyle="1">
+        <CheckProfile Name="PDF 1.3" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="1" minResolution="144" maxResolution="2400" checkAnnotations="0" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="0" checkFontNotEmbedded="1" checkFontIsOpenType="1" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PDF 1.4" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="0" minResolution="144" maxResolution="2400" checkAnnotations="0" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="0" checkFontNotEmbedded="1" checkFontIsOpenType="1" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PDF 1.5" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="0" minResolution="144" maxResolution="2400" checkAnnotations="0" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="0" checkFontNotEmbedded="1" checkFontIsOpenType="1" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PDF 1.6" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="0" minResolution="144" maxResolution="2400" checkAnnotations="0" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="0" checkFontNotEmbedded="1" checkFontIsOpenType="0" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PDF/X-1a" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="1" minResolution="144" maxResolution="2400" checkAnnotations="1" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="1" checkDeviceColorsAndOutputIntent="0" checkFontNotEmbedded="1" checkFontIsOpenType="1" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PDF/X-3" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="1" minResolution="144" maxResolution="2400" checkAnnotations="1" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="1" checkFontNotEmbedded="1" checkFontIsOpenType="1" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PDF/X-4" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="0" minResolution="144" maxResolution="2400" checkAnnotations="1" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="1" checkFontNotEmbedded="1" checkFontIsOpenType="0" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <CheckProfile Name="PostScript" ignoreErrors="0" autoCheck="1" checkGlyphs="1" checkOrphans="1" checkOverflow="1" checkPictures="1" checkPartFilledImageFrames="0" checkResolution="1" checkTransparency="1" minResolution="144" maxResolution="2400" checkAnnotations="0" checkRasterPDF="1" checkForGIF="1" ignoreOffLayers="0" checkNotCMYKOrSpot="0" checkDeviceColorsAndOutputIntent="0" checkFontNotEmbedded="0" checkFontIsOpenType="0" checkAppliedMasterDifferentSide="1" checkEmptyTextFrames="1"/>
+        <COLOR NAME="Auth_Color" SPACE="CMYK" C="57" M="21" Y="14" K="1"/>
+        <COLOR NAME="Authoriz_Color" SPACE="CMYK" C="18" M="20" Y="76" K="3"/>
+        <COLOR NAME="Black" SPACE="CMYK" C="0" M="0" Y="0" K="100"/>
+        <COLOR NAME="Blue" SPACE="RGB" R="0" G="0" B="255"/>
+        <COLOR NAME="Cool Black" SPACE="CMYK" C="60" M="0" Y="0" K="100"/>
+        <COLOR NAME="Cornucopia_Color" SPACE="CMYK" C="95" M="65" Y="25" K="55"/>
+        <COLOR NAME="Crypto_Color" SPACE="CMYK" C="42" M="42" Y="0" K="0"/>
+        <COLOR NAME="Cyan" SPACE="CMYK" C="100" M="0" Y="0" K="0"/>
+        <COLOR NAME="Dark_Grey" SPACE="CMYK" C="0" M="0" Y="0" K="70"/>
+        <COLOR NAME="Data_Color" SPACE="CMYK" C="0" M="0" Y="0" K="50"/>
+        <COLOR NAME="FromSVG#000000" SPACE="RGB" R="0" G="0" B="0"/>
+        <COLOR NAME="FromSVG#050505" SPACE="RGB" R="5" G="5" B="5"/>
+        <COLOR NAME="FromSVG#084c7d" SPACE="RGB" R="8" G="76" B="125"/>
+        <COLOR NAME="FromSVG#0b0b0b" SPACE="RGB" R="11" G="11" B="11"/>
+        <COLOR NAME="FromSVG#0d0d0d" SPACE="RGB" R="13" G="13" B="13"/>
+        <COLOR NAME="FromSVG#0e3b5e" SPACE="RGB" R="14" G="59" B="94"/>
+        <COLOR NAME="FromSVG#0f3f65" SPACE="RGB" R="15" G="63" B="101"/>
+        <COLOR NAME="FromSVG#1164a1" SPACE="RGB" R="17" G="100" B="161"/>
+        <COLOR NAME="FromSVG#131313" SPACE="RGB" R="19" G="19" B="19"/>
+        <COLOR NAME="FromSVG#212223" SPACE="RGB" R="33" G="34" B="35"/>
+        <COLOR NAME="FromSVG#262728" SPACE="RGB" R="38" G="39" B="40"/>
+        <COLOR NAME="FromSVG#263d5d" SPACE="RGB" R="38" G="61" B="93"/>
+        <COLOR NAME="FromSVG#294164" SPACE="RGB" R="41" G="65" B="100"/>
+        <COLOR NAME="FromSVG#2d4d7b" SPACE="RGB" R="45" G="77" B="123"/>
+        <COLOR NAME="FromSVG#3a3b3c" SPACE="RGB" R="58" G="59" B="60"/>
+        <COLOR NAME="FromSVG#3b649d" SPACE="RGB" R="59" G="100" B="157"/>
+        <COLOR NAME="FromSVG#3d3d3e" SPACE="RGB" R="61" G="61" B="62"/>
+        <COLOR NAME="FromSVG#4a4b4c" SPACE="RGB" R="74" G="75" B="76"/>
+        <COLOR NAME="FromSVG#4c4c4d" SPACE="RGB" R="76" G="76" B="77"/>
+        <COLOR NAME="FromSVG#4f5152" SPACE="RGB" R="79" G="81" B="82"/>
+        <COLOR NAME="FromSVG#515253" SPACE="RGB" R="81" G="82" B="83"/>
+        <COLOR NAME="FromSVG#555657" SPACE="RGB" R="85" G="86" B="87"/>
+        <COLOR NAME="FromSVG#565758" SPACE="RGB" R="86" G="87" B="88"/>
+        <COLOR NAME="FromSVG#5d5e60" SPACE="RGB" R="93" G="94" B="96"/>
+        <COLOR NAME="FromSVG#5e5e60" SPACE="RGB" R="94" G="94" B="96"/>
+        <COLOR NAME="FromSVG#6d6e6f" SPACE="RGB" R="109" G="110" B="111"/>
+        <COLOR NAME="FromSVG#6d6e70" SPACE="RGB" R="109" G="110" B="112"/>
+        <COLOR NAME="FromSVG#6da5c1" SPACE="RGB" R="109" G="165" B="193"/>
+        <COLOR NAME="FromSVG#73adcb" SPACE="RGB" R="115" G="173" B="203"/>
+        <COLOR NAME="FromSVG#76739a" SPACE="RGB" R="118" G="115" B="154"/>
+        <COLOR NAME="FromSVG#78739b" SPACE="RGB" R="120" G="115" B="155"/>
+        <COLOR NAME="FromSVG#78749e" SPACE="RGB" R="120" G="116" B="158"/>
+        <COLOR NAME="FromSVG#79769f" SPACE="RGB" R="121" G="118" B="159"/>
+        <COLOR NAME="FromSVG#7a749f" SPACE="RGB" R="122" G="116" B="159"/>
+        <COLOR NAME="FromSVG#7a77a0" SPACE="RGB" R="122" G="119" B="160"/>
+        <COLOR NAME="FromSVG#7b77a3" SPACE="RGB" R="123" G="119" B="163"/>
+        <COLOR NAME="FromSVG#7ba870" SPACE="RGB" R="123" G="168" B="112"/>
+        <COLOR NAME="FromSVG#7c78a4" SPACE="RGB" R="124" G="120" B="164"/>
+        <COLOR NAME="FromSVG#7dbbda" SPACE="RGB" R="125" G="187" B="218"/>
+        <COLOR NAME="FromSVG#7eaa72" SPACE="RGB" R="126" G="170" B="114"/>
+        <COLOR NAME="FromSVG#7fa2be" SPACE="RGB" R="127" G="162" B="190"/>
+        <COLOR NAME="FromSVG#807da8" SPACE="RGB" R="128" G="125" B="168"/>
+        <COLOR NAME="FromSVG#808081" SPACE="RGB" R="128" G="128" B="129"/>
+        <COLOR NAME="FromSVG#808184" SPACE="RGB" R="128" G="129" B="132"/>
+        <COLOR NAME="FromSVG#808283" SPACE="RGB" R="128" G="130" B="131"/>
+        <COLOR NAME="FromSVG#80c0e1" SPACE="RGB" R="128" G="192" B="225"/>
+        <COLOR NAME="FromSVG#818386" SPACE="RGB" R="129" G="131" B="134"/>
+        <COLOR NAME="FromSVG#81c3e4" SPACE="RGB" R="129" G="195" B="228"/>
+        <COLOR NAME="FromSVG#81c4e5" SPACE="RGB" R="129" G="196" B="229"/>
+        <COLOR NAME="FromSVG#81c6e8" SPACE="RGB" R="129" G="198" B="232"/>
+        <COLOR NAME="FromSVG#827eac" SPACE="RGB" R="130" G="126" B="172"/>
+        <COLOR NAME="FromSVG#827faa" SPACE="RGB" R="130" G="127" B="170"/>
+        <COLOR NAME="FromSVG#828487" SPACE="RGB" R="130" G="132" B="135"/>
+        <COLOR NAME="FromSVG#836831" SPACE="RGB" R="131" G="104" B="49"/>
+        <COLOR NAME="FromSVG#83c8e9" SPACE="RGB" R="131" G="200" B="233"/>
+        <COLOR NAME="FromSVG#848689" SPACE="RGB" R="132" G="134" B="137"/>
+        <COLOR NAME="FromSVG#8580ae" SPACE="RGB" R="133" G="128" B="174"/>
+        <COLOR NAME="FromSVG#85aac8" SPACE="RGB" R="133" G="170" B="200"/>
+        <COLOR NAME="FromSVG#8884b3" SPACE="RGB" R="136" G="132" B="179"/>
+        <COLOR NAME="FromSVG#88a572" SPACE="RGB" R="136" G="165" B="114"/>
+        <COLOR NAME="FromSVG#89cef1" SPACE="RGB" R="137" G="206" B="241"/>
+        <COLOR NAME="FromSVG#8aa774" SPACE="RGB" R="138" G="167" B="116"/>
+        <COLOR NAME="FromSVG#8b8d8f" SPACE="RGB" R="139" G="141" B="143"/>
+        <COLOR NAME="FromSVG#8bbe7f" SPACE="RGB" R="139" G="190" B="127"/>
+        <COLOR NAME="FromSVG#8c86b7" SPACE="RGB" R="140" G="134" B="183"/>
+        <COLOR NAME="FromSVG#8d8f91" SPACE="RGB" R="141" G="143" B="145"/>
+        <COLOR NAME="FromSVG#8f6828" SPACE="RGB" R="143" G="104" B="40"/>
+        <COLOR NAME="FromSVG#8f8bbc" SPACE="RGB" R="143" G="139" B="188"/>
+        <COLOR NAME="FromSVG#8fd4f5" SPACE="RGB" R="143" G="212" B="245"/>
+        <COLOR NAME="FromSVG#90b9d7" SPACE="RGB" R="144" G="185" B="215"/>
+        <COLOR NAME="FromSVG#938dc0" SPACE="RGB" R="147" G="141" B="192"/>
+        <COLOR NAME="FromSVG#939597" SPACE="RGB" R="147" G="149" B="151"/>
+        <COLOR NAME="FromSVG#93d6f6" SPACE="RGB" R="147" G="214" B="246"/>
+        <COLOR NAME="FromSVG#94bede" SPACE="RGB" R="148" G="190" B="222"/>
+        <COLOR NAME="FromSVG#959799" SPACE="RGB" R="149" G="151" B="153"/>
+        <COLOR NAME="FromSVG#95979a" SPACE="RGB" R="149" G="151" B="154"/>
+        <COLOR NAME="FromSVG#95c1e1" SPACE="RGB" R="149" G="193" B="225"/>
+        <COLOR NAME="FromSVG#96c2e2" SPACE="RGB" R="150" G="194" B="226"/>
+        <COLOR NAME="FromSVG#96c4e5" SPACE="RGB" R="150" G="196" B="229"/>
+        <COLOR NAME="FromSVG#97999c" SPACE="RGB" R="151" G="153" B="156"/>
+        <COLOR NAME="FromSVG#98c6e6" SPACE="RGB" R="152" G="198" B="230"/>
+        <COLOR NAME="FromSVG#99bc80" SPACE="RGB" R="153" G="188" B="128"/>
+        <COLOR NAME="FromSVG#9e843f" SPACE="RGB" R="158" G="132" B="63"/>
+        <COLOR NAME="FromSVG#9eccee" SPACE="RGB" R="158" G="204" B="238"/>
+        <COLOR NAME="FromSVG#a4d2f2" SPACE="RGB" R="164" G="210" B="242"/>
+        <COLOR NAME="FromSVG#a7d4f3" SPACE="RGB" R="167" G="212" B="243"/>
+        <COLOR NAME="FromSVG#a98637" SPACE="RGB" R="169" G="134" B="55"/>
+        <COLOR NAME="FromSVG#b19b63" SPACE="RGB" R="177" G="155" B="99"/>
+        <COLOR NAME="FromSVG#b7b8bb" SPACE="RGB" R="183" G="184" B="187"/>
+        <COLOR NAME="FromSVG#b9babe" SPACE="RGB" R="185" G="186" B="190"/>
+        <COLOR NAME="FromSVG#bb9d5f" SPACE="RGB" R="187" G="157" B="95"/>
+        <COLOR NAME="FromSVG#bcae5c" SPACE="RGB" R="188" G="174" B="92"/>
+        <COLOR NAME="FromSVG#bdaa7b" SPACE="RGB" R="189" G="170" B="123"/>
+        <COLOR NAME="FromSVG#c1b25e" SPACE="RGB" R="193" G="178" B="94"/>
+        <COLOR NAME="FromSVG#c2b282" SPACE="RGB" R="194" G="178" B="130"/>
+        <COLOR NAME="FromSVG#c4b155" SPACE="RGB" R="196" G="177" B="85"/>
+        <COLOR NAME="FromSVG#c5b660" SPACE="RGB" R="197" G="182" B="96"/>
+        <COLOR NAME="FromSVG#c6ad79" SPACE="RGB" R="198" G="173" B="121"/>
+        <COLOR NAME="FromSVG#c9b457" SPACE="RGB" R="201" G="180" B="87"/>
+        <COLOR NAME="FromSVG#c9bb61" SPACE="RGB" R="201" G="187" B="97"/>
+        <COLOR NAME="FromSVG#cbb482" SPACE="RGB" R="203" G="180" B="130"/>
+        <COLOR NAME="FromSVG#cdb859" SPACE="RGB" R="205" G="184" B="89"/>
+        <COLOR NAME="FromSVG#d1bd5a" SPACE="RGB" R="209" G="189" B="90"/>
+        <COLOR NAME="FromSVG#ddcd6b" SPACE="RGB" R="221" G="205" B="107"/>
+        <COLOR NAME="FromSVG#e2d26d" SPACE="RGB" R="226" G="210" B="109"/>
+        <COLOR NAME="FromSVG#e5cf64" SPACE="RGB" R="229" G="207" B="100"/>
+        <COLOR NAME="FromSVG#ead466" SPACE="RGB" R="234" G="212" B="102"/>
+        <COLOR NAME="FromSVG#ebda72" SPACE="RGB" R="235" G="218" B="114"/>
+        <COLOR NAME="FromSVG#f3dc6b" SPACE="RGB" R="243" G="220" B="107"/>
+        <COLOR NAME="FromSVG#f3e174" SPACE="RGB" R="243" G="225" B="116"/>
+        <COLOR NAME="FromSVG#f5e277" SPACE="RGB" R="245" G="226" B="119"/>
+        <COLOR NAME="FromSVG#f5e376" SPACE="RGB" R="245" G="227" B="118"/>
+        <COLOR NAME="FromSVG#f5e378" SPACE="RGB" R="245" G="227" B="120"/>
+        <COLOR NAME="FromSVG#fbe36d" SPACE="RGB" R="251" G="227" B="109"/>
+        <COLOR NAME="FromSVG#fde470" SPACE="RGB" R="253" G="228" B="112"/>
+        <COLOR NAME="FromSVG#fde56f" SPACE="RGB" R="253" G="229" B="111"/>
+        <COLOR NAME="FromSVG#fde571" SPACE="RGB" R="253" G="229" B="113"/>
+        <COLOR NAME="Green" SPACE="RGB" R="0" G="255" B="0"/>
+        <COLOR NAME="Joker_Color" SPACE="CMYK" C="0" M="33" Y="55" K="0"/>
+        <COLOR NAME="Magenta" SPACE="CMYK" C="0" M="100" Y="0" K="0"/>
+        <COLOR NAME="Pure_Black" SPACE="CMYK" C="0" M="0" Y="0" K="100"/>
+        <COLOR NAME="Pure_White" SPACE="CMYK" C="0" M="0" Y="0" K="0"/>
+        <COLOR NAME="Red" SPACE="RGB" R="255" G="0" B="0"/>
+        <COLOR NAME="Registration" SPACE="CMYK" C="100" M="100" Y="100" K="100" Register="1"/>
+        <COLOR NAME="Rich Black" SPACE="CMYK" C="60" M="40" Y="40" K="100"/>
+        <COLOR NAME="Session_Color" SPACE="CMYK" C="47" M="4" Y="64" K="0"/>
+        <COLOR NAME="Warm Black" SPACE="CMYK" C="0" M="60" Y="29.8039215686275" K="100"/>
+        <COLOR NAME="White" SPACE="CMYK" C="0" M="0" Y="0" K="0"/>
+        <COLOR NAME="Yellow" SPACE="CMYK" C="0" M="0" Y="100" K="0"/>
+        <HYPHEN/>
+        <CHARSTYLE CNAME="Default Character Style" DefaultStyle="1" FONT="Arial Regular" FONTSIZE="12" FONTFEATURES="" FEATURES="inherit" FCOLOR="Black" FSHADE="100" HyphenWordMin="3" SCOLOR="Black" BGCOLOR="None" BGSHADE="100" SSHADE="100" TXTSHX="5" TXTSHY="-5" TXTOUT="1" TXTULP="-0.1" TXTULW="-0.1" TXTSTP="-0.1" TXTSTW="-0.1" SCALEH="100" SCALEV="100" BASEO="0" KERN="0" LANGUAGE="en_US"/>
+        <STYLE NAME="Default Paragraph Style" DefaultStyle="1" ALIGN="0" DIRECTION="0" LINESPMode="0" LINESP="15" INDENT="0" RMARGIN="0" FIRST="0" VOR="0" NACH="0" ParagraphEffectOffset="0" DROP="0" DROPLIN="2" Bullet="0" Numeration="0" HyphenConsecutiveLines="2" BCOLOR="None" BSHADE="100"/>
+        <STYLE NAME="Style_SuitName" ALIGN="2" LINESP="14.4" BCOLOR="None" FONT="Noto Sans Medium" FONTFEATURES="-clig" FCOLOR="Pure_White" LANGUAGE="en_US"/>
+        <STYLE NAME="Style_CardNumber" ALIGN="2" LINESP="50.4" FONT="Noto Sans ExtraBold" FONTSIZE="42" FONTFEATURES="-clig" FCOLOR="Pure_Black" LANGUAGE="en_US"/>
+        <STYLE NAME="Style_Attack" ALIGN="0" LINESP="7.3" FONT="Noto Sans Light" FONTSIZE="7" FONTFEATURES="-clig" FCOLOR="Pure_Black" KERN="-2" LANGUAGE="en_US"/>
+        <STYLE NAME="Style_SpecialText" LINESP="9.6" FONT="Noto Sans Medium Italic" FONTSIZE="8" FONTFEATURES="-clig" FCOLOR="Dark_Grey" LANGUAGE="en_US"/>
+        <STYLE NAME="Style_URL" LINESP="4.68" FONT="Noto Sans Light" FONTSIZE="3.9" FONTFEATURES="-clig" FCOLOR="Pure_Black" LANGUAGE="en_US"/>
+        <TableStyle NAME="Default Table Style" DefaultStyle="1" FillColor="None" FillShade="100">
+            <TableBorderLeft>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderLeft>
+            <TableBorderRight>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderRight>
+            <TableBorderTop>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderTop>
+            <TableBorderBottom>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderBottom>
+        </TableStyle>
+        <CellStyle NAME="Default Cell Style" DefaultStyle="1" FillColor="None" FillShade="100" LeftPadding="1" RightPadding="1" TopPadding="1" BottomPadding="1">
+            <TableBorderLeft>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderLeft>
+            <TableBorderRight>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderRight>
+            <TableBorderTop>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderTop>
+            <TableBorderBottom>
+                <TableBorderLine Width="1" PenStyle="1" Color="Black" Shade="100"/>
+            </TableBorderBottom>
+        </CellStyle>
+        <LAYERS NUMMER="0" LEVEL="0" NAME="Background" SICHTBAR="1" DRUCKEN="1" EDIT="1" SELECT="0" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#000000"/>
+        <LAYERS NUMMER="1" LEVEL="1" NAME="Face Color" SICHTBAR="1" DRUCKEN="1" EDIT="1" SELECT="0" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#ff0000"/>
+        <LAYERS NUMMER="2" LEVEL="2" NAME="Suit Border" SICHTBAR="1" DRUCKEN="1" EDIT="1" SELECT="0" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#00ff00"/>
+        <LAYERS NUMMER="3" LEVEL="3" NAME="Text Elements" SICHTBAR="1" DRUCKEN="1" EDIT="1" SELECT="0" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#0000ff"/>
+        <LAYERS NUMMER="4" LEVEL="4" NAME="Card Identifiers" SICHTBAR="1" DRUCKEN="1" EDIT="1" SELECT="0" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#00ffff"/>
+        <LAYERS NUMMER="5" LEVEL="5" NAME="Top Level" SICHTBAR="1" DRUCKEN="1" EDIT="1" SELECT="0" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#ff00ff"/>
+        <Printer firstUse="1" toFile="0" useAltPrintCommand="0" outputSeparations="0" useSpotColors="1" useColor="1" mirrorH="0" mirrorV="0" useICC="1" doGCR="0" doClip="0" setDevParam="0" useDocBleeds="1" cropMarks="0" bleedMarks="0" registrationMarks="0" colorMarks="0" includePDFMarks="1" PSLevel="3" PrintEngine="4" markLength="20.0013" markOffset="0" BleedTop="8.50393700787402" BleedLeft="8.50393700787402" BleedRight="8.50393700787402" BleedBottom="8.50393700787402" printer="Microsoft Print to PDF" filename="" separationName="All" printerCommand=""/>
+        <PDF firstUse="0" Thumbnails="0" Articles="0" Bookmarks="0" Compress="1" CMethod="0" Quality="0" EmbedPDF="0" MirrorH="0" MirrorV="0" Clip="0" rangeSel="0" rangeTxt="" RotateDeg="0" PresentMode="0" RecalcPic="1" FontEmbedding="0" Grayscale="0" RGBMode="1" UseProfiles="0" UseProfiles2="0" Binding="0" PicRes="300" Resolution="300" Version="14" Intent="1" Intent2="0" SolidP="sRGB display profile (ICC v2.2)" ImageP="sRGB display profile (ICC v2.2)" PrintP="ISO Coated v2 300% (basICColor)" InfoString="" BTop="0" BLeft="0" BRight="0" BBottom="0" useDocBleeds="1" cropMarks="0" bleedMarks="0" registrationMarks="0" colorMarks="0" docInfoMarks="0" markLength="20.0012598425197" markOffset="0" ImagePr="0" PassOwner="" PassUser="" Permissions="-4" Encrypt="0" UseLayers="0" UseLpi="0" UseSpotColors="1" doMultiFile="0" displayBookmarks="0" displayFullscreen="0" displayLayers="0" displayThumbs="0" hideMenuBar="0" hideToolBar="0" fitWindow="0" openAfterExport="0" PageLayout="0" openAction="">
+            <Subset Name="Arial Regular"/>
+            <Subset Name="Noto Sans ExtraBold"/>
+            <Subset Name="Noto Sans Light"/>
+            <Subset Name="Noto Sans Medium Italic"/>
+            <LPI Color="" Frequency="133" Angle="45" SpotFunction="3"/>
+            <LPI Color="Black" Frequency="133" Angle="45" SpotFunction="3"/>
+            <LPI Color="Cyan" Frequency="133" Angle="105" SpotFunction="3"/>
+            <LPI Color="Magenta" Frequency="133" Angle="75" SpotFunction="3"/>
+            <LPI Color="Yellow" Frequency="133" Angle="90" SpotFunction="3"/>
+        </PDF>
+        <DocItemAttributes/>
+        <TablesOfContents/>
+        <NotesStyles>
+            <notesStyle Name="Default" Start="1" Endnotes="0" Type="Type_1_2_3" Range="0" Prefix="" Suffix=")" AutoHeight="1" AutoWidth="1" AutoRemove="1" AutoWeld="1" SuperNote="1" SuperMaster="1" MarksStyle="" NotesStyle=""/>
+        </NotesStyles>
+        <PageSets>
+            <Set Name="Single Page" FirstPage="0" Rows="1" Columns="1"/>
+            <Set Name="Facing Pages" FirstPage="1" Rows="1" Columns="2">
+                <PageNames Name="Left Page"/>
+                <PageNames Name="Right Page"/>
+            </Set>
+            <Set Name="3-Fold" FirstPage="0" Rows="1" Columns="3">
+                <PageNames Name="Left Page"/>
+                <PageNames Name="Middle"/>
+                <PageNames Name="Right Page"/>
+            </Set>
+            <Set Name="4-Fold" FirstPage="0" Rows="1" Columns="4">
+                <PageNames Name="Left Page"/>
+                <PageNames Name="Middle Left"/>
+                <PageNames Name="Middle Right"/>
+                <PageNames Name="Right Page"/>
+            </Set>
+        </PageSets>
+        <Sections>
+            <Section Number="0" Name="Section 1" From="0" To="1" Type="Type_1_2_3" Start="1" Reversed="0" Active="1" FillChar="0" FieldWidth="0"/>
+        </Sections>
+        <MASTERPAGE PAGEXPOS="100" PAGEYPOS="20" PAGEWIDTH="158.740157480315" PAGEHEIGHT="246.614173228346" BORDERLEFT="14.1732283464567" BORDERRIGHT="14.1732283464567" BORDERTOP="14.1732283464567" BORDERBOTTOM="14.1732283464567" NUM="0" NAM="Normal" MNAM="" Size="Custom" Orientation="0" LEFT="0" PRESET="0" VerticalGuides="" HorizontalGuides="" AGhorizontalAutoGap="0" AGverticalAutoGap="0" AGhorizontalAutoCount="0" AGverticalAutoCount="0" AGhorizontalAutoRefer="0" AGverticalAutoRefer="0" AGSelection="0 0 0 0" pageEffectDuration="1" pageViewDuration="1" effectType="0" Dm="0" M="0" Di="0"/>
+        <PAGE PAGEXPOS="100" PAGEYPOS="20" PAGEWIDTH="158.740157480315" PAGEHEIGHT="246.614173228346" BORDERLEFT="14.1732283464567" BORDERRIGHT="14.1732283464567" BORDERTOP="14.1732283464567" BORDERBOTTOM="14.1732283464567" NUM="0" NAM="" MNAM="Normal" Size="Custom" Orientation="0" LEFT="0" PRESET="0" VerticalGuides="" HorizontalGuides="" AGhorizontalAutoGap="0" AGverticalAutoGap="0" AGhorizontalAutoCount="0" AGverticalAutoCount="0" AGhorizontalAutoRefer="0" AGverticalAutoRefer="0" AGSelection="0 0 0 0" pageEffectDuration="1" pageViewDuration="1" effectType="0" Dm="0" M="0" Di="0"/>
+        <PAGE PAGEXPOS="100" PAGEYPOS="306.614173228346" PAGEWIDTH="158.740157480315" PAGEHEIGHT="246.614173228346" BORDERLEFT="14.1732283464567" BORDERRIGHT="14.1732283464567" BORDERTOP="14.1732283464567" BORDERBOTTOM="14.1732283464567" NUM="1" NAM="" MNAM="Normal" Size="Custom" Orientation="0" LEFT="0" PRESET="0" VerticalGuides="" HorizontalGuides="" AGhorizontalAutoGap="0" AGverticalAutoGap="0" AGhorizontalAutoCount="0" AGverticalAutoCount="0" AGhorizontalAutoRefer="0" AGverticalAutoRefer="0" AGSelection="0 0 0 0" pageEffectDuration="1" pageViewDuration="1" effectType="0" Dm="0" M="0" Di="0"/>
+        <PAGEOBJECT XPOS="82.992125984252" YPOS="2.99212598425197" OwnPage="0" ItemID="133184672" PTYPE="6" WIDTH="45.3543307086614" HEIGHT="280.629921259843" FRTYPE="0" CLIPEDIT="1" PWIDTH="1" PCOLOR="Data_Color" PLINEART="1" path="M0 0 L45.3543 0 L45.3543 280.63 L0 280.63 L0 0 Z" copath="M0 0 L45.3543 0 L45.3543 280.63 L0 280.63 L0 0 Z" gXpos="82.992125984252" gYpos="2.99212598425197" gWidth="0" gHeight="0" LAYER="4"/>
+        <PAGEOBJECT XPOS="99.496062992126" YPOS="12.1241621656797" OwnPage="0" ItemID="133731568" PTYPE="2" WIDTH="124.724409448819" HEIGHT="263.622047244095" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="card_border" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="0" RATIO="0" PRFILE="sRGB display profile (ICC v2.2)" IRENDER="0" path="M0 0 L124.724 0 L124.724 263.622 L0 263.622 L0 0 Z" copath="M0 0 L124.724 0 L124.724 263.622 L0 263.622 L0 0 Z" gXpos="99.496062992126" gYpos="12.1241621656797" gWidth="0" gHeight="0" LAYER="2" NEXTITEM="-1" BACKITEM="-1"/>
+        <PAGEOBJECT XPOS="135.074380165289" YPOS="18.8661417322835" OwnPage="0" ItemID="133596240" PTYPE="4" WIDTH="114.247933884297" HEIGHT="87.4710743801653" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="card_number" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="1" RATIO="1" COLUMNS="1" COLGAP="0" AUTOTEXT="0" EXTRA="0" TEXTRA="0" BEXTRA="0" REXTRA="0" VAlign="0" FLOP="1" PLTSHOW="0" BASEOF="0" textPathType="0" textPathFlipped="0" path="M0 0 L114.248 0 L114.248 87.4711 L0 87.4711 L0 0 Z" copath="M0 0 L114.248 0 L114.248 87.4711 L0 87.4711 L0 0 Z" gXpos="135.074380165289" gYpos="18.8661417322835" gWidth="0" gHeight="0" PSTYLE="Style_CardNumber" LAYER="4" NEXTITEM="-1" BACKITEM="-1">
+            <StoryText>
+                <DefaultStyle PARENT="Style_CardNumber" FCOLOR="Data_Color"/>
+                <ITEXT FCOLOR="Data_Color" CH="00"/>
+                <trail/>
+            </StoryText>
+        </PAGEOBJECT>
+        <PAGEOBJECT XPOS="134.015748031496" YPOS="77.2116535433071" OwnPage="0" ItemID="136881312" PTYPE="4" WIDTH="114.711524695777" HEIGHT="120.198347107438" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="attack_text" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="1" RATIO="1" COLUMNS="1" COLGAP="0" AUTOTEXT="0" EXTRA="0" TEXTRA="0" BEXTRA="0" REXTRA="0" VAlign="0" FLOP="1" PLTSHOW="0" BASEOF="0" textPathType="0" textPathFlipped="0" path="M0 0 L114.712 0 L114.712 120.198 L0 120.198 L0 0 Z" copath="M0 0 L114.712 0 L114.712 120.198 L0 120.198 L0 0 Z" gXpos="134.015748031496" gYpos="77.2116535433071" gWidth="0" gHeight="0" PSTYLE="Style_Attack" LAYER="3" NEXTITEM="-1" BACKITEM="-1">
+            <StoryText>
+                <DefaultStyle PARENT="Style_Attack" FONTSIZE="7"/>
+                <ITEXT FONTSIZE="7" CH="ATTACK"/>
+                <trail/>
+            </StoryText>
+        </PAGEOBJECT>
+        <PAGEOBJECT XPOS="133.590551181102" YPOS="218.708661417323" OwnPage="0" ItemID="175965104" PTYPE="2" WIDTH="28.3464566929134" HEIGHT="28.3464566929134" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="qr_code" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="0" RATIO="1" PRFILE="sRGB display profile (ICC v2.2)" IRENDER="0" TransBlend="3" TransBlendS="3" path="M0 0 L28.3465 0 L28.3465 28.3465 L0 28.3465 L0 0 Z" copath="M0 0 L28.3465 0 L28.3465 28.3465 L0 28.3465 L0 0 Z" gXpos="133.590551181102" gYpos="218.708661417323" gWidth="0" gHeight="0" LAYER="5" NEXTITEM="-1" BACKITEM="-1"/>
+        <PAGEOBJECT XPOS="134.015748031496" YPOS="249.103307086614" OwnPage="0" ItemID="175870672" PTYPE="4" WIDTH="110.551181102362" HEIGHT="71.8060779592633" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="url_text" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="1" RATIO="1" COLUMNS="1" COLGAP="0" AUTOTEXT="0" EXTRA="0" TEXTRA="0" BEXTRA="0" REXTRA="0" VAlign="0" FLOP="1" PLTSHOW="0" BASEOF="0" textPathType="0" textPathFlipped="0" path="M0 0 L110.551 0 L110.551 71.8061 L0 71.8061 L0 0 Z" copath="M0 0 L110.551 0 L110.551 71.8061 L0 71.8061 L0 0 Z" gXpos="134.015748031496" gYpos="249.103307086614" gWidth="0" gHeight="0" PSTYLE="Style_URL" LAYER="5" NEXTITEM="-1" BACKITEM="-1">
+            <StoryText>
+                <DefaultStyle PARENT="Style_URL"/>
+                <ITEXT CH="URL-PLACEHOLDER"/>
+                <trail/>
+            </StoryText>
+        </PAGEOBJECT>
+        <PAGEOBJECT XPOS="134.015748031496" YPOS="128.306141732283" OwnPage="0" ItemID="133427744" PTYPE="4" WIDTH="114.711524695777" HEIGHT="100.561983471074" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="special_text" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="1" RATIO="1" COLUMNS="1" COLGAP="0" AUTOTEXT="0" EXTRA="0" TEXTRA="0" BEXTRA="0" REXTRA="0" VAlign="0" FLOP="1" PLTSHOW="0" BASEOF="0" textPathType="0" textPathFlipped="0" path="M0 0 L114.712 0 L114.712 100.562 L0 100.562 L0 0 Z" copath="M0 0 L114.712 0 L114.712 100.562 L0 100.562 L0 0 Z" gXpos="134.015748031496" gYpos="128.306141732283" gWidth="0" gHeight="0" PSTYLE="Style_SpecialText" LAYER="3" NEXTITEM="-1" BACKITEM="-1">
+            <StoryText>
+                <DefaultStyle PARENT="Style_SpecialText"/>
+                <ITEXT CH="SPECIAL"/>
+                <trail/>
+            </StoryText>
+        </PAGEOBJECT>
+        <PAGEOBJECT XPOS="82.992125984252" YPOS="289.606299212598" OwnPage="1" ItemID="131177120" PTYPE="2" WIDTH="192.755905511811" HEIGHT="280.629921259843" FRTYPE="0" CLIPEDIT="0" PWIDTH="1" PLINEART="1" ANNAME="card_back" LOCALSCX="0.319988507707917" LOCALSCY="0.319988507707917" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="0" RATIO="1" Pagenumber="0" PFILE="Assets/Backgrounds/websiteapp/assets/websiteapp/back_of_card_small_expanded_outlined_6mmbleed.png" IRENDER="0" EMBEDDED="0" path="M0 0 L192.756 0 L192.756 280.63 L0 280.63 L0 0 Z" copath="M0 0 L192.756 0 L192.756 280.63 L0 280.63 L0 0 Z" gXpos="82.992125984252" gYpos="289.606299212598" gWidth="0" gHeight="0" LAYER="0" NEXTITEM="-1" BACKITEM="-1"/>
+        <PAGEOBJECT XPOS="126.929133858268" YPOS="34.1732283464567" OwnPage="0" ItemID="249821616" PTYPE="4" WIDTH="232.44094488189" HEIGHT="28.3464566929134" FRTYPE="0" CLIPEDIT="0" ROT="90" PWIDTH="1" PLINEART="1" ANNAME="suit_name" LOCALSCX="1" LOCALSCY="1" LOCALX="0" LOCALY="0" LOCALROT="0" PICART="1" SCALETYPE="1" RATIO="1" COLUMNS="1" COLGAP="0" AUTOTEXT="0" EXTRA="0" TEXTRA="0" BEXTRA="0" REXTRA="0" VAlign="1" FLOP="1" PLTSHOW="0" BASEOF="0" textPathType="0" textPathFlipped="0" path="M0 0 L232.441 0 L232.441 28.3465 L0 28.3465 L0 0 Z" copath="M0 0 L232.441 0 L232.441 28.3465 L0 28.3465 L0 0 Z" gXpos="126.929133858268" gYpos="34.1732283464567" gWidth="0" gHeight="0" ALIGN="0" LAYER="4" NEXTITEM="-1" BACKITEM="-1">
+            <StoryText>
+                <DefaultStyle ALIGN="0" DIRECTION="0" LINESP="14.4" FONT="Noto Sans Medium" FCOLOR="Pure_White" KERN="-6"/>
+                <ITEXT FONT="Noto Sans Medium" FCOLOR="Pure_White" KERN="-6" CH="DATA VALIDATION &amp; ENCODING"/>
+                <trail ALIGN="0" DIRECTION="0" LINESP="14.4"/>
+            </StoryText>
+        </PAGEOBJECT>
+    </DOCUMENT>
+</SCRIBUSUTF8NEW>

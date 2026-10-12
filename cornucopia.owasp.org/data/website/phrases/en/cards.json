@@ -28,7 +28,8 @@
       "p1": "Back to overview"
     },
     "cardFound": {
-      "a": "How to play?"
+      "a": "How to play?",
+      "copy": "Copy card link"
     },
     "cardBrowser": {
       "a1": {
@@ -38,38 +39,13 @@
         "title": "View next card"
       }
     },
-    "webAppCardTaxonomy": {
+    "mappings": {
+      "no_mappings": "No suitable mappings were found.",
       "h1": {
         "1": "Mappings",
         "2": "Attacks"
-      }
-    },
-    "ASVSOverview": {
-      "p1": "No suitable mappings were found."
-    },
-    "mobileAppCardTaxonomy": {
-      "h1": {
-        "1": "Mappings",
-        "2": "Attacks"
-      }
-    },
-    "companionCardTaxonomy": {
-      "h1": {
-        "1": "Mappings",
-        "2": "Attacks"
-      }
-    },
-    "eopCardTaxonomy": {
-      "h1": {
-        "1": "Mappings",
-        "2": "Attacks"
-      }
-    },
-    "MASVSOverview": {
-      "p1": "No suitable mappings were found."
-    },
-    "attacks": {
-      "p1": "No attacks registered!"
+      },
+      "no_attacks": "No attacks registered!"
     }
   }
 }

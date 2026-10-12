@@ -1,0 +1,1216 @@
+meta:
+  edition: mobileapp
+  component: mastg
+  language: ALL
+  version: '2.0'
+'0200':
+  owasp_maswe:
+  - '0002'
+'0201':
+  owasp_maswe:
+  - '0002'
+  owasp_mastg_know:
+  - '0042'
+'0202':
+  owasp_maswe:
+  - '0002'
+  owasp_mastg_know:
+  - '0042'
+'0203':
+  owasp_maswe:
+  - '0005'
+  owasp_mastg_know:
+  - '0049'
+  owasp_mastg_best:
+  - '0002'
+'0204':
+  owasp_maswe:
+  - '0012'
+  owasp_mastg_know:
+  - '0013'
+  owasp_mastg_best:
+  - '0001'
+'0205':
+  owasp_maswe:
+  - '0012'
+  owasp_mastg_know:
+  - '0013'
+  owasp_mastg_best:
+  - '0001'
+'0206':
+  owasp_maswe:
+  - '0073'
+'0207':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0041'
+  owasp_mastg_best:
+  - '0050'
+'0208':
+  owasp_maswe:
+  - '0013'
+  owasp_mastg_know:
+  - '0012'
+'0209':
+  owasp_maswe:
+  - '0013'
+'0210':
+  owasp_maswe:
+  - '0007'
+'0211':
+  owasp_maswe:
+  - '0008'
+'0212':
+  owasp_maswe:
+  - '0003'
+  owasp_mastg_know:
+  - '0012'
+'0213':
+  owasp_maswe:
+  - '0003'
+'0214':
+  owasp_maswe:
+  - '0003'
+'0215':
+  owasp_maswe:
+  - '0006'
+  owasp_mastg_know:
+  - '0102'
+  owasp_mastg_best:
+  - '0023'
+'0216':
+  owasp_maswe:
+  - '0006'
+  owasp_mastg_know:
+  - '0050'
+  owasp_mastg_best:
+  - '0004'
+'0217':
+  owasp_maswe:
+  - '0026'
+'0218':
+  owasp_maswe:
+  - '0026'
+'0219':
+  owasp_maswe:
+  - '0061'
+  owasp_mastg_know:
+  - '0063'
+'0220':
+  owasp_maswe:
+  - '0056'
+  owasp_mastg_know:
+  - '0058'
+'0221':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_best:
+  - '0009'
+'0222':
+  owasp_maswe:
+  - '0045'
+  owasp_mastg_know:
+  - '0006'
+'0223':
+  owasp_maswe:
+  - '0045'
+  owasp_mastg_know:
+  - '0006'
+'0224':
+  owasp_maswe:
+  - '0056'
+  owasp_mastg_know:
+  - '0003'
+  owasp_mastg_best:
+  - '0006'
+'0225':
+  owasp_maswe:
+  - '0056'
+  owasp_mastg_know:
+  - '0003'
+'0226':
+  owasp_maswe:
+  - '0063'
+  owasp_mastg_know:
+  - '0007'
+  owasp_mastg_best:
+  - '0007'
+'0227':
+  owasp_maswe:
+  - '0063'
+  owasp_mastg_know:
+  - '0028'
+  owasp_mastg_best:
+  - '0008'
+'0228':
+  owasp_maswe:
+  - '0045'
+  owasp_mastg_know:
+  - '0061'
+'0229':
+  owasp_maswe:
+  - '0045'
+  owasp_mastg_know:
+  - '0061'
+'0230':
+  owasp_maswe:
+  - '0045'
+  owasp_mastg_know:
+  - '0061'
+'0231':
+  owasp_maswe:
+  - '0005'
+  owasp_mastg_know:
+  - '0049'
+  owasp_mastg_best:
+  - '0002'
+'0232':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_best:
+  - '0005'
+'0233':
+  owasp_maswe:
+  - '0026'
+'0234':
+  owasp_maswe:
+  - '0027'
+'0235':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0014'
+'0236':
+  owasp_maswe:
+  - '0026'
+'0237':
+  owasp_maswe:
+  - '0026'
+'0238':
+  owasp_maswe:
+  - '0026'
+'0239':
+  owasp_maswe:
+  - '0026'
+'0240':
+  owasp_maswe:
+  - '0051'
+  owasp_mastg_know:
+  - '0084'
+'0241':
+  owasp_maswe:
+  - '0051'
+  owasp_mastg_know:
+  - '0084'
+'0242':
+  owasp_maswe:
+  - '0028'
+  owasp_mastg_know:
+  - '0014'
+  - '0015'
+'0243':
+  owasp_maswe:
+  - '0028'
+  owasp_mastg_know:
+  - '0014'
+  - '0015'
+'0244':
+  owasp_maswe:
+  - '0028'
+  owasp_mastg_know:
+  - '0015'
+'0245':
+  owasp_maswe:
+  - '0041'
+'0246':
+  owasp_maswe:
+  - '0017'
+  owasp_mastg_know:
+  - '0056'
+'0247':
+  owasp_maswe:
+  - '0017'
+  owasp_mastg_know:
+  - '0001'
+'0248':
+  owasp_maswe:
+  - '0017'
+  owasp_mastg_know:
+  - '0056'
+'0249':
+  owasp_maswe:
+  - '0017'
+  owasp_mastg_know:
+  - '0001'
+'0250':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0018'
+  owasp_mastg_best:
+  - '0011'
+  - '0012'
+  - '0013'
+  - '0049'
+'0251':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0018'
+  owasp_mastg_best:
+  - '0011'
+  - '0012'
+  - '0013'
+  - '0049'
+'0252':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0018'
+  owasp_mastg_best:
+  - '0010'
+  - '0011'
+  - '0012'
+'0253':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0018'
+  owasp_mastg_best:
+  - '0010'
+  - '0011'
+  - '0012'
+'0254':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0017'
+'0255':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0017'
+'0256':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0017'
+'0257':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0017'
+'0258':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0055'
+  owasp_mastg_best:
+  - '0019'
+'0261':
+  owasp_maswe:
+  - '0063'
+  owasp_mastg_know:
+  - '0062'
+'0262':
+  owasp_maswe:
+  - '0006'
+  owasp_mastg_know:
+  - '0050'
+  owasp_mastg_best:
+  - '0004'
+'0263':
+  owasp_maswe:
+  - '0061'
+'0264':
+  owasp_maswe:
+  - '0061'
+'0265':
+  owasp_maswe:
+  - '0061'
+'0266':
+  owasp_maswe:
+  - '0020'
+  owasp_mastg_know:
+  - '0056'
+  - '0057'
+'0267':
+  owasp_maswe:
+  - '0020'
+  owasp_mastg_know:
+  - '0056'
+'0268':
+  owasp_maswe:
+  - '0021'
+  owasp_mastg_know:
+  - '0056'
+'0269':
+  owasp_maswe:
+  - '0021'
+  owasp_mastg_know:
+  - '0056'
+'0270':
+  owasp_maswe:
+  - '0022'
+  owasp_mastg_know:
+  - '0056'
+'0271':
+  owasp_maswe:
+  - '0022'
+  owasp_mastg_know:
+  - '0056'
+'0272':
+  owasp_maswe:
+  - '0044'
+'0273':
+  owasp_maswe:
+  - '0044'
+'0274':
+  owasp_maswe:
+  - '0044'
+'0275':
+  owasp_maswe:
+  - '0044'
+'0276':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0083'
+'0277':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0083'
+'0278':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0083'
+'0279':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0083'
+'0280':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0083'
+'0281':
+  owasp_maswe:
+  - '0074'
+'0282':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0010'
+  owasp_mastg_best:
+  - '0021'
+'0283':
+  owasp_maswe:
+  - '0027'
+'0284':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0010'
+  owasp_mastg_best:
+  - '0021'
+'0285':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0014'
+'0286':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0014'
+'0287':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0036'
+  owasp_mastg_best:
+  - '0050'
+'0288':
+  owasp_maswe:
+  - '0061'
+'0289':
+  owasp_maswe:
+  - '0038'
+  owasp_mastg_know:
+  - '0053'
+  owasp_mastg_best:
+  - '0014'
+'0290':
+  owasp_maswe:
+  - '0038'
+  owasp_mastg_know:
+  - '0099'
+'0291':
+  owasp_maswe:
+  - '0038'
+  owasp_mastg_know:
+  - '0053'
+  owasp_mastg_best:
+  - '0014'
+'0292':
+  owasp_maswe:
+  - '0038'
+  owasp_mastg_know:
+  - '0053'
+  owasp_mastg_best:
+  - '0014'
+  - '0015'
+'0293':
+  owasp_maswe:
+  - '0038'
+  owasp_mastg_know:
+  - '0053'
+  owasp_mastg_best:
+  - '0014'
+  - '0017'
+'0294':
+  owasp_maswe:
+  - '0038'
+  owasp_mastg_know:
+  - '0053'
+  owasp_mastg_best:
+  - '0014'
+  - '0018'
+'0295':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0011'
+  - '0010'
+  owasp_mastg_best:
+  - '0020'
+'0296':
+  owasp_maswe:
+  - '0005'
+  owasp_mastg_know:
+  - '0101'
+  owasp_mastg_best:
+  - '0022'
+'0297':
+  owasp_maswe:
+  - '0005'
+  owasp_mastg_know:
+  - '0101'
+  owasp_mastg_best:
+  - '0022'
+'0298':
+  owasp_maswe:
+  - '0006'
+  owasp_mastg_know:
+  - '0102'
+  owasp_mastg_best:
+  - '0023'
+'0299':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0082'
+  - '0091'
+  - '0108'
+  owasp_mastg_best:
+  - '0024'
+'0300':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0091'
+  - '0057'
+  - '0108'
+  owasp_mastg_best:
+  - '0024'
+'0301':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0091'
+  - '0057'
+  - '0108'
+  owasp_mastg_best:
+  - '0024'
+'0302':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0108'
+  owasp_mastg_best:
+  - '0024'
+'0303':
+  owasp_maswe:
+  - '0002'
+  owasp_mastg_know:
+  - '0122'
+  - '0091'
+  - '0057'
+  - '0108'
+  owasp_mastg_best:
+  - '0024'
+'0304':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0037'
+'0305':
+  owasp_maswe:
+  - '0001'
+'0306':
+  owasp_maswe:
+  - '0001'
+'0307':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_know:
+  - '0012'
+'0308':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_know:
+  - '0012'
+'0309':
+  owasp_maswe:
+  - '0007'
+'0310':
+  owasp_maswe:
+  - '0007'
+'0311':
+  owasp_maswe:
+  - '0012'
+  owasp_mastg_know:
+  - '0070'
+  owasp_mastg_best:
+  - '0025'
+'0312':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_know:
+  - '0011'
+  owasp_mastg_best:
+  - '0020'
+'0313':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0100'
+  owasp_mastg_best:
+  - '0026'
+'0314':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0100'
+  owasp_mastg_best:
+  - '0026'
+'0315':
+  owasp_maswe:
+  - '0037'
+  owasp_mastg_know:
+  - '0054'
+  owasp_mastg_best:
+  - '0027'
+'0316':
+  owasp_maswe:
+  - '0036'
+'0317':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_best:
+  - '0005'
+'0318':
+  owasp_maswe:
+  - '0073'
+'0319':
+  owasp_maswe:
+  - '0073'
+'0320':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0018'
+  owasp_mastg_best:
+  - '0028'
+'0321':
+  owasp_maswe:
+  - '0026'
+'0322':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0071'
+'0323':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0073'
+'0324':
+  owasp_maswe:
+  - '0051'
+  owasp_mastg_know:
+  - '0027'
+  owasp_mastg_best:
+  - '0029'
+  - '0030'
+'0325':
+  owasp_maswe:
+  - '0051'
+  owasp_mastg_know:
+  - '0027'
+  owasp_mastg_best:
+  - '0029'
+  - '0030'
+'0326':
+  owasp_maswe:
+  - '0021'
+  owasp_mastg_know:
+  - '0001'
+  owasp_mastg_best:
+  - '0031'
+'0327':
+  owasp_maswe:
+  - '0020'
+  owasp_mastg_know:
+  - '0001'
+  - '0043'
+  - '0047'
+  - '0012'
+  owasp_mastg_best:
+  - '0036'
+'0328':
+  owasp_maswe:
+  - '0022'
+  owasp_mastg_know:
+  - '0001'
+  owasp_mastg_best:
+  - '0037'
+'0329':
+  owasp_maswe:
+  - '0020'
+  owasp_mastg_know:
+  - '0001'
+  owasp_mastg_best:
+  - '0038'
+'0330':
+  owasp_maswe:
+  - '0020'
+  owasp_mastg_know:
+  - '0001'
+  - '0043'
+  - '0047'
+  - '0012'
+  owasp_mastg_best:
+  - '0036'
+'0331':
+  owasp_maswe:
+  - '0035'
+  owasp_mastg_know:
+  - '0076'
+  owasp_mastg_best:
+  - '0032'
+'0332':
+  owasp_maswe:
+  - '0035'
+  owasp_mastg_know:
+  - '0076'
+  owasp_mastg_best:
+  - '0034'
+'0333':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  owasp_mastg_best:
+  - '0033'
+'0334':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0018'
+  owasp_mastg_best:
+  - '0011'
+  - '0012'
+  - '0013'
+  - '0035'
+'0335':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  owasp_mastg_best:
+  - '0033'
+'0336':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  owasp_mastg_best:
+  - '0033'
+'0337':
+  owasp_maswe:
+  - '0050'
+  owasp_mastg_know:
+  - '0021'
+'0338':
+  owasp_maswe:
+  - '0057'
+  owasp_mastg_know:
+  - '0036'
+  owasp_mastg_best:
+  - '0066'
+'0339':
+  owasp_maswe:
+  - '0050'
+  owasp_mastg_know:
+  - '0117'
+  owasp_mastg_best:
+  - '0039'
+'0340':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0022'
+  owasp_mastg_best:
+  - '0040'
+'0341':
+  owasp_maswe:
+  - '0058'
+  owasp_mastg_know:
+  - '0030'
+  - '0032'
+  - '0118'
+  owasp_mastg_best:
+  - '0041'
+'0342':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0071'
+  owasp_mastg_best:
+  - '0042'
+'0343':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0071'
+  - '0073'
+  owasp_mastg_best:
+  - '0042'
+'0344':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0073'
+  owasp_mastg_best:
+  - '0043'
+'0345':
+  owasp_maswe:
+  - '0026'
+  owasp_mastg_know:
+  - '0073'
+  owasp_mastg_best:
+  - '0043'
+'0346':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0121'
+  - '0141'
+  owasp_mastg_best:
+  - '0044'
+'0347':
+  owasp_maswe:
+  - '0036'
+  owasp_mastg_know:
+  - '0121'
+  - '0141'
+  owasp_mastg_best:
+  - '0044'
+'0348':
+  owasp_maswe:
+  - '0026'
+'0349':
+  owasp_maswe:
+  - '0012'
+  owasp_mastg_know:
+  - '0070'
+  owasp_mastg_best:
+  - '0025'
+'0350':
+  owasp_maswe:
+  - '0007'
+  owasp_mastg_best:
+  - '0005'
+'0351':
+  owasp_maswe:
+  - '0053'
+  owasp_mastg_know:
+  - '0031'
+  owasp_mastg_best:
+  - '0046'
+'0352':
+  owasp_maswe:
+  - '0064'
+  owasp_mastg_know:
+  - '0007'
+  - '0028'
+  owasp_mastg_best:
+  - '0007'
+  - '0029'
+  - '0047'
+'0353':
+  owasp_maswe:
+  - '0064'
+  owasp_mastg_know:
+  - '0007'
+  - '0028'
+  owasp_mastg_best:
+  - '0007'
+  - '0029'
+  - '0047'
+'0354':
+  owasp_maswe:
+  - '0058'
+  owasp_mastg_know:
+  - '0087'
+  owasp_mastg_best:
+  - '0048'
+'0355':
+  owasp_maswe:
+  - '0018'
+  owasp_mastg_know:
+  - '0020'
+  - '0117'
+  owasp_mastg_best:
+  - '0049'
+'0356':
+  owasp_maswe:
+  - '0018'
+  owasp_mastg_know:
+  - '0020'
+  - '0117'
+  owasp_mastg_best:
+  - '0049'
+'0357':
+  owasp_maswe:
+  - '0018'
+  owasp_mastg_know:
+  - '0020'
+  - '0117'
+  owasp_mastg_best:
+  - '0049'
+'0358':
+  owasp_maswe:
+  - '0061'
+  owasp_mastg_know:
+  - '0064'
+  - '0101'
+  owasp_mastg_best:
+  - '0022'
+'0359':
+  owasp_maswe:
+  - '0061'
+  owasp_mastg_know:
+  - '0064'
+  - '0101'
+  owasp_mastg_best:
+  - '0022'
+'0360':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0077'
+  owasp_mastg_best:
+  - '0051'
+'0361':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0077'
+  owasp_mastg_best:
+  - '0051'
+'0362':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0077'
+  owasp_mastg_best:
+  - '0051'
+'0363':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0077'
+  owasp_mastg_best:
+  - '0051'
+'0364':
+  owasp_maswe:
+  - '0018'
+  owasp_mastg_know:
+  - '0132'
+  - '0017'
+  - '0020'
+  owasp_mastg_best:
+  - '0052'
+'0365':
+  owasp_maswe:
+  - '0018'
+  owasp_mastg_know:
+  - '0133'
+  - '0017'
+  - '0020'
+  owasp_mastg_best:
+  - '0052'
+'0366':
+  owasp_maswe:
+  - '0018'
+  owasp_mastg_know:
+  - '0134'
+  - '0017'
+  - '0020'
+  owasp_mastg_best:
+  - '0052'
+'0367':
+  owasp_maswe:
+  - '0053'
+  owasp_mastg_know:
+  - '0135'
+  owasp_mastg_best:
+  - '0053'
+'0368':
+  owasp_maswe:
+  - '0059'
+  owasp_mastg_know:
+  - '0033'
+  owasp_mastg_best:
+  - '0029'
+'0369':
+  owasp_maswe:
+  - '0059'
+  owasp_mastg_know:
+  - '0033'
+  owasp_mastg_best:
+  - '0029'
+'0370':
+  owasp_maswe:
+  - '0029'
+  owasp_mastg_know:
+  - '0079'
+  owasp_mastg_best:
+  - '0045'
+  - '0054'
+'0371':
+  owasp_maswe:
+  - '0029'
+  owasp_mastg_know:
+  - '0079'
+  owasp_mastg_best:
+  - '0045'
+  - '0055'
+'0372':
+  owasp_maswe:
+  - '0032'
+  owasp_mastg_know:
+  - '0025'
+  owasp_mastg_best:
+  - '0056'
+'0374':
+  owasp_maswe:
+  - '0032'
+  owasp_mastg_know:
+  - '0025'
+  owasp_mastg_best:
+  - '0056'
+'0375':
+  owasp_maswe:
+  - '0050'
+  owasp_mastg_know:
+  - '0025'
+  - '0138'
+  owasp_mastg_best:
+  - '0057'
+'0376':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  owasp_mastg_best:
+  - '0058'
+'0377':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  - '0139'
+  owasp_mastg_best:
+  - '0062'
+'0378':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  - '0139'
+  owasp_mastg_best:
+  - '0059'
+  - '0060'
+'0379':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  - '0139'
+  owasp_mastg_best:
+  - '0061'
+'0380':
+  owasp_maswe:
+  - '0034'
+  owasp_mastg_know:
+  - '0076'
+  - '0139'
+  owasp_mastg_best:
+  - '0059'
+'0381':
+  owasp_maswe:
+  - '0032'
+  owasp_mastg_best:
+  - '0063'
+'0382':
+  owasp_maswe:
+  - '0043'
+  owasp_mastg_know:
+  - '0023'
+'0383':
+  owasp_maswe:
+  - '0043'
+  owasp_mastg_know:
+  - '0074'
+'0384':
+  owasp_maswe:
+  - '0043'
+  owasp_mastg_know:
+  - '0074'
+'0385':
+  owasp_maswe:
+  - '0028'
+  owasp_mastg_know:
+  - '0072'
+'0386':
+  owasp_maswe:
+  - '0050'
+  owasp_mastg_know:
+  - '0075'
+  owasp_mastg_best:
+  - '0064'
+'0387':
+  owasp_maswe:
+  - '0057'
+  owasp_mastg_know:
+  - '0086'
+  owasp_mastg_best:
+  - '0065'
+'0388':
+  owasp_maswe:
+  - '0001'
+  owasp_mastg_know:
+  - '0082'
+  owasp_mastg_best:
+  - '0068'
+'0389':
+  owasp_maswe:
+  - '0031'
+  owasp_mastg_know:
+  - '0082'
+  - '0141'
+  owasp_mastg_best:
+  - '0069'
+'0390':
+  owasp_maswe:
+  - '0066'
+  owasp_mastg_know:
+  - '0082'
+  - '0141'
+  owasp_mastg_best:
+  - '0069'
+'0391':
+  owasp_maswe:
+  - '0059'
+  owasp_mastg_know:
+  - '0089'
+  owasp_mastg_best:
+  - '0029'
+'0392':
+  owasp_maswe:
+  - '0043'
+  owasp_mastg_know:
+  - '0023'
+'0393':
+  owasp_maswe:
+  - '0029'
+  owasp_mastg_know:
+  - '0019'
+  owasp_mastg_best:
+  - '0070'
+'0394':
+  owasp_maswe:
+  - '0029'
+  owasp_mastg_know:
+  - '0019'
+  owasp_mastg_best:
+  - '0071'
+'0395':
+  owasp_maswe:
+  - '0029'
+  owasp_mastg_know:
+  - '0080'
+  owasp_mastg_best:
+  - '0072'
+'0396':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0072'
+  owasp_mastg_best:
+  - '0073'
+'0397':
+  owasp_maswe:
+  - '0027'
+  owasp_mastg_know:
+  - '0072'
+  owasp_mastg_best:
+  - '0073'
+'0398':
+  owasp_maswe:
+  - '0035'
+  owasp_mastg_know:
+  - '0018'
+'0399':
+  owasp_maswe:
+  - '0035'
+  owasp_mastg_know:
+  - '0018'
+'0400':
+  owasp_maswe:
+  - '0035'
+  owasp_mastg_know:
+  - '0018'
+'0401':
+  owasp_maswe:
+  - '0064'
+  owasp_mastg_know:
+  - '0085'
+  owasp_mastg_best:
+  - '0029'
+  - '0074'
+'0402':
+  owasp_maswe:
+  - '0064'
+  owasp_mastg_know:
+  - '0085'
+  owasp_mastg_best:
+  - '0029'
+  - '0074'

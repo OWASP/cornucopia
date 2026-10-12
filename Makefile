@@ -1,7 +1,6 @@
 DOCKER = docker run \
 	--interactive \
 	--rm \
-	--env "HOST_IP=$(HOST_IP)" \
 	--env "MYPYPATH=${PWD}/typings" \
 	--env "RETRY_DELAY=${RETRY_DELAY}" \
 	--env "UPDATE_GOLDEN_FILES=$(UPDATE_GOLDEN_FILES)" \
@@ -12,7 +11,6 @@ DOCKER = docker run \
 SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -O globstar -c
 
-HOST_IP ?= $(shell ip addr show dev docker0 | grep -oP "(?<=inet )[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
 RETRY_DELAY = 0.01
 
 PYTHON_TEST_PATTERN ?= "*_?test.py" # Default to all types of tests

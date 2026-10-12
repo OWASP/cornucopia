@@ -11,7 +11,7 @@ const _responseInit: ResponseInit = {
   },
 };
 
-const editions = ["webapp", "mobileapp", "companion", "dbd", "eop"]
+const editions = DeckService.getLatestEditions();
 
 export const GET: RequestHandler = ({ url }) => {
   const params = url.pathname.split('/');

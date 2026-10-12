@@ -1,24 +1,15 @@
 <script>
+    import Metadata from "$lib/components/metadata.svelte";
     import SvelteMarkdown from 'svelte-markdown'
     import { renderers } from '$lib/components/renderers/renderers';
-    import {readLang, readTranslation} from "$lib/stores/stores";
+    import {readLang} from "$lib/stores/stores";
 
     /** @type {{data: any}} */
     let { data } = $props();
-    let t = readTranslation();
     const lang = readLang();
     let content = $derived(data.content.get($lang) || data.content.get('en'));
 </script>
-<svelte:head>
-    <title>{$t('about.head.title')}</title>
-    <link rel="canonical" href="https://cornucopia.owasp.org/about" />
-    <meta name="description" content="{$t('about.head.description')}" />
-	<meta name="keywords" content="{$t('about.head.keywords')}" />
-    <meta property="og:title" content="{$t('about.head.title')}">
-    <meta property="og:description" content="{$t('about.head.description')}">
-    <meta name="twitter:title" content="{$t('about.head.title')}">
-    <meta name="twitter:description" content="{$t('about.head.description')}">
-</svelte:head>
+{#if data.metadata}<Metadata metadata={data.metadata} />{/if}
 <div>
 {#if content != ''}
     <SvelteMarkdown {renderers} source={content}></SvelteMarkdown>

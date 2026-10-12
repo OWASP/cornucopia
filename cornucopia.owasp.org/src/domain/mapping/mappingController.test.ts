@@ -1,5 +1,5 @@
 import {expect, describe, it} from 'vitest';
-import { MappingController } from './mappingController';
+import { getMappingLabel, getMappingUrl, MappingController } from './mappingController';
 
 
 describe('MappingController tests', () => {
@@ -106,6 +106,34 @@ describe('MappingController tests', () => {
         expect(Object.keys(mapping).length).toBe(0);
     });
 
+    it("should return empty mapping when a suit is not a record or has no cards array.", async () => {
+        const mappingData = {
+            suits: [
+                null,
+                "not-a-suit",
+                { name: "No cards array" },
+                {
+                    cards: [
+                        { id: "match-me" }
+                    ]
+                }
+            ]
+        };
+        const controller = new MappingController(mappingData);
+        const mapping = controller.getCardMappings("match-me");
+        expect(mapping.id).toBe("match-me");
+    });
+
+    it("should return undefined URL when attribute is undefined or template is missing.", () => {
+        const controller = new MappingController({
+            url_templates: { capec: "/taxonomy/capec/{code}" },
+            suits: []
+        });
+
+        expect(getMappingUrl(controller.getUrlTemplates(), undefined, "1")).toBeUndefined();
+        expect(getMappingUrl(controller.getUrlTemplates(), "missing", "1")).toBeUndefined();
+    });
+
     it("should return meta information.", async () => {
         const mappingData = {
             meta: { version: "1.0", date: "2024-01-01" },
@@ -116,5 +144,55 @@ describe('MappingController tests', () => {
         expect(meta).toBeDefined();
         expect(meta.version).toBe("1.0");
         expect(meta.date).toBe("2024-01-01");
+    });
+
+    it("should return empty meta when meta is missing or not a record.", async () => {
+        const controllerMissing = new MappingController({ suits: [] });
+        expect(controllerMissing.getMeta()).toEqual({});
+
+        const controllerArray = new MappingController({ meta: [1, 2], suits: [] });
+        expect(controllerArray.getMeta()).toEqual({});
+    });
+
+    it("should return empty labels/url templates when missing, not an object, or an array.", () => {
+        const missing = new MappingController({ suits: [] });
+        expect(missing.getLabels()).toEqual({});
+        expect(missing.getUrlTemplates()).toEqual({});
+
+        const notObject = new MappingController({ labels: "invalid", url_templates: 42, suits: [] });
+        expect(notObject.getLabels()).toEqual({});
+        expect(notObject.getUrlTemplates()).toEqual({});
+
+        const isArray = new MappingController({ labels: ["a"], url_templates: ["b"], suits: [] });
+        expect(isArray.getLabels()).toEqual({});
+        expect(isArray.getUrlTemplates()).toEqual({});
+    });
+
+    it("should return mapping labels and URL templates.", () => {
+        const controller = new MappingController({
+            labels: {
+                capec: "CAPEC",
+                invalid: 42
+            },
+            url_templates: {
+                capec: "/taxonomy/capec/{code}",
+                safecode: "https://example.com/safecode",
+                invalid: false
+            },
+            suits: []
+        });
+
+        expect(controller.getLabels()).toEqual({ capec: "CAPEC" });
+        expect(controller.getUrlTemplates()).toEqual({
+            capec: "/taxonomy/capec/{code}",
+            safecode: "https://example.com/safecode"
+        });
+        expect(getMappingLabel(controller.getLabels(), "capec")).toBe("CAPEC");
+        expect(getMappingUrl(controller.getUrlTemplates(), "capec", "A/B")).toBe(
+            "/taxonomy/capec/A%2FB"
+        );
+        expect(getMappingUrl(controller.getUrlTemplates(), "safecode", "ignored")).toBe(
+            "https://example.com/safecode"
+        );
     });
 });

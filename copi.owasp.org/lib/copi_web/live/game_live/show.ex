@@ -207,10 +207,10 @@ defmodule CopiWeb.GameLive.Show do
     case edition do
       "webapp" -> "3.0"
       "ecommerce" -> "1.22"
-      "mobileapp" -> "1.1"
+      "mobileapp" -> "2.0"
       "mlsec" -> "1.0"
       "cumulus" -> "1.1"
-      "masvs" -> "1.1"
+      "masvs" -> "2.0"
       "eop" -> "5.2"
       "dbd" -> "1.0"
       _ -> "1.0"

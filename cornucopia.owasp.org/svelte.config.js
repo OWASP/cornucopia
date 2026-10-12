@@ -405,6 +405,7 @@ export default {
 				'/404',
 				'/api/docs',
 				'/api/lang/mobileapp/1.1',
+				'/api/lang/mobileapp/2.0',
 				'/api/lang/webapp/2.2',
 				'/api/lang/webapp/3.0',
 				'/api/lang/dbd/1.0',
@@ -418,6 +419,9 @@ export default {
 				'/api/cre/webapp/pt_br',
 				'/api/cre/webapp/no_nb',
 				'/api/cre/mobileapp/en',
+                '/api/cre/mobileapp/ru',
+                '/api/cre/mobileapp/hi',
+                '/api/cre/mobileapp/uk',
 				'/api/cre/companion/en',
 				'/api/lang/companion/1.0',
 				'/api/cre/eop/en',
@@ -425,20 +429,27 @@ export default {
 				'/api/cre/eop/ru',
 				'/api/lang/eop/5.0',
 				'/api/cre/dbd/en',
-				'/api/cre/mobileapp/hi',
-    '/api/cre/mobileapp/uk',
+				
 				'/api/asvs/webapp/3.0',
-    '/api/capec/webapp/3.0',
+                '/api/capec/webapp/3.0',
+				'/api/mastg/mobileapp/2.0',
+				'/api/maswe/mobileapp/2.0',
+				'/api/mapping/eop/5.0',
 				'/api/mapping/webapp/2.2',
 				'/api/mapping/webapp/3.0',
 				'/api/mapping/mobileapp/1.1',
-    '/api/mapping/companion/1.0',
+				'/api/mapping/mobileapp/2.0',
+                '/api/mapping/companion/1.0',
 				'/edition/eop/SP2/5.0/en',
 				'/edition/eop/SP2/5.0/es',
-    '/edition/eop/SP2/5.0/ru',
+                '/edition/eop/SP2/5.0/ru',
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/mobileapp/PC2/1.1/uk',
-    '/edition/mobileapp/PC2/1.1/hi',
+                '/edition/mobileapp/PC2/1.1/hi',
+				'/edition/mobileapp/PC2/2.0/en',
+				'/edition/mobileapp/PC2/2.0/uk',
+                '/edition/mobileapp/PC2/2.0/hi',
+				'/edition/mobileapp/PC2/2.0/ru',
 				'/edition/webapp/VE2/2.2',
 				'/edition/webapp/VE2/2.2/es',
 				'/edition/webapp/VE2/2.2/it',
@@ -467,7 +478,6 @@ export default {
 		}
 	}
 };
-
 
 
 

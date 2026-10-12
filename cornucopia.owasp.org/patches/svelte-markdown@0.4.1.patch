@@ -1,0 +1,19 @@
+diff --git a/src/supress-warnings.js b/src/supress-warnings.js
+index 057103ab3247e8906778df85fca33860ebe08384..d8024fcb0d8a77ed892d4b5ee982adc2845560af 100644
+--- a/src/supress-warnings.js
++++ b/src/supress-warnings.js
+@@ -1,6 +1,14 @@
+ import { onMount } from 'svelte'
+ 
++// Guard against SSR: onMount never fires during server-side rendering, so
++// console.warn would otherwise be re-wrapped on every recursive markdown
++// token render (one per <svelte:self> instance) with no restore in between,
++// eventually overflowing the call stack (RangeError: Maximum call stack
++// size exceeded). Only patch console.warn in the browser, where onMount
++// reliably restores it.
+ export function supressWarnings() {
++  if (typeof window === 'undefined') return
++
+   const origWarn = console.warn
+ 
+   console.warn = (message) => {

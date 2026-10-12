@@ -1,5 +1,6 @@
 import argparse
 import fnmatch
+import html
 import logging
 import os
 import platform
@@ -9,9 +10,8 @@ import sys
 import subprocess
 import yaml
 import zipfile
-import xml.etree.ElementTree as ElTree
 from defusedxml import ElementTree as DefusedElTree
-from typing import Any, Dict, List, Optional, Tuple, cast
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple, cast
 from operator import itemgetter
 from itertools import groupby
 from pathlib import Path
@@ -121,11 +121,38 @@ def check_fix_file_extension(filename: str, file_type: str) -> str:
     return filename
 
 
-def check_make_list_into_text(var: List[str]) -> str:
-    """Convert list to comma-separated text string."""
+def check_make_list_into_text(var: List[str], tag: str = "") -> str:
+    """Convert list to comma-separated text string.
+
+    Consecutive numeric values are collapsed into ranges (e.g. "1-3") only for
+    "_print" tags, which are display-only text; those lists are de-duplicated
+    first since they may contain literal repeated entries (e.g. a pre-formatted
+    range like "1.2.1-3" appearing twice) that group_number_ranges cannot catch,
+    as it only recognizes purely-numeric duplicates.
+
+    Every other tag is de-duplicated and, if every value is numeric, sorted
+    ascending, but never collapsed into a range: those values (e.g. CAPEC/CWE
+    IDs) are used individually to build links to external reference pages, so
+    collapsing them would make it impossible to recover the individual IDs
+    needed to link to each one.
+    """
     if not isinstance(var, list):
         return str(var)
-    var = group_number_ranges(var)
+    if tag.endswith("_print"):
+        var = list(dict.fromkeys(var))
+        var = group_number_ranges(var)
+    else:
+        seen: Set[str] = set()
+        deduped: List[str] = []
+        for v in var:
+            if v not in seen:
+                seen.add(v)
+                deduped.append(v)
+        var = (
+            sorted(deduped, key=lambda value: int(value))
+            if deduped and all(str(value).isnumeric() for value in deduped)
+            else deduped
+        )
     text_output = ", ".join(str(s) for s in var)
     if not text_output.strip():
         text_output = " - "
@@ -762,7 +789,9 @@ def get_mapping_data_for_edition(
 def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
     """Build template dictionary from the input data"""
     data: Dict[str, Any] = {"meta": get_meta_data(input_data)}
-    for key in list(k for k in input_data.keys() if k != "meta"):
+    for key in ("suits", "paragraphs"):
+        if key not in input_data:
+            continue
         for paragraphs in input_data[key]:
             text_type = ""
             if key == "suits":
@@ -785,7 +814,7 @@ def build_template_dict(input_data: Dict[str, Any]) -> Dict[str, Any]:
                         is_valid_string_argument(paragraphs["id"]), is_valid_string_argument(paragraph["id"]), tag
                     )
                     logging.debug(f" --- full tag = {full_tag}")
-                    data[full_tag] = check_make_list_into_text(text_output)
+                    data[full_tag] = check_make_list_into_text(text_output, tag)
     return data
 
 
@@ -805,8 +834,10 @@ def get_meta_data(data: Dict[str, Any]) -> Dict[str, Any]:
     for key in valid_keys:
         if key in raw_meta:
             value = raw_meta[key]
+            if key == "version" and isinstance(value, (int, float)) and not isinstance(value, bool):
+                meta[key] = str(value)
             # Simple validation: must be string or list of strings
-            if isinstance(value, str) and value.strip():
+            elif isinstance(value, str) and value.strip():
                 meta[key] = value
             elif isinstance(value, list) and all(isinstance(v, str) for v in value):
                 meta[key] = value
@@ -920,7 +951,7 @@ def get_replacement_mapping_value(k: str, v: str, el_text: str) -> str:
     return ""
 
 
-def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple[str, str]]) -> str:
+def get_replacement_value_from_dict(el_text: str, replacement_values: Sequence[Tuple[Optional[str], object]]) -> str:
     """Get replacement value from dictionary."""
     # Fast path: if no $ and no OWASP, likely no tags
     if "$" not in el_text and "OWASP" not in el_text:
@@ -928,7 +959,7 @@ def get_replacement_value_from_dict(el_text: str, replacement_values: List[Tuple
 
     for k, v in replacement_values:
         # Skip None keys to prevent AttributeError
-        if k is None:
+        if k is None or not isinstance(v, str):
             continue
         # Avoid expensive regex if key is not even in text
         if k.strip() not in el_text:
@@ -969,12 +1000,13 @@ def get_template_for_edition(
     """Get template document for the specified edition."""
     template_doc: str
     args_input_file: str = convert_vars.args.inputfile
+    input_is_absolute = bool(args_input_file) and os.path.isabs(args_input_file)
     sfile_ext = "idml"
     if layout == "guide":
         sfile_ext = "odt"
     if args_input_file:
         # Input file was specified
-        if os.path.isabs(args_input_file):
+        if input_is_absolute:
             template_doc = args_input_file
         elif os.path.isfile(convert_vars.BASE_PATH + os.sep + args_input_file):
             template_doc = os.path.normpath(convert_vars.BASE_PATH + os.sep + args_input_file)
@@ -1015,7 +1047,8 @@ def get_template_for_edition(
             logging.info(f" --- Using generic template (no language-specific found): {generic_template_doc}")
 
     template_doc = template_doc.replace("\\ ", " ")
-    template_doc = str(Path(sanitize_filepath(template_doc)))
+    if not input_is_absolute:
+        template_doc = str(Path(sanitize_filepath(template_doc)))
     if os.path.isfile(template_doc):
         template_doc = check_fix_file_extension(template_doc, sfile_ext)
         logging.debug(f" --- Returning template_doc = {template_doc}")
@@ -1105,11 +1138,19 @@ def get_valid_edition_choices() -> List[str]:
 
 
 def group_number_ranges(data: List[str]) -> List[str]:
-    """Group consecutive numbers into ranges."""
+    """Group consecutive numbers into ranges.
+
+    The incoming list order is not guaranteed to be numerically sorted or
+    free of duplicates (source YAML mapping files are hand-maintained), so
+    the values are sorted and de-duplicated before consecutive runs are
+    grouped. Without this, unsorted input produces out-of-order and
+    incorrectly grouped ranges (e.g. [20, 116, 117, 97] -> "20, 116-117, 97"
+    instead of "20, 97, 116-117").
+    """
     if len(data) < 2 or len([s for s in data if not str(s).isnumeric()]):
         return data
     list_ranges: List[str] = []
-    data_numbers = [int(s) for s in data]
+    data_numbers = sorted(set(int(s) for s in data))
     for k, g in groupby(enumerate(data_numbers), lambda x: x[0] - x[1]):
         group: List[int] = list(map(itemgetter(1), g))
         group = list(map(int, group))
@@ -1287,7 +1328,7 @@ def replace_docx_inline_text(doc: Any, data: Dict[str, str]) -> Any:
     return doc
 
 
-def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
+def _find_xml_elements(tree: Any) -> List[Any]:
     """Identify elements likely to contain text to replace for IDML and ODT."""
     namespaces = {
         "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
@@ -1297,11 +1338,11 @@ def _find_xml_elements(tree: Any) -> List[ElTree.Element]:
     elements.extend(tree.findall(".//text:p", namespaces))
     elements.extend(tree.findall(".//text:span", namespaces))
     if not elements:
-        return cast(List[ElTree.Element], tree.findall(".//*"))
-    return cast(List[ElTree.Element], elements)
+        return cast(List[Any], tree.findall(".//*"))
+    return cast(List[Any], elements)
 
 
-def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
+def _replace_element_text(el: Any, replacement_values: List[Tuple[str, str]], modified: bool) -> bool:
     """Replace text and tail text in an XML element."""
     if el.text:
         new_text = get_replacement_value_from_dict(el.text, replacement_values)
@@ -1318,7 +1359,7 @@ def _replace_element_text(el: ElTree.Element, replacement_values: List[Tuple[str
 
 
 def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, str]]) -> None:
-    """Replace text in XML file."""
+    """Replace text in XML file while preserving package-specific XML syntax."""
     logging.debug(f" --- starting xml_replace for {filename}")
     try:
         tree = DefusedElTree.parse(filename)
@@ -1326,21 +1367,30 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
         logging.error(f"Failed to parse XML file {filename}: {e}")
         return
 
-    root = tree.getroot()
-    if root is None:
+    if tree.getroot() is None:
         logging.error(f" --- The XML file has no root element: {filename}")
         return
 
-    elements_to_check = _find_xml_elements(tree)
+    with open(filename, "r", encoding="utf-8") as file:
+        source = file.read()
 
     modified = False
-    for el in elements_to_check:
-        modified = _replace_element_text(el, replacement_values, modified)
+
+    def replace_text_node(match: re.Match[str]) -> str:
+        nonlocal modified
+        text = html.unescape(match.group(1))
+        replacement = get_replacement_value_from_dict(text, replacement_values)
+        if replacement == text:
+            return match.group(0)
+        modified = True
+        return f">{html.escape(replacement, quote=False)}<"
+
+    result = re.sub(r">([^<]+)<", replace_text_node, source)
 
     if modified:
         try:
-            with open(filename, "bw") as f:
-                f.write(ElTree.tostring(root, encoding="utf-8"))
+            with open(filename, "w", encoding="utf-8", newline="") as file:
+                file.write(result)
         except Exception as e:
             logging.error(f"Failed to save modified XML file {filename}: {e}")
 
@@ -1348,10 +1398,16 @@ def replace_text_in_xml_file(filename: str, replacement_values: List[Tuple[str, 
 def zip_dir(path: str, zip_filename: str) -> None:
     """Zip all the files recursively from path into zip_filename (excluding root path)"""
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zip_file:
-        for root, _, files in os.walk(os.path.normpath(path)):
-            for file in files:
-                f = str(Path(os.path.join(root, file)))
-                zip_file.write(f, f[len(path) :])  # noqa: E203
+        source_path = Path(path)
+        files = sorted(source_path.rglob("*"))
+        mimetype = source_path / "mimetype"
+        if mimetype.is_file():
+            zip_file.write(mimetype, "mimetype", compress_type=zipfile.ZIP_STORED)
+
+        for file in files:
+            if not file.is_file() or file == mimetype:
+                continue
+            zip_file.write(file, file.relative_to(source_path).as_posix())
 
 
 if __name__ == "__main__":

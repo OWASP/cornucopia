@@ -1,0 +1,9 @@
+# Build output — regenerated on every run
+output/
+build_log.txt
+build_manifest.json
+check_environment.txt
+
+# Python
+__pycache__/
+*.pyc
