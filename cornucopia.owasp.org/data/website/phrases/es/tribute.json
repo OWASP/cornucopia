@@ -1,0 +1,10 @@
+{
+  "tribute": {
+    "title": "Homenaje",
+    "head": {
+      "title": "OWASP Cornucopia - Homenaje",
+      "description": "¿Quiénes son las personas detrás de OWASP Cornucopia? Conozca a los colaboradores y su dedicación a mejorar la seguridad de las aplicaciones a través de este proyecto.",
+      "keywords": "OWASP, Cornucopia, Projecto, Seguridad de Aplicaciones, Objetivos, Modelado de Amenazas"
+    }
+  }
+}
