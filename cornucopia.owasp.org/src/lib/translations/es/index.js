@@ -13,6 +13,8 @@ import copiPage from '$data/website/phrases/es/copi.json';
 import layoutPage from '$data/website/phrases/es/layout.json';
 import roadmapPage from '$data/website/phrases/es/roadmap.json';
 import authorPage from '$data/website/phrases/es/author.json';
+import historyPage from '$data/website/phrases/es/history.json';
+import tributePage from '$data/website/phrases/es/tribute.json';
 export default {
   layout: layoutPage.layout,
   about: aboutPage.about,
@@ -28,6 +30,8 @@ export default {
   webshop: webshopPage.webshop,
   getthegame: getTheGamePage.getthegame,
   roadmap: roadmapPage.roadmap,
-  author: authorPage.author
+  author: authorPage.author,
+  history: historyPage.history,
+  tribute: tributePage.tribute
 
 }
