@@ -102,8 +102,8 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1(svelte@5.57.1(@typescript-eslint/types@8.71.1))
       svelte-sitemap:
-        specifier: ^4.0.4
-        version: 4.0.4(vite@7.3.5(@types/node@26.6.3)(jiti@2.7.0))
+        specifier: ^4.1.2
+        version: 4.1.2(vite@7.3.5(@types/node@26.6.3)(jiti@2.7.0))
       then-request:
         specifier: ^6.0.2
         version: 6.0.2
@@ -1798,8 +1798,8 @@ packages:
   fast-uri@3.1.2:
     resolution: {integrity: sha512-rVjf7ArG3LTk+FS6Yw81V1DLuZl1bRbNrev6Tmd/9RaroeeRRJhAt7jg/6YFxbvAQXUCavSoZhPPj6oOx+5KjQ==}
 
-  fastq@1.20.1:
-    resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
+  fastq@1.20.3:
+    resolution: {integrity: sha512-XKv5nnLs6nLF71NgiKJLIZFLkPyIEuOselLG7ujZnGrRfQK8HpvY+WqKhAJUAdLomwVHErVS4LfxFlPq0/FTAw==}
 
   fdir@6.5.0:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
@@ -2549,9 +2549,9 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-sitemap@4.0.4:
-    resolution: {integrity: sha512-Rw7fEsTjjFEhO1Zs32XRAYl3lKDyccAQPznwxtPXBWaDmPwDgpbfmoPPzV7v5JjfyVlO4/Xf2zF32vi1lK1HJQ==}
-    engines: {node: '>= 14.17.0'}
+  svelte-sitemap@4.1.2:
+    resolution: {integrity: sha512-1Px1hS+smvrNTvipaEG9dVR/N64dPZ9vvArGp88FSkqwqda4+edaHXKficM3nfefT9PAqww4M2ybJOI2RZaLQw==}
+    engines: {node: '>= 20'}
     hasBin: true
     peerDependencies:
       vite: '>=5.0.0'
@@ -3380,7 +3380,7 @@ snapshots:
   '@nodelib/fs.walk@1.2.8':
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
-      fastq: 1.20.1
+      fastq: 1.20.3
 
   '@oozcitak/dom@2.0.2':
     dependencies:
@@ -4327,7 +4327,7 @@ snapshots:
 
   fast-uri@3.1.2: {}
 
-  fastq@1.20.1:
+  fastq@1.20.3:
     dependencies:
       reusify: 1.1.0
 
@@ -5090,7 +5090,7 @@ snapshots:
       marked: 5.1.2
       svelte: 5.57.1(@typescript-eslint/types@8.71.1)
 
-  svelte-sitemap@4.0.4(vite@7.3.5(@types/node@26.6.3)(jiti@2.7.0)):
+  svelte-sitemap@4.1.2(vite@7.3.5(@types/node@26.6.3)(jiti@2.7.0)):
     dependencies:
       fast-glob: 3.3.3
       jiti: 2.7.0
