@@ -1,0 +1,135 @@
+<div class="space-y-6">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900">Threat Modeling</h1>
+    <p class="mt-2 text-gray-600">
+      Explore potential security threats in your application design using local, rule-based analysis.
+    </p>
+  </div>
+
+  <div class="rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+    <strong>Important:</strong>
+    These results are preliminary security suggestions, not proof of vulnerabilities or a complete threat model.
+    Your submitted details are analyzed locally and are not sent to an external AI service by this feature.
+  </div>
+
+  <form id="threat-model-form" phx-submit="analyze" class="space-y-5">
+    <div>
+      <label for="application_type" class="block text-sm font-semibold text-gray-800">
+        Application type
+      </label>
+      <select id="application_type" name="threat_model[application_type]" required
+        class="mt-2 block w-full rounded-lg border border-gray-300 bg-white p-3 text-sm">
+        <option value="web">Web application</option>
+        <option value="api">API</option>
+        <option value="mobile">Mobile application</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="authentication" class="block text-sm font-semibold text-gray-800">
+        Authentication
+      </label>
+      <select id="authentication" name="threat_model[authentication]" required
+        class="mt-2 block w-full rounded-lg border border-gray-300 bg-white p-3 text-sm">
+        <option value="none">No authentication</option>
+        <option value="session">Session-based authentication</option>
+        <option value="oauth">OAuth or OpenID Connect</option>
+        <option value="other">Other authentication</option>
+      </select>
+    </div>
+
+    <fieldset>
+      <legend class="text-sm font-semibold text-gray-800">
+        Does the application handle sensitive data?
+      </legend>
+      <div class="mt-2 flex flex-wrap gap-5">
+        <label class="flex items-center gap-2">
+          <input type="radio" name="threat_model[sensitive_data]" value="yes" required />
+          Yes
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="threat_model[sensitive_data]" value="no" />
+          No
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="text-sm font-semibold text-gray-800">
+        Is the application accessible from the internet?
+      </legend>
+      <div class="mt-2 flex flex-wrap gap-5">
+        <label class="flex items-center gap-2">
+          <input type="radio" name="threat_model[internet_facing]" value="yes" required />
+          Yes
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="threat_model[internet_facing]" value="no" />
+          No
+        </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="text-sm font-semibold text-gray-800">
+        Does the application use AI or an LLM?
+      </legend>
+      <div class="mt-2 flex flex-wrap gap-5">
+        <label class="flex items-center gap-2">
+          <input type="radio" name="threat_model[uses_ai]" value="yes" required />
+          Yes
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="threat_model[uses_ai]" value="no" />
+          No
+        </label>
+      </div>
+    </fieldset>
+
+    <div>
+      <label for="description" class="block text-sm font-semibold text-gray-800">
+        Describe your application
+      </label>
+      <textarea id="description" name="threat_model[description]" rows="5" maxlength="5000"
+        placeholder="Describe the main components, users, data flows, external services, and security requirements."
+        class="mt-2 block w-full rounded-lg border border-gray-300 p-3 text-sm"></textarea>
+      <p class="mt-1 text-xs text-gray-500">
+        Do not include passwords, API keys, personal data, or other secrets.
+      </p>
+    </div>
+
+    <button type="submit"
+      class="rounded-lg bg-gray-800 px-5 py-3 font-semibold text-white hover:bg-gray-700">
+      Analyze Threats
+    </button>
+  </form>
+
+  <section :if={@findings != nil} id="threat-results" class="space-y-4">
+    <h2 class="text-2xl font-bold text-gray-900">
+      Potential Threats and Recommendations
+    </h2>
+
+    <p class="text-sm text-gray-600">
+      Review each observation and determine whether it applies to your application.
+    </p>
+
+    <article :for={finding <- @findings}
+      class="rounded-lg border border-gray-200 p-5">
+      <div class="flex flex-wrap items-center gap-3">
+  <h3 class="text-lg font-semibold text-gray-900">
+    {finding.title}
+  </h3>
+  <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold uppercase text-gray-700">
+    {finding.severity}
+  </span>
+</div>
+      <p class="mt-2 text-sm text-gray-700">
+        <strong>Potential risk:</strong> {finding.risk}
+      </p>
+      <p class="mt-2 text-sm text-gray-700">
+        <strong>Recommendation:</strong> {finding.recommendation}
+      </p>
+    </article>
+  </section>
+</div>

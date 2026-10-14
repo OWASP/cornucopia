@@ -42,6 +42,7 @@ defmodule CopiWeb.Router do
     live "/games/:game_id/players/:id", PlayerLive.Show, :show
 
     live "/resources", ResourcesLive.Index, :index
+    live "/threat-modeling", ThreatModelingLive, :index
     live "/privacy", PrivacyLive.Index, :index
     live "/sponsors", SponsorsLive.Index, :index
     get "/cards", CardController, :index
