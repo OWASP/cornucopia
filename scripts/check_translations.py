@@ -158,6 +158,7 @@ class TranslationChecker:
         # Language name mapping
         lang_names = {
             "es": "Spanish",
+            "fa": "Persian",
             "fr": "French",
             "hi": "Hindi",
             "hu": "Hungarian",
