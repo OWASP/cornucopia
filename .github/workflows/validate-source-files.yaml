@@ -1,0 +1,95 @@
+name: Validate Source Files
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'source/**'
+      - 'scripts/validate_source_files.py'
+      - 'tests/scripts/validate_source_files_utest.py'
+      - '.github/workflows/validate-source-files.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-source-files:
+    name: Validate Changed Source Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            azure.archive.ubuntu.com:80
+            esm.ubuntu.com:443
+            files.pythonhosted.org:443
+            github-cloud.githubusercontent.com:443
+            github.com:443
+            motd.ubuntu.com:443
+            packages.microsoft.com:443
+            ppa.launchpadcontent.net:443
+            pypi.org:443
+
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+          cache: 'pipenv'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt --require-hashes
+          pipenv install --ignore-pipfile --dev
+
+      - name: Run validator unit tests
+        run: pipenv run python -m unittest tests/scripts/validate_source_files_utest.py
+
+      - name: Determine changed source files and validate
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            if [ -n "$BASE_SHA" ]; then
+              git fetch --depth=1 origin "$BASE_SHA"
+              DIFF_REF="$BASE_SHA"
+            else
+              git fetch origin "${{ github.base_ref }}" --depth=1
+              DIFF_REF="origin/${{ github.base_ref }}"
+            fi
+
+            DIFF_FILE="$(mktemp)"
+            trap 'rm -f "$DIFF_FILE"' EXIT
+            git diff -z --diff-filter=d --name-only "$DIFF_REF" HEAD -- 'source/*.yaml' > "$DIFF_FILE"
+
+            VALIDATE_TARGETS=()
+            while IFS= read -r -d '' file; do
+              if [ -f "$file" ]; then
+                VALIDATE_TARGETS+=("$file")
+              fi
+            done < "$DIFF_FILE"
+
+            if [ ${#VALIDATE_TARGETS[@]} -gt 0 ]; then
+              echo "Validating changed source files:"
+              printf ' - %s\n' "${VALIDATE_TARGETS[@]}"
+              pipenv run python scripts/validate_source_files.py "${VALIDATE_TARGETS[@]}"
+            else
+              echo "No source YAML files modified in this pull request."
+              echo "Running smoke validation on representative source files..."
+              pipenv run python scripts/validate_source_files.py source/mobileapp-mappings-2.0.yaml source/webapp-cards-3.0-en.yaml
+            fi
+          else
+            echo "Workflow dispatched manually. Validating representative source files."
+            pipenv run python scripts/validate_source_files.py source/mobileapp-mappings-2.0.yaml source/webapp-cards-3.0-en.yaml
+          fi
