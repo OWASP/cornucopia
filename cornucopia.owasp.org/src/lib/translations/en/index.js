@@ -15,6 +15,7 @@ import roadmapPage from '$data/website/phrases/en/roadmap.json';
 import authorPage from '$data/website/phrases/en/author.json';
 import questionsAndAnswersPage from '$data/website/phrases/en/questionsandanswers.json';
 import tributePage from '$data/website/phrases/en/tribute.json';
+import historyPage from '$data/website/phrases/en/history.json';
 export default {
   layout: layoutPage.layout,
   about: aboutPage.about,
@@ -32,5 +33,6 @@ export default {
   roadmap: roadmapPage.roadmap,
   author: authorPage.author,
   questionsandanswers: questionsAndAnswersPage.questionsandanswers,
+  history: historyPage.history,
   tribute: tributePage.tribute
 };
