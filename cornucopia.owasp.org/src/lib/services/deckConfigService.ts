@@ -1,5 +1,4 @@
-﻿import * as yaml from 'js-yaml';
-import { getRawYaml } from '$lib/config';
+import { decks } from '$lib/config';
 
 
 export interface DeckVersionConfig {
@@ -36,10 +35,6 @@ export interface DeckConfig {
     versions: DeckVersionConfig[];
 }
 
-interface DecksYaml {
-    decks: DeckConfig[];
-}
-
 function collectDeckConfigErrors(deck: Partial<DeckConfig>, index: number): string[] {
     const errorLabel = deck.edition ? `deck "${deck.edition}"` : `decks[${index}]`;
     const errors: string[] = [];
@@ -71,7 +66,7 @@ function collectDeckConfigErrors(deck: Partial<DeckConfig>, index: number): stri
     return errors;
 }
 
-function validateDecksYaml(decks: Partial<DeckConfig>[]): asserts decks is DeckConfig[] {
+function validateDeckConfigs(decks: Partial<DeckConfig>[]): asserts decks is DeckConfig[] {
     const errors = decks.flatMap((deck, index) => collectDeckConfigErrors(deck, index));
     if (errors.length > 0) {
         throw new Error(`decks.yaml has ${errors.length} problem(s):\n` + errors.map((e) => `  - ${e}`).join('\n'));
@@ -84,10 +79,10 @@ export class DeckConfigService {
 
     private static load(): DeckConfig[] {
         if (!DeckConfigService.configs) {
-            const parsed = yaml.load(getRawYaml()) as DecksYaml;
-            if (!Array.isArray(parsed?.decks)) throw new Error('decks.yaml: missing or invalid top-level "decks" array');
-            validateDecksYaml(parsed.decks);
-            DeckConfigService.configs = parsed.decks;
+            const deckConfig = decks;
+            if (!Array.isArray(deckConfig)) throw new Error('decks.yaml: missing or invalid top-level "decks" array');
+            validateDeckConfigs(deckConfig);
+            DeckConfigService.configs = deckConfig;
         }
         return DeckConfigService.configs;
     }

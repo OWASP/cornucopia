@@ -1,39 +1,45 @@
-﻿import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-vi.mock('../../decks.yaml?raw', () => ({
-    default: `
+const validYaml = `
 decks:
   - edition: webapp
     displayName: "OWASP Cornucopia"
-    fullName: "Website App Edition"
-    cre:
-      name: "OWASP Cornucopia Website App Edition"
-      category: "Website Application"
-    defaultPreviewCard: VE2
-    buttonLabelKey: cards.button.1
-    descriptionHeadingKey: cards.h2.1
-    descriptionBodyKey: cards.p2
-    howToPlayLink: /how-to-play
     versions:
       - version: "2.2"
-`
-}));
+`;
+
+async function loadConfig(yamlText: string) {
+    vi.resetModules();
+    vi.doMock('../../decks.yaml?raw', () => ({ default: yamlText }));
+    return import('./config.js');
+}
 
 describe('config.js', () => {
-    it('getRawYaml returns a non-empty string', async () => {
-        const { getRawYaml } = await import('./config.js');
-        expect(typeof getRawYaml()).toBe('string');
-        expect(getRawYaml().length).toBeGreaterThan(0);
+    beforeEach(() => {
+        vi.resetModules();
     });
 
-    it('config is a parsed object with a decks array', async () => {
-        const { config } = await import('./config.js');
-        expect(typeof config).toBe('object');
-        expect(Array.isArray((config as any).decks)).toBe(true);
-    });
-
-    it('decks exposes config.decks', async () => {
-        const { config, decks } = await import('./config.js');
+    it('parses yaml into config and exposes decks', async () => {
+        const { config, decks } = await loadConfig(validYaml);
+        expect(Array.isArray(decks)).toBe(true);
+        expect(decks).toHaveLength(1);
+        expect((decks as any)[0].edition).toBe('webapp');
         expect(decks).toBe((config as any).decks);
+    });
+
+    it('returns empty config and undefined decks for empty yaml', async () => {
+        const { config, decks } = await loadConfig('');
+        expect(config).toEqual({});
+        expect(decks).toBeUndefined();
+    });
+
+    it('returns undefined decks when the decks key is missing', async () => {
+        const { decks } = await loadConfig('other: value');
+        expect(decks).toBeUndefined();
+    });
+
+    it('returns undefined decks when yaml is not an object', async () => {
+        const { decks } = await loadConfig('just a string');
+        expect(decks).toBeUndefined();
     });
 });
