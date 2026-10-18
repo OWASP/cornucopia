@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Component } from "svelte";
     import type { Card } from "../../domain/card/card";
+    import { getDirection } from "$lib/utils/direction";
     import { cardColor } from "../../domain/card/cardColor";
     import EopCardMapping from "./eopCardMapping.svelte";
     import type { CardImage } from "$lib/services/cardImagesService";
@@ -79,7 +80,7 @@
     <div class="number-tab"><span>{formatCardValue(card.value)}</span></div>
     <div class="text-block">
         <p class="suit-name">{card.suitName}</p>
-        <p class="description">{card.desc}</p>
+        <p class="description" lang={card.language} dir={getDirection(card.language)}>{card.desc}</p>
     </div>
 </div>
 {:else}
@@ -88,19 +89,19 @@
         <span class="property-card-suit{previewStyle}">{card?.suitName}</span>
     </div>
     <div class="right {getRoyalSuitColor(card?.suit, card?.suitId, card?.value)}">
-        
+
         {#if mapping}
         <span class="property-card-number{previewStyle} {getTextColor(card?.suit, card?.suitId)}-text {getRoyalTextColor(card?.suit, card?.suitId, card?.value)}">{card?.card ?? card?.value}</span>
-        <p class="property-card-description{previewStyle}">{card?.desc}</p>
+        <p class="property-card-description{previewStyle}" lang={card?.language} dir={getDirection(card?.language)}>{card?.desc}</p>
             {#if MappingComponent}
                 <svelte:component this={MappingComponent} {mapping} {style} />
             {/if}
         {:else if card?.suitName == 'WILD CARD'}
         <span class="property-card-number {getSuitColor(card.suit, card?.suitId)}">Joker</span>
-        <p class="property-card-description{previewStyle}">{card.desc}</p>
+        <p class="property-card-description{previewStyle}" lang={card?.language} dir={getDirection(card?.language)}>{card.desc}</p>
         {:else}
         <span class="property-card-number {getSuitColor(card?.suit, card?.suitId)}">{card?.value}</span>
-        <p class="property-card-description{previewStyle}">{card?.desc}</p>
+        <p class="property-card-description{previewStyle}" lang={card?.language} dir={getDirection(card?.language)}>{card?.desc}</p>
         {/if}
     </div>
 </div>
@@ -154,7 +155,7 @@
     {
         font-size: 5vw;
     }
-    
+
     .property-card-suit.browser-card-container
     {
         font-size: 1.5vw;
@@ -297,7 +298,7 @@
     .cornucopia-mobile-text {
         color: rgb(10,58,94);
     }
-    
+
     .left.agentic-ai {
         background: linear-gradient(180deg, #3b2c42, #3b2c4280);
     }
