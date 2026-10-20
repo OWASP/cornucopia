@@ -27,7 +27,7 @@
 {/if}
 </div>
 <style>
-    @media (max-width: 767px) 
+    @media (max-width: 767px)
     {
         div
         {
