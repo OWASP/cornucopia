@@ -3,12 +3,16 @@ import { DeckConfigService } from './deckConfigService';
 
 const deckYaml = vi.hoisted(() => ({ value: '', reads: 0 }));
 
-vi.mock('../../../decks.yaml?raw', () => ({
-    get default() {
-        deckYaml.reads += 1;
-        return deckYaml.value;
-    }
-}));
+vi.mock('$lib/config', async () => {
+    const yaml = await import('js-yaml');
+    return {
+        get decks() {
+            deckYaml.reads += 1;
+            const config = deckYaml.value ? yaml.load(deckYaml.value) : {};
+            return config !== null && typeof config === 'object' && 'decks' in config ? config.decks : undefined;
+        }
+    };
+});
 
 const MOCK_DECKS_YAML = `
 decks:
@@ -267,7 +271,7 @@ decks:
             expect(configs.map((c) => c.edition)).toEqual(['webapp', 'eop', 'dbd']);
         });
 
-        it('should only read the file once and cache the result', () => {
+        it('should only load the decks config once and cache the result', () => {
             DeckConfigService.getDeckConfigs();
             DeckConfigService.getDeckConfigs();
             expect(deckYaml.reads).toBe(1);
@@ -395,7 +399,7 @@ decks:
     });
 
     describe('clear', () => {
-        it('should force decks.yaml to be re-read on the next access', () => {
+        it('should force the decks config to be reloaded on the next access', () => {
             DeckConfigService.getDeckConfigs();
             expect(deckYaml.reads).toBe(1);
 
