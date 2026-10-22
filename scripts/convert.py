@@ -64,10 +64,11 @@ class ConvertVars:
     ) -> None:
         """Update the choice sets with values extracted from a mapping file's meta block."""
         edition = meta.get("edition")
-        version = str(meta.get("version"))
+        raw_version = meta.get("version")
         if edition:
             editions.add(edition)
-            if version:
+            if raw_version is not None:
+                version = str(raw_version)
                 versions.add(version)
                 edition_version_map.setdefault(edition, {})[version] = version
         for lang in meta.get("languages", []):
