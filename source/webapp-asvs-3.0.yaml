@@ -17,12 +17,14 @@ meta:
   - es
   - fr
   - nl
-  - no-nb
-  - pt-br
-  - pt-pt
+  - no_nb
+  - pt_br
+  - pt_pt
   - it
   - ru
   - hu
+  - hi
+  - uk
 1.1.1:
   capec_codes:
   - '120'
@@ -965,7 +967,6 @@ meta:
   - '155'
   - '204'
   - '37'
-  - '473'
   - '474'
   - '548'
   - '57'
@@ -981,7 +982,6 @@ meta:
   - '155'
   - '204'
   - '37'
-  - '473'
   - '474'
   - '548'
   - '57'
@@ -996,7 +996,6 @@ meta:
   - '155'
   - '204'
   - '37'
-  - '473'
   - '474'
   - '548'
   - '57'
@@ -1465,9 +1464,6 @@ meta:
     exposed during processing, and ensure that data is encrypted immediately after
     use or as soon as feasible.
   level: '3'
-116.3.3:
-  capec_codes:
-  - '217'
 12.1.1:
   capec_codes:
   - '102'
@@ -2229,6 +2225,7 @@ meta:
   capec_codes:
   - '116'
   - '117'
+  - '204'
   - '37'
   - '508'
   description: Verify that data stored in browser storage (such as localStorage, sessionStorage,
@@ -2469,6 +2466,7 @@ meta:
   level: '2'
 15.3.5:
   capec_codes:
+  - '113'
   - '137'
   - '152'
   - '153'
@@ -2482,11 +2480,9 @@ meta:
     is to avoid type juggling or type confusion vulnerabilities caused by the application
     code making an assumption about a variable type.
   level: '2'
-15.3.5 15.3.6:
-  capec_codes:
-  - '113'
 15.3.6:
   capec_codes:
+  - '113'
   - '137'
   - '152'
   - '153'
@@ -2650,9 +2646,15 @@ meta:
   - '21'
   - '268'
   - '39'
+  - '444'
   - '49'
   - '50'
+  - '518'
+  - '519'
+  - '523'
+  - '548'
   - '600'
+  - '673'
   - '68'
   - '70'
   - '75'
@@ -2692,11 +2694,17 @@ meta:
   - '268'
   - '36'
   - '39'
+  - '444'
   - '49'
   - '50'
+  - '518'
+  - '519'
+  - '523'
   - '54'
+  - '548'
   - '58'
   - '600'
+  - '673'
   - '68'
   - '74'
   - '75'
@@ -2797,8 +2805,11 @@ meta:
   - '48'
   - '49'
   - '50'
+  - '518'
+  - '519'
   - '523'
   - '54'
+  - '548'
   - '549'
   - '554'
   - '57'
@@ -2815,6 +2826,7 @@ meta:
   - '64'
   - '66'
   - '664'
+  - '673'
   - '676'
   - '68'
   - '69'
@@ -2867,6 +2879,7 @@ meta:
   - '39'
   - '438'
   - '442'
+  - '444'
   - '445'
   - '446'
   - '461'
@@ -2874,8 +2887,11 @@ meta:
   - '49'
   - '50'
   - '511'
+  - '518'
+  - '519'
   - '523'
   - '538'
+  - '548'
   - '594'
   - '600'
   - '620'
@@ -3627,7 +3643,9 @@ meta:
   capec_codes:
   - '104'
   - '173'
+  - '220'
   - '233'
+  - '272'
   - '446'
   - '62'
   description: Verify that HTTP requests to sensitive functionality use appropriate
@@ -3660,12 +3678,15 @@ meta:
   capec_codes:
   - '104'
   - '152'
+  - '153'
   - '160'
   - '173'
   - '19'
+  - '231'
   - '233'
   - '242'
   - '446'
+  - '586'
   - '62'
   - '63'
   description: Verify that messages received by the postMessage interface are discarded
@@ -4001,6 +4022,7 @@ meta:
 5.1.1:
   capec_codes:
   - '126'
+  - '165'
   - '175'
   - '184'
   - '23'
@@ -5118,6 +5140,7 @@ meta:
   capec_codes:
   - '156'
   - '176'
+  - '22'
   - '554'
   - '593'
   description: Verify that changes to values on which authorization decisions are

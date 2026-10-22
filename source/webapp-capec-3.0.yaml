@@ -17,12 +17,14 @@ meta:
   - es
   - fr
   - nl
-  - no-nb
-  - pt-br
-  - pt-pt
+  - no_nb
+  - pt_br
+  - pt_pt
   - it
   - ru
   - hu
+  - hi
+  - uk
 1:
   owasp_asvs:
   - 13.2.2
@@ -36,7 +38,6 @@ meta:
   - 8.3.1
   - 8.4.1
   - 8.4.2
-  name: Accessing Functionality Not Properly Constrained by ACLs
 2:
   owasp_asvs:
   - 10.5.5
@@ -49,7 +50,6 @@ meta:
   - 6.1.1
   - 6.3.1
   - 6.3.8
-  name: Inducing Account Lockout
 3:
   owasp_asvs:
   - 1.1.1
@@ -57,20 +57,17 @@ meta:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: Using Leading 'Ghost' Character Sequences to Bypass Input Filters
 4:
   owasp_asvs:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: Using Alternative IP Address Encodings
 11:
   owasp_asvs:
   - 13.4.1
   - 13.4.7
   - 16.3.2
   - 16.3.3
-  name: Cause Web Server Misclassification
 16:
   owasp_asvs:
   - 13.2.3
@@ -79,7 +76,6 @@ meta:
   - 6.2.4
   - 6.3.2
   - 6.4.2
-  name: Dictionary-based Password Attack
 19:
   owasp_asvs:
   - 1.2.1
@@ -130,7 +126,6 @@ meta:
   - 5.3.1
   - 5.3.2
   - 5.3.3
-  name: Embedding Scripts within Scripts
 20:
   owasp_asvs:
   - 11.2.1
@@ -154,7 +149,6 @@ meta:
   - 14.1.1
   - 14.1.2
   - 16.3.3
-  name: Encryption Brute Forcing
 21:
   owasp_asvs:
   - 10.1.1
@@ -252,7 +246,6 @@ meta:
   - 9.2.2
   - 9.2.3
   - 9.2.4
-  name: Exploitation of Trusted Identifiers
 22:
   owasp_asvs:
   - 10.1.1
@@ -289,7 +282,7 @@ meta:
   - 3.5.1
   - 4.1.3
   - 8.3.1
-  name: Exploiting Trust in Client
+  - 8.3.2
 23:
   owasp_asvs:
   - 1.3.4
@@ -311,7 +304,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: File Content Injection
 24:
   owasp_asvs:
   - 11.2.5
@@ -321,7 +313,6 @@ meta:
   - 16.5.2
   - 16.5.3
   - 16.5.4
-  name: Filter Failure through Buffer Overflow
 25:
   owasp_asvs:
   - 1.4.1
@@ -333,7 +324,6 @@ meta:
   - 16.5.3
   - 2.3.2
   - 4.2.5
-  name: Forced Deadlock
 26:
   owasp_asvs:
   - 15.4.1
@@ -342,7 +332,6 @@ meta:
   - 16.5.3
   - 2.3.4
   - 2.4.2
-  name: Leveraging Race Conditions
 28:
   owasp_asvs:
   - 1.1.1
@@ -389,12 +378,10 @@ meta:
   - 4.2.4
   - 4.2.5
   - 5.4.2
-  name: Fuzzing
 30:
   owasp_asvs:
   - 16.3.3
   - 8.3.3
-  name: Hijacking a Privileged Thread of Execution
 31:
   owasp_asvs:
   - 10.1.1
@@ -438,7 +425,6 @@ meta:
   - 7.4.5
   - 7.5.2
   - 7.6.1
-  name: Accessing/Intercepting/Modifying HTTP Cookies
 33:
   owasp_asvs:
   - 16.3.3
@@ -447,7 +433,6 @@ meta:
   - 4.2.2
   - 4.2.3
   - 4.2.4
-  name: HTTP Request Smuggling
 36:
   owasp_asvs:
   - 13.2.1
@@ -455,7 +440,6 @@ meta:
   - 16.3.2
   - 16.3.3
   - 8.3.1
-  name: Using Unpublished Interfaces or Functionality
 37:
   owasp_asvs:
   - 10.1.1
@@ -496,7 +480,6 @@ meta:
   - 16.2.5
   - 16.3.3
   - 16.5.1
-  name: Retrieve Embedded Sensitive Data
 39:
   owasp_asvs:
   - 10.3.1
@@ -555,7 +538,6 @@ meta:
   - 9.2.2
   - 9.2.3
   - 9.2.4
-  name: Manipulating Opaque Client-based Data Tokens
 43:
   owasp_asvs:
   - 1.1.1
@@ -577,7 +559,6 @@ meta:
   - 3.2.2
   - 4.1.1
   - 5.4.2
-  name: Exploiting Multiple Input Interpretation Layers
 48:
   owasp_asvs:
   - 1.5.3
@@ -589,7 +570,6 @@ meta:
   - 5.3.3
   - 5.4.1
   - 5.4.2
-  name: Passing Local Filenames to Functions That Expect a URL
 49:
   owasp_asvs:
   - 13.2.1
@@ -636,7 +616,6 @@ meta:
   - 6.6.4
   - 7.5.3
   - 8.4.2
-  name: Password Brute Forcing
 50:
   owasp_asvs:
   - 10.4.2
@@ -677,18 +656,15 @@ meta:
   - 7.5.1
   - 7.5.3
   - 9.2.1
-  name: Password Recovery Exploitation
 51:
   owasp_asvs:
   - 1.3.6
-  name: Poison Web Service Registry
 52:
   owasp_asvs:
   - 1.2.10
   - 2.1.1
   - 2.2.1
   - 5.4.2
-  name: Embedding NULL Bytes
 54:
   owasp_asvs:
   - 10.2.3
@@ -711,7 +687,6 @@ meta:
   - 17.1.1
   - 4.3.2
   - 8.1.1
-  name: Query System for Information
 55:
   owasp_asvs:
   - 11.2.1
@@ -729,7 +704,6 @@ meta:
   - 13.3.1
   - 14.1.1
   - 14.1.2
-  name: Rainbow Table Password Cracking
 57:
   owasp_asvs:
   - 10.1.1
@@ -763,7 +737,6 @@ meta:
   - 9.1.1
   - 9.1.2
   - 9.1.3
-  name: Utilizing REST's Trust in the System Resource to Obtain Sensitive Data
 58:
   owasp_asvs:
   - 10.2.3
@@ -776,14 +749,12 @@ meta:
   - 8.2.1
   - 8.2.2
   - 8.2.3
-  name: Restful Privilege Elevation
 59:
   owasp_asvs:
   - 7.2.1
   - 7.2.2
   - 7.2.3
   - 7.2.4
-  name: Session Credential Falsification through Prediction
 61:
   owasp_asvs:
   - 14.2.1
@@ -792,7 +763,6 @@ meta:
   - 3.5.4
   - 7.2.1
   - 7.2.2
-  name: Session Fixation
 62:
   owasp_asvs:
   - 10.2.1
@@ -807,7 +777,6 @@ meta:
   - 3.5.8
   - 3.7.3
   - 4.4.2
-  name: Cross Site Request Forgery
 63:
   owasp_asvs:
   - 1.2.1
@@ -837,7 +806,6 @@ meta:
   - 3.6.1
   - 3.7.5
   - 4.1.1
-  name: Cross-Site Scripting (XSS)
 64:
   owasp_asvs:
   - 1.1.1
@@ -850,7 +818,6 @@ meta:
   - 2.2.1
   - 5.4.1
   - 5.4.2
-  name: Using Slashes and URL Encoding Combined to Bypass Validation Logic
 65:
   owasp_asvs:
   - 12.1.1
@@ -865,7 +832,6 @@ meta:
   - 12.3.3
   - 12.3.4
   - 12.3.5
-  name: Sniff Application Code
 66:
   owasp_asvs:
   - 1.2.4
@@ -885,7 +851,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: SQL Injection
 68:
   owasp_asvs:
   - 11.3.3
@@ -905,14 +870,12 @@ meta:
   - 4.1.5
   - 6.3.3
   - 6.7.1
-  name: Subvert Code-signing Facilities
 69:
   owasp_asvs:
   - 13.4.5
   - 16.3.3
   - 8.3.3
   - 8.4.2
-  name: Target Programs with Elevated Privileges
 70:
   owasp_asvs:
   - 13.2.3
@@ -929,7 +892,6 @@ meta:
   - 6.3.2
   - 6.3.8
   - 6.4.2
-  name: Try Common or Default Usernames and Passwords
 71:
   owasp_asvs:
   - 1.1.1
@@ -937,7 +899,6 @@ meta:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: Using Unicode Encoding to Bypass Validation Logic
 72:
   owasp_asvs:
   - 1.1.1
@@ -946,7 +907,6 @@ meta:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: URL Encoding
 74:
   owasp_asvs:
   - 16.3.2
@@ -956,7 +916,6 @@ meta:
   - 2.3.5
   - 3.5.7
   - 8.3.1
-  name: Manipulating State
 75:
   owasp_asvs:
   - 10.2.3
@@ -973,7 +932,6 @@ meta:
   - 8.1.4
   - 8.2.1
   - 8.4.2
-  name: Manipulating Writeable Configuration Files
 77:
   owasp_asvs:
   - 16.3.3
@@ -985,7 +943,6 @@ meta:
   - 2.3.2
   - 2.3.3
   - 3.5.7
-  name: Manipulating User-Controlled Variables
 78:
   owasp_asvs:
   - 1.1.1
@@ -993,7 +950,6 @@ meta:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: Using Escaped Slashes in Alternate Encoding
 79:
   owasp_asvs:
   - 1.1.1
@@ -1001,7 +957,6 @@ meta:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: Using Slashes in Alternate Encoding
 80:
   owasp_asvs:
   - 1.1.1
@@ -1009,14 +964,12 @@ meta:
   - 1.2.9
   - 2.1.1
   - 2.2.1
-  name: Using UTF-8 Encoding to Bypass Validation Logic
 83:
   owasp_asvs:
   - 1.2.7
   - 16.3.3
   - 16.3.4
   - 16.5.1
-  name: XPath Injection
 87:
   owasp_asvs:
   - 10.2.3
@@ -1028,7 +981,6 @@ meta:
   - 3.1.1
   - 3.7.5
   - 8.1.1
-  name: Forceful Browsing
 88:
   owasp_asvs:
   - 1.1.1
@@ -1039,7 +991,6 @@ meta:
   - 16.3.3
   - 16.4.1
   - 16.5.1
-  name: OS Command Injection
 89:
   owasp_asvs:
   - 12.1.4
@@ -1053,7 +1004,6 @@ meta:
   - 3.4.7
   - 3.7.4
   - 3.7.5
-  name: Pharming
 93:
   owasp_asvs:
   - 1.2.3
@@ -1061,7 +1011,6 @@ meta:
   - 16.3.3
   - 16.4.1
   - 16.5.1
-  name: Log Injection-Tampering-Forging
 94:
   owasp_asvs:
   - 11.2.1
@@ -1109,13 +1058,11 @@ meta:
   - 9.1.1
   - 9.1.2
   - 9.1.3
-  name: Adversary in the Middle (AiTM)
 95:
   owasp_asvs:
   - 16.3.2
   - 16.3.3
   - 8.3.1
-  name: WSDL Scanning
 97:
   owasp_asvs:
   - 11.2.1
@@ -1137,7 +1084,6 @@ meta:
   - 11.6.1
   - 11.6.2
   - 16.3.3
-  name: Cryptanalysis
 98:
   owasp_asvs:
   - 10.4.16
@@ -1154,7 +1100,6 @@ meta:
   - 8.1.3
   - 8.1.4
   - 8.2.4
-  name: Phishing
 100:
   owasp_asvs:
   - 16.3.3
@@ -1162,7 +1107,6 @@ meta:
   - 16.5.3
   - 4.2.5
   - 4.3.1
-  name: Overflow Buffers
 102:
   owasp_asvs:
   - 12.1.1
@@ -1178,7 +1122,6 @@ meta:
   - 12.3.4
   - 12.3.5
   - 4.4.1
-  name: Session Sidejacking
 103:
   owasp_asvs:
   - 3.2.1
@@ -1187,7 +1130,6 @@ meta:
   - 3.4.6
   - 3.4.7
   - 3.7.5
-  name: Clickjacking
 104:
   owasp_asvs:
   - 3.1.1
@@ -1204,7 +1146,6 @@ meta:
   - 3.5.7
   - 3.5.8
   - 3.6.1
-  name: Cross Zone Scripting
 105:
   owasp_asvs:
   - 16.3.3
@@ -1213,13 +1154,11 @@ meta:
   - 4.2.2
   - 4.2.3
   - 4.2.4
-  name: HTTP Request Splitting
 111:
   owasp_asvs:
   - 3.4.3
   - 3.4.6
   - 3.4.7
-  name: JSON Hijacking (aka JavaScript Hijacking)
 112:
   owasp_asvs:
   - 11.2.1
@@ -1241,13 +1180,13 @@ meta:
   - 11.6.1
   - 11.6.2
   - 16.3.3
-  name: Brute Force
 113:
   owasp_asvs:
   - 13.2.1
   - 15.3.3
   - 15.3.4
-  - 15.3.5 15.3.6
+  - 15.3.5
+  - 15.3.6
   - 15.3.7
   - 16.3.3
   - 2.1.1
@@ -1258,7 +1197,6 @@ meta:
   - 2.3.2
   - 2.3.3
   - 6.1.3
-  name: Interface Manipulation
 114:
   owasp_asvs:
   - 11.2.1
@@ -1319,7 +1257,6 @@ meta:
   - 8.1.3
   - 8.1.4
   - 8.4.2
-  name: Authentication Abuse
 115:
   owasp_asvs:
   - 10.1.1
@@ -1354,7 +1291,6 @@ meta:
   - 7.5.1
   - 7.5.3
   - 8.4.2
-  name: Authentication Bypass
 116:
   owasp_asvs:
   - 11.7.1
@@ -1396,7 +1332,6 @@ meta:
   - 8.1.4
   - 8.2.1
   - 8.4.2
-  name: Excavation
 117:
   owasp_asvs:
   - 12.1.1
@@ -1422,7 +1357,6 @@ meta:
   - 14.3.2
   - 14.3.3
   - 4.4.1
-  name: Interception
 120:
   owasp_asvs:
   - 1.1.1
@@ -1432,7 +1366,6 @@ meta:
   - 16.5.1
   - 2.1.1
   - 2.2.1
-  name: Double Encoding
 121:
   owasp_asvs:
   - 13.4.1
@@ -1442,7 +1375,6 @@ meta:
   - 16.3.2
   - 16.3.3
   - 8.3.1
-  name: Exploit Non-Production Interfaces
 122:
   owasp_asvs:
   - 1.2.3
@@ -1458,14 +1390,12 @@ meta:
   - 8.2.1
   - 8.2.2
   - 8.2.3
-  name: Privilege Abuse
 124:
   owasp_asvs:
   - 15.4.3
   - 15.4.4
   - 16.5.2
   - 16.5.3
-  name: Shared Resource Manipulation
 125:
   owasp_asvs:
   - 13.1.2
@@ -1484,7 +1414,6 @@ meta:
   - 2.3.2
   - 2.4.1
   - 2.4.2
-  name: Flooding
 126:
   owasp_asvs:
   - 1.1.1
@@ -1510,18 +1439,15 @@ meta:
   - 5.4.2
   - 5.4.3
   - 8.1.1
-  name: Path Traversal
 127:
   owasp_asvs:
   - 13.4.3
   - 16.3.3
-  name: Directory Indexing
 128:
   owasp_asvs:
   - 1.4.1
   - 1.4.2
   - 16.5.3
-  name: Integer Attacks
 129:
   owasp_asvs:
   - 1.4.1
@@ -1529,7 +1455,6 @@ meta:
   - 1.4.3
   - 16.5.2
   - 16.5.3
-  name: Pointer Manipulation
 130:
   owasp_asvs:
   - 1.3.12
@@ -1549,7 +1474,6 @@ meta:
   - 4.3.1
   - 5.2.1
   - 5.2.6
-  name: Excessive Allocation
 131:
   owasp_asvs:
   - 1.4.1
@@ -1558,7 +1482,6 @@ meta:
   - 15.4.1
   - 16.5.2
   - 16.5.3
-  name: Resource Leak Exposure
 133:
   owasp_asvs:
   - 13.2.1
@@ -1575,11 +1498,9 @@ meta:
   - 8.1.4
   - 8.2.1
   - 8.4.2
-  name: Try All Common Switches
 135:
   owasp_asvs:
   - 1.3.10
-  name: Format String Injection
 136:
   owasp_asvs:
   - 1.2.6
@@ -1587,7 +1508,6 @@ meta:
   - 16.3.3
   - 16.3.4
   - 16.5.1
-  name: LDAP Injection
 137:
   owasp_asvs:
   - 1.2.2
@@ -1608,7 +1528,6 @@ meta:
   - 2.2.2
   - 2.2.3
   - 5.4.1
-  name: Parameter Injection
 140:
   owasp_asvs:
   - 16.3.3
@@ -1619,11 +1538,9 @@ meta:
   - 2.3.1
   - 2.3.2
   - 2.3.3
-  name: Bypassing of Intermediate Forms in Multiple-Form Sets
 141:
   owasp_asvs:
   - 1.3.9
-  name: Cache Poisoning
 143:
   owasp_asvs:
   - 10.2.3
@@ -1631,7 +1548,6 @@ meta:
   - 15.2.3
   - 16.3.2
   - 8.1.1
-  name: Detect Unpublicized Web Pages
 144:
   owasp_asvs:
   - 10.2.3
@@ -1639,7 +1555,6 @@ meta:
   - 15.2.3
   - 16.3.2
   - 8.1.1
-  name: Detect Unpublicized Web Services
 145:
   owasp_asvs:
   - 11.2.1
@@ -1667,7 +1582,6 @@ meta:
   - 9.1.1
   - 9.1.2
   - 9.1.3
-  name: Checksum Spoofing
 149:
   owasp_asvs:
   - 10.2.3
@@ -1678,7 +1592,6 @@ meta:
   - 15.2.3
   - 16.3.2
   - 8.1.1
-  name: Explore for Predictable Temporary File Names
 150:
   owasp_asvs:
   - 13.2.2
@@ -1691,7 +1604,6 @@ meta:
   - 13.4.7
   - 15.2.3
   - 16.4.2
-  name: Collect Data from Common Resource Locations
 151:
   owasp_asvs:
   - 10.4.2
@@ -1752,7 +1664,6 @@ meta:
   - 8.1.4
   - 8.4.2
   - 9.2.1
-  name: Identity Spoofing
 152:
   owasp_asvs:
   - 1.1.1
@@ -1807,7 +1718,6 @@ meta:
   - 4.1.1
   - 5.4.1
   - 5.4.2
-  name: Inject Unexpected Items
 153:
   owasp_asvs:
   - 1.1.1
@@ -1837,13 +1747,13 @@ meta:
   - 2.2.3
   - 2.3.2
   - 2.3.3
+  - 3.5.5
   - 4.1.1
   - 5.2.5
   - 5.3.2
   - 5.3.3
   - 5.4.1
   - 5.4.2
-  name: Input Data Manipulation
 154:
   owasp_asvs:
   - 10.2.2
@@ -1851,7 +1761,6 @@ meta:
   - 13.2.4
   - 13.2.5
   - 15.3.2
-  name: Resource Location Spoofing
 155:
   owasp_asvs:
   - 10.2.3
@@ -1872,7 +1781,6 @@ meta:
   - 16.3.2
   - 16.3.3
   - 8.1.1
-  name: Screen Temporary Files for Sensitive Information
 156:
   owasp_asvs:
   - 16.3.1
@@ -1887,7 +1795,6 @@ meta:
   - 8.3.2
   - 8.3.3
   - 8.4.2
-  name: Engage in Deceptive Interactions
 157:
   owasp_asvs:
   - 11.2.1
@@ -1921,12 +1828,10 @@ meta:
   - 3.4.1
   - 3.7.4
   - 4.1.2
-  name: Sniffing Attacks
 159:
   owasp_asvs:
   - 15.2.4
   - 16.3.4
-  name: Redirect Access to Libraries
 160:
   owasp_asvs:
   - 1.1.1
@@ -1965,7 +1870,6 @@ meta:
   - 3.6.1
   - 3.7.5
   - 4.1.1
-  name: Exploit Script-Based APIs
 162:
   owasp_asvs:
   - 11.2.1
@@ -1981,7 +1885,6 @@ meta:
   - 2.3.4
   - 2.3.5
   - 8.3.1
-  name: Manipulating Hidden Fields
 165:
   owasp_asvs:
   - 1.5.3
@@ -1990,6 +1893,7 @@ meta:
   - 2.2.1
   - 2.2.2
   - 3.2.1
+  - 5.1.1
   - 5.2.1
   - 5.2.2
   - 5.2.3
@@ -2001,7 +1905,6 @@ meta:
   - 5.3.3
   - 5.4.1
   - 5.4.2
-  name: File Manipulation
 166:
   owasp_asvs:
   - 16.3.2
@@ -2010,7 +1913,6 @@ meta:
   - 2.3.4
   - 2.3.5
   - 8.3.1
-  name: Force the System to Reset Values
 169:
   owasp_asvs:
   - 13.2.1
@@ -2031,7 +1933,6 @@ meta:
   - 16.5.1
   - 17.1.1
   - 4.3.2
-  name: Footprinting
 172:
   owasp_asvs:
   - 16.3.2
@@ -2042,7 +1943,6 @@ meta:
   - 2.3.4
   - 2.3.5
   - 8.3.1
-  name: Manipulate Timing and State
 173:
   owasp_asvs:
   - 3.4.2
@@ -2058,7 +1958,6 @@ meta:
   - 3.5.8
   - 3.7.2
   - 3.7.3
-  name: Action Spoofing
 175:
   owasp_asvs:
   - 1.3.10
@@ -2082,7 +1981,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Code Inclusion
 176:
   owasp_asvs:
   - 1.3.8
@@ -2108,7 +2006,6 @@ meta:
   - 8.3.2
   - 8.3.3
   - 8.4.2
-  name: Configuration/Environment Manipulation
 179:
   owasp_asvs:
   - 10.4.11
@@ -2123,7 +2020,6 @@ meta:
   - 8.2.1
   - 8.3.1
   - 8.4.2
-  name: Calling Micro-Services Directly
 180:
   owasp_asvs:
   - 10.1.1
@@ -2160,22 +2056,18 @@ meta:
   - 8.4.1
   - 8.4.2
   - 9.2.1
-  name: Exploiting Incorrectly Configured Access Control Security Levels
 181:
   owasp_asvs:
   - 3.7.1
-  name: Flash File Overlay
 182:
   owasp_asvs:
   - 3.7.1
-  name: Flash Injection
 183:
   owasp_asvs:
   - 1.3.11
   - 16.3.3
   - 16.3.4
   - 16.5.1
-  name: IMAP/SMTP Command Injection
 184:
   owasp_asvs:
   - 1.2.10
@@ -2224,7 +2116,6 @@ meta:
   - 5.4.2
   - 5.4.3
   - 6.7.1
-  name: Software Integrity Attack
 188:
   owasp_asvs:
   - 13.3.1
@@ -2235,16 +2126,13 @@ meta:
   - 13.4.7
   - 15.2.3
   - 16.3.3
-  name: Reverse Engineering
 191:
   owasp_asvs:
   - 13.3.1
   - 13.4.7
-  name: Read Sensitive Constants Within an Executable
 194:
   owasp_asvs:
   - 4.1.3
-  name: Fake the Source of Data
 195:
   owasp_asvs:
   - 10.4.16
@@ -2261,18 +2149,15 @@ meta:
   - 8.1.3
   - 8.1.4
   - 8.2.4
-  name: Principal Spoof
 196:
   owasp_asvs:
   - 14.2.1
   - 7.2.1
   - 7.2.3
-  name: Session Credential Falsification through Forging
 198:
   owasp_asvs:
   - 16.3.3
   - 16.5.1
-  name: XSS Targeting Error Pages
 201:
   owasp_asvs:
   - 1.3.6
@@ -2282,20 +2167,17 @@ meta:
   - 16.3.3
   - 16.3.4
   - 2.2.2
-  name: Serialized Data External Linking
 202:
   owasp_asvs:
   - 2.2.2
   - 3.1.1
   - 3.7.5
-  name: Create Malicious Client
 203:
   owasp_asvs:
   - 10.2.3
   - 13.2.2
   - 16.3.2
   - 8.1.1
-  name: Manipulate Registry Information
 204:
   owasp_asvs:
   - 11.1.1
@@ -2320,8 +2202,8 @@ meta:
   - 14.2.8
   - 14.3.1
   - 14.3.2
+  - 14.3.3
   - 16.3.3
-  name: Lifting Sensitive Data Embedded in Cache
 206:
   owasp_asvs:
   - 13.3.1
@@ -2331,7 +2213,6 @@ meta:
   - 16.3.2
   - 16.3.3
   - 16.3.4
-  name: Signing Malicious Code
 207:
   owasp_asvs:
   - 1.4.1
@@ -2362,7 +2243,6 @@ meta:
   - 8.1.4
   - 8.2.1
   - 8.3.1
-  name: Removing Important Client Functionality
 212:
   owasp_asvs:
   - 15.3.1
@@ -2388,7 +2268,6 @@ meta:
   - 8.2.2
   - 8.2.3
   - 8.3.1
-  name: Functionality Misuse
 215:
   owasp_asvs:
   - 13.2.2
@@ -2398,7 +2277,6 @@ meta:
   - 16.4.2
   - 16.5.1
   - 2.4.1
-  name: Fuzzing for application mapping
 216:
   owasp_asvs:
   - 11.2.1
@@ -2418,10 +2296,8 @@ meta:
   - 11.6.2
   - 16.3.3
   - 16.3.4
-  name: Communication Channel Manipulation
 217:
   owasp_asvs:
-  - 116.3.3
   - 12.1.1
   - 12.1.2
   - 12.1.3
@@ -2436,7 +2312,6 @@ meta:
   - 12.3.5
   - 16.3.3
   - 16.3.4
-  name: Exploiting Incorrectly Configured SSL/TLS
 218:
   owasp_asvs:
   - 11.2.1
@@ -2459,7 +2334,6 @@ meta:
   - 2.2.1
   - 2.2.2
   - 4.1.5
-  name: Spoofing of UDDI/ebXML Messages
 220:
   owasp_asvs:
   - 11.2.1
@@ -2493,12 +2367,12 @@ meta:
   - 16.3.4
   - 3.1.1
   - 3.4.1
+  - 3.5.3
   - 3.7.4
   - 4.2.1
   - 4.2.2
   - 4.2.3
   - 4.2.4
-  name: Client-Server Protocol Manipulation
 224:
   owasp_asvs:
   - 13.2.2
@@ -2510,7 +2384,6 @@ meta:
   - 15.2.3
   - 17.1.1
   - 4.3.2
-  name: Fingerprinting
 227:
   owasp_asvs:
   - 13.1.2
@@ -2524,7 +2397,6 @@ meta:
   - 2.4.1
   - 2.4.2
   - 4.2.5
-  name: Sustained Client Engagement
 231:
   owasp_asvs:
   - 1.3.1
@@ -2534,7 +2406,7 @@ meta:
   - 1.3.5
   - 1.5.2
   - 16.3.3
-  name: Oversized Serialized Data Payloads
+  - 3.5.5
 233:
   owasp_asvs:
   - 1.2.3
@@ -2564,12 +2436,10 @@ meta:
   - 6.7.1
   - 8.3.3
   - 8.4.2
-  name: Privilege Escalation
 234:
   owasp_asvs:
   - 16.3.3
   - 8.3.3
-  name: Hijacking a privileged process
 240:
   owasp_asvs:
   - 10.2.3
@@ -2583,7 +2453,6 @@ meta:
   - 16.3.3
   - 8.1.1
   - 8.3.3
-  name: Resource Injection
 242:
   owasp_asvs:
   - 1.1.1
@@ -2650,7 +2519,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Code Injection
 248:
   owasp_asvs:
   - 1.2.10
@@ -2675,7 +2543,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Command Injection
 250:
   owasp_asvs:
   - 1.2.7
@@ -2688,7 +2555,6 @@ meta:
   - 16.3.3
   - 16.3.4
   - 16.5.1
-  name: XML Injection
 253:
   owasp_asvs:
   - 1.3.10
@@ -2710,7 +2576,6 @@ meta:
   - 5.3.2
   - 5.3.3
   - 5.4.3
-  name: Remote Code Inclusion
 261:
   owasp_asvs:
   - 15.3.1
@@ -2721,7 +2586,6 @@ meta:
   - 15.3.7
   - 16.3.3
   - 16.5.1
-  name: Fuzzing for garnering other adjacent user/sensitive data
 267:
   owasp_asvs:
   - 1.1.1
@@ -2747,7 +2611,6 @@ meta:
   - 3.2.3
   - 3.6.1
   - 5.4.2
-  name: Leverage Alternate Encoding
 268:
   owasp_asvs:
   - 16.1.1
@@ -2766,12 +2629,10 @@ meta:
   - 6.3.2
   - 6.7.1
   - 6.8.2
-  name: Audit Log Manipulation
 271:
   owasp_asvs:
   - 1.5.1
   - 2.2.2
-  name: Schema Poisoning
 272:
   owasp_asvs:
   - 1.2.2
@@ -2808,6 +2669,7 @@ meta:
   - 2.1.1
   - 2.2.1
   - 2.2.2
+  - 3.5.3
   - 4.1.1
   - 4.1.4
   - 4.2.1
@@ -2815,7 +2677,6 @@ meta:
   - 4.2.3
   - 4.2.4
   - 5.4.1
-  name: Protocol Manipulation
 310:
   owasp_asvs:
   - 13.4.1
@@ -2823,7 +2684,6 @@ meta:
   - 13.4.6
   - 13.4.7
   - 16.3.4
-  name: Scanning for Vulnerable Software
 383:
   owasp_asvs:
   - 16.3.3
@@ -2834,12 +2694,10 @@ meta:
   - 8.2.2
   - 8.2.3
   - 8.2.4
-  name: Harvesting Information via API Event Monitoring
 416:
   owasp_asvs:
   - 6.4.6
   - 7.6.2
-  name: Manipulate Human Behavior
 438:
   owasp_asvs:
   - 11.3.3
@@ -2848,7 +2706,6 @@ meta:
   - 16.3.4
   - 4.1.5
   - 6.7.1
-  name: Modification During Manufacture
 441:
   owasp_asvs:
   - 1.2.10
@@ -2879,7 +2736,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Malicious Logic Insertion
 442:
   owasp_asvs:
   - 11.3.3
@@ -2895,12 +2751,10 @@ meta:
   - 16.3.4
   - 4.1.5
   - 6.7.1
-  name: Infected Software
 443:
   owasp_asvs:
   - 15.2.4
   - 15.2.5
-  name: Malicious Logic Inserted Into Product by Authorized Developer
 444:
   owasp_asvs:
   - 13.3.1
@@ -2914,7 +2768,10 @@ meta:
   - 15.2.1
   - 15.2.4
   - 15.2.5
+  - 16.3.1
+  - 16.3.2
   - 16.3.3
+  - 16.3.4
   - 3.6.1
   - 5.1.1
   - 5.2.2
@@ -2923,7 +2780,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Development Alteration
 445:
   owasp_asvs:
   - 13.2.3
@@ -2937,8 +2793,6 @@ meta:
   - 15.2.4
   - 15.2.5
   - 16.3.4
-  name: Malicious Logic Insertion into Product Software via Configuration Management
-    Manipulation
 446:
   owasp_asvs:
   - 15.1.1
@@ -2959,7 +2813,6 @@ meta:
   - 3.5.7
   - 3.6.1
   - 3.7.1
-  name: Malicious Logic Insertion into Product via Inclusion of Third-Party Component
 461:
   owasp_asvs:
   - 11.2.2
@@ -2972,14 +2825,12 @@ meta:
   - 16.3.3
   - 16.3.4
   - 16.5.3
-  name: Web Services API Signature Forgery Leveraging Hash Function Extension Weakness
 463:
   owasp_asvs:
   - 11.2.4
   - 11.2.5
   - 11.3.1
   - 16.3.3
-  name: Padding Oracle Crypto Attack
 464:
   owasp_asvs:
   - 10.4.8
@@ -2993,7 +2844,6 @@ meta:
   - 7.4.5
   - 7.5.2
   - 7.6.1
-  name: Evercookie
 465:
   owasp_asvs:
   - 10.4.16
@@ -3009,7 +2859,6 @@ meta:
   - 8.1.3
   - 8.1.4
   - 8.2.4
-  name: Transparent Proxy Abuse
 466:
   owasp_asvs:
   - 3.1.1
@@ -3017,7 +2866,6 @@ meta:
   - 3.4.2
   - 3.4.8
   - 3.7.4
-  name: Leveraging Active Adversary in the Middle Attacks to Bypass Same Origin Policy
 469:
   owasp_asvs:
   - 15.4.3
@@ -3026,12 +2874,8 @@ meta:
   - 2.3.2
   - 2.4.1
   - 2.4.2
-  name: HTTP DoS
 473:
   owasp_asvs:
-  - 11.1.1
-  - 11.1.2
-  - 11.1.3
   - 11.2.1
   - 11.2.2
   - 11.2.3
@@ -3066,7 +2910,6 @@ meta:
   - 9.1.1
   - 9.1.2
   - 9.1.3
-  name: Signature Spoof
 474:
   owasp_asvs:
   - 11.1.1
@@ -3079,7 +2922,6 @@ meta:
   - 13.3.3
   - 16.3.3
   - 17.2.1
-  name: Signature Spoofing by Key Theft
 475:
   owasp_asvs:
   - 11.3.3
@@ -3096,14 +2938,12 @@ meta:
   - 9.1.1
   - 9.1.2
   - 9.1.3
-  name: Signature Spoofing by Improper Validation
 481:
   owasp_asvs:
   - 13.1.1
   - 13.2.4
   - 13.2.5
   - 15.3.2
-  name: Contradictory Destinations in Traffic Routing Schemes
 497:
   owasp_asvs:
   - 13.2.2
@@ -3111,7 +2951,6 @@ meta:
   - 13.4.3
   - 13.4.7
   - 15.2.3
-  name: File Discovery
 508:
   owasp_asvs:
   - 14.2.6
@@ -3120,7 +2959,6 @@ meta:
   - 14.3.3
   - 6.2.6
   - 6.2.7
-  name: Shoulder Surfing
 510:
   owasp_asvs:
   - 10.4.16
@@ -3136,7 +2974,6 @@ meta:
   - 8.1.3
   - 8.1.4
   - 8.2.4
-  name: SaaS User Request Forgery
 511:
   owasp_asvs:
   - 13.3.1
@@ -3148,24 +2985,29 @@ meta:
   - 15.2.4
   - 15.2.5
   - 16.3.4
-  name: Infiltration of Software Development Environment
 518:
   owasp_asvs:
+  - 16.3.1
+  - 16.3.2
+  - 16.3.3
+  - 16.3.4
   - 3.1.1
   - 5.1.1
   - 6.3.3
   - 6.4.5
   - 6.4.6
   - 6.7.1
-  name: Documentation Alteration to Produce Under-performing Systems
 519:
   owasp_asvs:
+  - 16.3.1
+  - 16.3.2
+  - 16.3.3
+  - 16.3.4
   - 5.1.1
   - 6.3.3
   - 6.4.5
   - 6.4.6
   - 6.7.1
-  name: Documentation Alteration to Cause Errors in System Design
 523:
   owasp_asvs:
   - 1.3.2
@@ -3184,6 +3026,8 @@ meta:
   - 15.2.1
   - 15.2.4
   - 15.2.5
+  - 16.3.1
+  - 16.3.2
   - 16.3.3
   - 16.3.4
   - 4.1.5
@@ -3195,7 +3039,6 @@ meta:
   - 5.4.2
   - 5.4.3
   - 6.7.1
-  name: Malicious Software Implanted
 538:
   owasp_asvs:
   - 15.1.1
@@ -3206,7 +3049,6 @@ meta:
   - 15.2.4
   - 15.2.5
   - 16.3.4
-  name: Open-Source Library Manipulation
 541:
   owasp_asvs:
   - 13.2.2
@@ -3216,7 +3058,6 @@ meta:
   - 13.4.6
   - 13.4.7
   - 15.2.3
-  name: Application Fingerprinting
 543:
   owasp_asvs:
   - 10.4.16
@@ -3236,11 +3077,9 @@ meta:
   - 8.1.3
   - 8.1.4
   - 8.2.4
-  name: Counterfeit Websites
 546:
   owasp_asvs:
   - 15.2.3
-  name: Incomplete Data Deletion in a Multi-Tenant Environment
 548:
   owasp_asvs:
   - 10.7.1
@@ -3259,11 +3098,14 @@ meta:
   - 14.2.6
   - 14.2.7
   - 14.2.8
+  - 16.3.1
+  - 16.3.2
+  - 16.3.3
+  - 16.3.4
   - 5.1.1
   - 6.3.3
   - 6.4.6
   - 6.7.1
-  name: Contaminate Resource
 549:
   owasp_asvs:
   - 1.2.10
@@ -3295,7 +3137,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Local Execution of Code
 554:
   owasp_asvs:
   - 10.1.1
@@ -3328,7 +3169,6 @@ meta:
   - 8.3.2
   - 8.3.3
   - 8.4.2
-  name: Functionality Bypass
 560:
   owasp_asvs:
   - 13.2.3
@@ -3341,12 +3181,10 @@ meta:
   - 6.3.8
   - 6.4.2
   - 6.5.6
-  name: Use of Known Domain Credentials
 568:
   owasp_asvs:
   - 6.3.3
   - 6.5.6
-  name: Capture Credentials via Keylogger
 569:
   owasp_asvs:
   - 3.2.1
@@ -3357,13 +3195,11 @@ meta:
   - 3.7.2
   - 3.7.3
   - 3.7.4
-  name: Collect Data as Provided by Users
 572:
   owasp_asvs:
   - 16.3.3
   - 5.2.1
   - 5.2.6
-  name: Artificially Inflate File Sizes
 586:
   owasp_asvs:
   - 1.2.2
@@ -3373,9 +3209,9 @@ meta:
   - 2.1.1
   - 2.2.1
   - 2.2.2
+  - 3.5.5
   - 5.4.1
   - 5.4.2
-  name: Object Injection
 593:
   owasp_asvs:
   - 10.4.8
@@ -3411,7 +3247,6 @@ meta:
   - 8.1.4
   - 8.2.4
   - 8.3.2
-  name: Session Hijacking
 594:
   owasp_asvs:
   - 11.2.1
@@ -3448,7 +3283,6 @@ meta:
   - 4.1.2
   - 4.1.5
   - 6.7.1
-  name: Traffic Injection
 600:
   owasp_asvs:
   - 16.1.1
@@ -3464,7 +3298,6 @@ meta:
   - 16.4.3
   - 6.3.5
   - 6.3.7
-  name: Credential Stuffing
 603:
   owasp_asvs:
   - 13.1.3
@@ -3475,7 +3308,6 @@ meta:
   - 17.3.2
   - 6.4.5
   - 6.4.6
-  name: Blockage
 607:
   owasp_asvs:
   - 13.1.3
@@ -3486,7 +3318,6 @@ meta:
   - 17.3.2
   - 6.4.5
   - 6.4.6
-  name: Obstruction
 620:
   owasp_asvs:
   - 11.2.1
@@ -3520,7 +3351,6 @@ meta:
   - 3.4.1
   - 3.7.4
   - 4.1.2
-  name: Drop Encryption Level
 633:
   owasp_asvs:
   - 10.1.1
@@ -3580,7 +3410,6 @@ meta:
   - 8.1.4
   - 8.2.4
   - 9.2.1
-  name: Token Impersonation
 636:
   owasp_asvs:
   - 1.2.3
@@ -3593,7 +3422,6 @@ meta:
   - 5.4.1
   - 5.4.2
   - 5.4.3
-  name: Hiding Malicious Data or Code within Files
 639:
   owasp_asvs:
   - 11.1.1
@@ -3605,12 +3433,10 @@ meta:
   - 13.3.2
   - 13.3.3
   - 16.3.3
-  name: Probe System Files
 654:
   owasp_asvs:
   - 6.3.3
   - 6.5.6
-  name: Credential Prompt Impersonation
 664:
   owasp_asvs:
   - 1.3.6
@@ -3619,7 +3445,6 @@ meta:
   - 16.3.4
   - 16.5.1
   - 5.3.2
-  name: Server Side Request Forgery
 673:
   owasp_asvs:
   - 15.1.1
@@ -3629,15 +3454,16 @@ meta:
   - 15.2.1
   - 15.2.4
   - 15.2.5
+  - 16.3.1
+  - 16.3.2
+  - 16.3.3
   - 16.3.4
-  name: Developer Signing Maliciously Altered Software
 676:
   owasp_asvs:
   - 1.2.4
   - 1.3.3
   - 16.3.3
   - 16.5.1
-  name: NoSQL Injection
 690:
   owasp_asvs:
   - 11.3.3
@@ -3648,7 +3474,6 @@ meta:
   - 4.1.3
   - 4.1.5
   - 6.7.1
-  name: Metadata Spoofing
 691:
   owasp_asvs:
   - 15.1.1
@@ -3659,4 +3484,3 @@ meta:
   - 15.2.4
   - 15.2.5
   - 16.3.4
-  name: Spoof Open-Source Software Metadata
