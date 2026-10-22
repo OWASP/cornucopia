@@ -8,12 +8,26 @@ Can be executed locally or in GitHub Actions on changed files in a pull request.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
 from typing import Any
 
 import yaml
+
+
+class UniqueKeySafeLoader(yaml.SafeLoader):
+    """Safe YAML loader that rejects ambiguous duplicate mapping keys."""
+
+    def construct_mapping(self, node: yaml.MappingNode, deep: bool = False) -> dict[Any, Any]:
+        mapping: dict[Any, Any] = {}
+        for key_node, value_node in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            if key in mapping:
+                raise ValueError(f"Duplicate YAML key: {key!r}")
+            mapping[key] = self.construct_object(value_node, deep=deep)
+        return mapping
 
 ASVS_ID_PATTERN = re.compile(r"^(-|\d+(\.\d+)+)$")
 CAPEC_ID_PATTERN = re.compile(r"^(-|\d+)$")
@@ -53,7 +67,7 @@ class SourceValidator:
 
         try:
             with open(file_path, "r", encoding="utf-8") as f:
-                content = yaml.safe_load(f)
+                content = yaml.load(f, Loader=UniqueKeySafeLoader)  # nosec B506
         except Exception as exc:
             self.errors.append(f"{file_path}: Failed to parse YAML: {exc}")
             return False
@@ -120,18 +134,27 @@ class SourceValidator:
 
         labels = self._current_content.get("labels", {}) if isinstance(self._current_content, dict) else {}
         asvs_label = str(labels.get("owasp_asvs", labels.get("asvs", "")))
-        match = re.search(r"(\d+(\.\d+)?)", asvs_label)
+        match = re.search(r"(\d+(\.\d+)*)", asvs_label)
         referenced_asvs_version = match.group(1) if match else None
 
         candidates: list[str] = []
         if referenced_asvs_version == "5.0":
             candidates.extend(["webapp-asvs-3.0.yaml", "*-asvs-5.0.yaml"])
+        elif referenced_asvs_version and referenced_asvs_version.startswith("4.0"):
+            candidates.extend(
+                [
+                    "*-asvs-4.0*.yaml",
+                    f"{edition}-asvs-4.0*.yaml",
+                    "OWASP_Application_Security_Verification_Standard_4.0.3.flat.json",
+                    "OWASP Application Security Verification Standard 4.0.3-*.json",
+                ]
+            )
         elif referenced_asvs_version:
             candidates.extend(
                 [f"*-asvs-{referenced_asvs_version}.yaml", f"{edition}-asvs-{referenced_asvs_version}.yaml"]
             )
 
-        if edition and version:
+        if edition and version and not referenced_asvs_version:
             candidates.append(f"{edition}-asvs-{version}.yaml")
 
         return candidates
@@ -155,10 +178,24 @@ class SourceValidator:
         return None
 
     def _parse_catalog_keys(self, catalog_path: Path) -> set[str] | None:
-        """Parse non-meta dictionary keys from catalog YAML."""
+        """Parse non-meta dictionary keys from catalog YAML or JSON."""
         try:
+            if catalog_path.suffix == ".json":
+                with open(catalog_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    reqs = data.get("requirements")
+                    if isinstance(reqs, list):
+                        return {
+                            str(r["req_id"]).lstrip("V").strip()
+                            for r in reqs
+                            if isinstance(r, dict) and "req_id" in r and r["req_id"] is not None
+                        }
+                    return {str(k).strip() for k in data.keys() if k != "meta"}
+                return None
+
             with open(catalog_path, "r", encoding="utf-8") as f:
-                data = yaml.safe_load(f)
+                data = yaml.load(f, Loader=UniqueKeySafeLoader)  # nosec B506
             if isinstance(data, dict):
                 return {str(k).strip() for k in data.keys() if k != "meta"}
         except Exception:
@@ -171,6 +208,11 @@ class SourceValidator:
         if self.catalog_dir:
             search_dirs.append(self.catalog_dir)
         search_dirs.append(file_path.parent)
+
+        resolved_parent = file_path.resolve().parent
+        repo_asvs_4_dir = resolved_parent.parent / "cornucopia.owasp.org" / "data" / "asvs-4.0.3" / "en"
+        if repo_asvs_4_dir.is_dir() and repo_asvs_4_dir not in search_dirs:
+            search_dirs.append(repo_asvs_4_dir)
 
         candidate_patterns = self._get_asvs_candidate_patterns()
         catalog_path = self._find_catalog_file(search_dirs, candidate_patterns)
@@ -403,6 +445,13 @@ class SourceValidator:
                 self._validate_asvs_mapping(context, val["owasp_asvs"], file_path)
             if "capec_codes" in val:
                 self._validate_capec_mapping(context, val["capec_codes"])
+            if catalog_name in ("MASTG", "MASWE"):
+                for field in ("owasp_maswe", "owasp_mastg", "owasp_mastg_know", "owasp_mastg_best"):
+                    references = val.get(field)
+                    if references is not None and (
+                        not isinstance(references, list) or not all(isinstance(item, str) for item in references)
+                    ):
+                        self.errors.append(f"{context}: '{field}' must be a list of strings")
 
         return len(self.errors) == initial_error_count
 

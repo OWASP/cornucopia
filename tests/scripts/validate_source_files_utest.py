@@ -574,6 +574,136 @@ class TestSourceValidator(unittest.TestCase):
         self.assertFalse(res)
         self.assertTrue(any("contains surrounding whitespace" in e for e in self.validator.errors))
 
+    def test_duplicate_yaml_keys_rejected(self) -> None:
+        raw_yaml = """
+meta:
+  edition: webapp
+  component: mappings
+  version: "3.0"
+suits:
+  - id: T1
+    name: Test 1
+    cards: []
+suits:
+  - id: T2
+    name: Test 2
+    cards: []
+"""
+        path = self._write_yaml("duplicate_key.yaml", raw_yaml)
+        res = self.validator.validate_file(path)
+        self.assertFalse(res)
+        self.assertTrue(any("Duplicate YAML key" in e for e in self.validator.errors))
+
+    def test_explicit_asvs_version_does_not_fallback_to_unmatched_edition_catalog(self) -> None:
+        isolated_dir = Path(tempfile.mkdtemp())
+        try:
+            asvs_5_catalog = {
+                "meta": {"edition": "webapp", "component": "asvs", "version": "3.0"},
+                "5.1.1": {"name": "Auth requirement"},
+            }
+            with open(isolated_dir / "webapp-asvs-3.0.yaml", "w", encoding="utf-8") as f:
+                yaml.dump(asvs_5_catalog, f)
+
+            mappings_data = {
+                "meta": {"edition": "webapp", "component": "mappings", "version": "3.0"},
+                "labels": {"owasp_asvs": "OWASP ASVS (v4.0)"},
+                "suits": [
+                    {
+                        "id": "T",
+                        "name": "Test",
+                        "cards": [{"id": "T1", "owasp_asvs": ["5.1.1"]}],
+                    }
+                ],
+            }
+            mapping_path = isolated_dir / "webapp-mappings-3.0.yaml"
+            with open(mapping_path, "w", encoding="utf-8") as f:
+                yaml.dump(mappings_data, f)
+
+            validator = SourceValidator()
+            self.assertFalse(validator.validate_file(mapping_path))
+            self.assertTrue(any("Unable to resolve authoritative ASVS catalog" in e for e in validator.errors))
+        finally:
+            shutil.rmtree(isolated_dir, ignore_errors=True)
+
+    def test_mastg_scalar_reference_rejected(self) -> None:
+        mastg_data = {
+            "meta": {"edition": "mobileapp", "component": "mastg", "version": "2.0"},
+            "0200": {
+                "title": "Testing Network Communication",
+                "owasp_maswe": "0002",
+            },
+        }
+        path = self._write_yaml("mobileapp-mastg-2.0.yaml", mastg_data)
+        res = self.validator.validate_file(path)
+        self.assertFalse(res)
+        self.assertTrue(any("'owasp_maswe' must be a list of strings" in e for e in self.validator.errors))
+
+    def test_mastg_valid_list_references_accepted(self) -> None:
+        mastg_data = {
+            "meta": {"edition": "mobileapp", "component": "mastg", "version": "2.0"},
+            "0200": {
+                "title": "Testing Network Communication",
+                "owasp_maswe": ["0002"],
+                "owasp_mastg": ["0100"],
+            },
+        }
+        path = self._write_yaml("mobileapp-mastg-2.0.yaml", mastg_data)
+        res = self.validator.validate_file(path)
+        self.assertTrue(res)
+
+    def test_legacy_asvs_4_catalog_resolution_and_validation(self) -> None:
+        isolated_dir = Path(tempfile.mkdtemp())
+        try:
+            import json
+            json_catalog = {
+                "requirements": [
+                    {"req_id": "V1.1.1", "req_description": "Requirement 1.1.1"},
+                    {"req_id": "V1.2.1", "req_description": "Requirement 1.2.1"},
+                ]
+            }
+            catalog_file = isolated_dir / "OWASP_Application_Security_Verification_Standard_4.0.3.flat.json"
+            with open(catalog_file, "w", encoding="utf-8") as f:
+                json.dump(json_catalog, f)
+
+            valid_mapping = {
+                "meta": {"edition": "webapp", "component": "mappings", "version": "2.2"},
+                "labels": {"owasp_asvs": "OWASP ASVS (v4.0)"},
+                "suits": [
+                    {
+                        "id": "VE",
+                        "name": "Encoding",
+                        "cards": [{"id": "VE2", "owasp_asvs": ["1.1.1", "1.2.1"]}],
+                    }
+                ],
+            }
+            mapping_path = isolated_dir / "webapp-mappings-2.2.yaml"
+            with open(mapping_path, "w", encoding="utf-8") as f:
+                yaml.dump(valid_mapping, f)
+
+            validator = SourceValidator(catalog_dir=isolated_dir)
+            self.assertTrue(validator.validate_file(mapping_path))
+
+            invalid_mapping = {
+                "meta": {"edition": "webapp", "component": "mappings", "version": "2.2"},
+                "labels": {"owasp_asvs": "OWASP ASVS (v4.0)"},
+                "suits": [
+                    {
+                        "id": "VE",
+                        "name": "Encoding",
+                        "cards": [{"id": "VE2", "owasp_asvs": ["99.99.99"]}],
+                    }
+                ],
+            }
+            invalid_path = isolated_dir / "webapp-mappings-2.2-bad.yaml"
+            with open(invalid_path, "w", encoding="utf-8") as f:
+                yaml.dump(invalid_mapping, f)
+
+            validator2 = SourceValidator(catalog_dir=isolated_dir)
+            self.assertFalse(validator2.validate_file(invalid_path))
+            self.assertTrue(any("does not exist in authoritative catalog" in e for e in validator2.errors))
+        finally:
+            shutil.rmtree(isolated_dir, ignore_errors=True)
+
 
 class TestCLIAndMain(unittest.TestCase):
     """Test suite for argument parsing and CLI main() function."""
