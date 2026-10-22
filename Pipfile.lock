@@ -1347,11 +1347,11 @@
         },
         "pyflakes": {
             "hashes": [
-                "sha256:1559b701962c803eadeb9c215dbac279585367b73ac12e1f0c42868785e6caad",
-                "sha256:cb4e721195b96e1792f3dfaefa02fb36a4f6253e899bbe0793f8aef6ed0065ef"
+                "sha256:01faee1160feadfd9d58c9631a895126ba2032c2e8748e32a96ab51cbd084c6d",
+                "sha256:dcf9cfcece3d9dacc66b7dd2fa217c1a1b79e3075bf488909c15e0857203fd24"
             ],
             "markers": "python_version >= '3.10'",
-            "version": "==4.0.1"
+            "version": "==4.0.2"
         },
         "pygments": {
             "hashes": [
