@@ -40,7 +40,7 @@
 		"tslib": "^2.8.1",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.71.2",
-		"vite": "^7.3.5",
+		"vite": "^7.3.7",
 		"vitest": "^4.1.8",
 		"wait-on": "^9.5.1",
 		"wrangler": "4.151.1"
