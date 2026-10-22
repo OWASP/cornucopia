@@ -655,6 +655,7 @@ suits:
         isolated_dir = Path(tempfile.mkdtemp())
         try:
             import json
+
             json_catalog = {
                 "requirements": [
                     {"req_id": "V1.1.1", "req_description": "Requirement 1.1.1"},

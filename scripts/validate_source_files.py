@@ -29,6 +29,7 @@ class UniqueKeySafeLoader(yaml.SafeLoader):
             mapping[key] = self.construct_object(value_node, deep=deep)
         return mapping
 
+
 ASVS_ID_PATTERN = re.compile(r"^(-|\d+(\.\d+)+)$")
 CAPEC_ID_PATTERN = re.compile(r"^(-|\d+)$")
 SAFECODE_ID_PATTERN = re.compile(r"^(-|\d+)$")
