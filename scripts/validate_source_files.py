@@ -447,14 +447,18 @@ class SourceValidator:
             if "capec_codes" in val:
                 self._validate_capec_mapping(context, val["capec_codes"])
             if catalog_name in ("MASTG", "MASWE"):
-                for field in ("owasp_maswe", "owasp_mastg", "owasp_mastg_know", "owasp_mastg_best"):
-                    references = val.get(field)
-                    if references is not None and (
-                        not isinstance(references, list) or not all(isinstance(item, str) for item in references)
-                    ):
-                        self.errors.append(f"{context}: '{field}' must be a list of strings")
+                self._validate_mobile_references(context, val)
 
         return len(self.errors) == initial_error_count
+
+    def _validate_mobile_references(self, context: str, val: dict[str, Any]) -> None:
+        """Validate optional string list fields for mobile catalogs."""
+        for field in ("owasp_maswe", "owasp_mastg", "owasp_mastg_know", "owasp_mastg_best"):
+            references = val.get(field)
+            if references is not None and (
+                not isinstance(references, list) or not all(isinstance(item, str) for item in references)
+            ):
+                self.errors.append(f"{context}: '{field}' must be a list of strings")
 
     def _validate_generic_yaml(self, file_path: Path, content: dict[str, Any]) -> bool:
         """Basic validation for other source YAML files."""
