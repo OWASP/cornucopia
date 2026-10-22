@@ -4,6 +4,7 @@ WORKDIR /app
 
 # Install dependencies (lockfile copied for deterministic builds)
 COPY package.json pnpm-lock.yaml ./
+COPY patches/ ./patches/
 RUN npm install -g pnpm@v10.3.0 --save-exact
 RUN pnpm install --frozen-lockfile
 
