@@ -20,14 +20,19 @@ export default {
 		},
 		prerender: {
 			concurrency: 1,
-			handleHttpError: ({ path, referrer, message }) => {
-                                if (path === '/mapping') return;
-                                if (path.startsWith('/edition')) return;
-                                console.log(message);
-				console.log(referrer);
-				console.log(path);
-				// otherwise fail the build
-				throw new Error(message);
+			handleHttpError: ({ status, path, referrer, referenceType, message }) => {
+				console.error(
+					`\n[prerender error] HTTP ${status} on ${path}\n` +
+					`  Referrer: ${referrer ?? '(direct entry)'}\n` +
+					`  Reference Type: ${referenceType}\n` +
+					`  Message: ${message}\n`
+				);
+
+				if (status >= 500) {
+					throw new Error(`Prerender SSR failure (HTTP ${status}) on ${path}: ${message}`);
+				}
+
+				throw new Error(`Prerender missing route (HTTP ${status}) on ${path} (linked from ${referrer ?? 'entries'})`);
 			},
 			handleMissingId: ({ _path, id, _referrers, message }) => {
 			 if (id == 'card') return;
