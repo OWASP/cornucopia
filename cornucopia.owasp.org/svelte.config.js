@@ -28,11 +28,15 @@ export default {
 					`  Message: ${message}\n`
 				);
 
-				if (status >= 500) {
-					throw new Error(`Prerender SSR failure (HTTP ${status}) on ${path}: ${message}`);
-				}
+				const errorCategory =
+					status >= 500
+						? 'Prerender SSR failure'
+						: status === 404
+							? 'Prerender route not found'
+							: 'Prerender HTTP error';
 
-				throw new Error(`Prerender missing route (HTTP ${status}) on ${path} (linked from ${referrer ?? 'entries'})`);
+				const linkedFrom = referrer ? ` (linked from ${referrer})` : '';
+				throw new Error(`${errorCategory} (HTTP ${status}) on ${path}${linkedFrom}: ${message}`);
 			},
 			handleMissingId: ({ _path, id, _referrers, message }) => {
 			 if (id == 'card') return;
