@@ -218,55 +218,70 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
     player = socket.assigns.player
 
-    case dealt_card_module().find(card_id) do
-      {:ok, dealt_card} ->
-        game_card_ids = game.players
-          |> Enum.flat_map(fn p -> p.dealt_cards end)
-          |> Enum.map(fn dc -> dc.id end)
+    cond do
+      is_nil(game.started_at) ->
+        Logger.warning("Voting attempt on unstarted game: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+        {:noreply, socket |> put_flash(:error, "Game has not started yet")}
 
-        if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
-          vote = get_vote(dealt_card, player)
+      not is_nil(game.finished_at) ->
+        Logger.warning("Voting attempt on finished game: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+        {:noreply, socket |> put_flash(:error, "Game has already ended")}
 
-          if vote do
-            case Copi.Repo.delete_all(
-                   from v in Copi.Cornucopia.Vote,
-                     where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
-                 ) do
-              {0, _} ->
-                Logger.debug("Vote already removed (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-              {n, _} ->
-                Logger.debug("Removed #{n} vote(s) for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+      true ->
+        case dealt_card_module().find(card_id) do
+          {:ok, dealt_card} ->
+            game_card_ids =
+              game.players
+              |> Enum.flat_map(fn p -> p.dealt_cards end)
+              |> Enum.map(fn dc -> dc.id end)
+
+            if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
+              vote = get_vote(dealt_card, player)
+
+              if vote do
+                case Copi.Repo.delete_all(
+                       from v in Copi.Cornucopia.Vote,
+                         where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
+                     ) do
+                  {0, _} ->
+                    Logger.debug("Vote already removed (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+
+                  {n, _} ->
+                    Logger.debug("Removed #{n} vote(s) for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                end
+              else
+                case Copi.Repo.insert(
+                       %Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id},
+                       on_conflict: :nothing,
+                       conflict_target: [:player_id, :dealt_card_id]
+                     ) do
+                  {:ok, %{id: nil}} ->
+                    Logger.debug("Vote already exists (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+
+                  {:ok, _vote} ->
+                    Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+
+                  {:error, changeset} ->
+                    Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+                end
+              end
+
+              {:ok, updated_game} = game_module().find(game.id)
+              CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+              {:noreply, assign(socket, :game, updated_game)}
+            else
+              Logger.warning("Unauthorized vote attempt: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+              {:noreply, socket |> put_flash(:error, "Invalid card selection")}
             end
-          else
-            case Copi.Repo.insert(
-                   %Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id},
-                   on_conflict: :nothing,
-                   conflict_target: [:player_id, :dealt_card_id]
-                 ) do
-              {:ok, %{id: nil}} ->
-                Logger.debug("Vote already exists (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-              {:ok, _vote} ->
-                Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-              {:error, changeset} ->
-                Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
-            end
-          end
 
-          {:ok, updated_game} = game_module().find(game.id)
-          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-          {:noreply, assign(socket, :game, updated_game)}
-        else
-          Logger.warning("Unauthorized vote attempt: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
-          {:noreply, socket |> put_flash(:error, "Invalid card selection")}
+          {:error, :not_found} ->
+            Logger.debug("Vote attempt with missing dealt_card_id=#{inspect(card_id)} for player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}")
+            {:noreply, socket |> put_flash(:error, "Card not found. Please refresh and try again.")}
+
+          {:error, reason} ->
+            Logger.debug("Transient dealt card lookup failure for dealt_card_id=#{inspect(card_id)}, player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
+            {:noreply, socket |> put_flash(:error, "Temporary issue loading card. Please try again.")}
         end
-
-      {:error, :not_found} ->
-        Logger.debug("Vote attempt with missing dealt_card_id=#{inspect(card_id)} for player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}")
-        {:noreply, socket |> put_flash(:error, "Card not found. Please refresh and try again.")}
-
-      {:error, reason} ->
-        Logger.debug("Transient dealt card lookup failure for dealt_card_id=#{inspect(card_id)}, player_id=#{inspect(player.id)}, game_id=#{inspect(game.id)}, reason=#{inspect(reason)}")
-        {:noreply, socket |> put_flash(:error, "Temporary issue loading card. Please try again.")}
     end
   end
 
