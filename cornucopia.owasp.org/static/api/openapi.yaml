@@ -72,7 +72,7 @@ paths:
                       edition: OWASP Cornucopia Mobile App Edition
                       component: cards
                       language: all
-                      languages: [en, ru, uk, hi]
+                      languages: [en, ru, uk, hi, fa]
                       version: "2.0"
 
 
@@ -182,7 +182,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru]
+            enum: [en, es, fr, nl, no_nb, pt_br, pt_pt, it, ru, fa]
       responses:
         '200':
           description: Website App cards and Open CRE mappings
@@ -552,7 +552,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [en, hi, ru, uk]
+            enum: [en, fa, hi, ru, uk]
       responses:
         '200':
           description: Mobile App cards and Open CRE mappings
@@ -612,7 +612,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [en]
+            enum: [en, fa]
       responses:
         '200':
           description: Companion edition cards and Open CRE mappings
