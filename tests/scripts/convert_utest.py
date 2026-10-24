@@ -125,6 +125,42 @@ class TextGetValidVersionChoices(unittest.TestCase):
         self.assertTrue(len(got_list) > 0)
 
 
+class TestUpdateFromMeta(unittest.TestCase):
+    def setUp(self) -> None:
+        self.convert_vars = c.ConvertVars()
+        self.editions: set[str] = set()
+        self.versions: set[str] = set()
+        self.languages: set[str] = set()
+        self.layouts: set[str] = set()
+        self.templates: set[str] = set()
+        self.edition_version_map: Dict[str, Dict[str, str]] = {}
+
+    def _update(self, meta: Dict[str, Any]) -> None:
+        self.convert_vars._update_from_meta(
+            meta,
+            self.editions,
+            self.versions,
+            self.languages,
+            self.layouts,
+            self.templates,
+            self.edition_version_map,
+        )
+
+    def test_missing_version_does_not_add_none(self) -> None:
+        self._update({"edition": "webapp"})
+
+        self.assertIn("webapp", self.editions)
+        self.assertNotIn("None", self.versions)
+        self.assertEqual(self.versions, set())
+        self.assertEqual(self.edition_version_map, {})
+
+    def test_version_is_registered_as_string(self) -> None:
+        self._update({"edition": "webapp", "version": 3.0})
+
+        self.assertEqual(self.versions, {"3.0"})
+        self.assertEqual(self.edition_version_map, {"webapp": {"3.0": "3.0"}})
+
+
 class TestGetValidLayouts(unittest.TestCase):
 
     def setUp(self) -> None:
