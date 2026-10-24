@@ -262,6 +262,7 @@ class SourceValidator:
     def _validate_card_mappings(self, file_path: Path, suit_name: str, card_id: Any, card: dict[str, Any]) -> None:
         """Validate individual card mapping fields (ASVS, CAPEC, STRIDE, capec_map, etc.)."""
         context = f"{file_path} [{suit_name} -> {card_id}]"
+        self._validate_mobile_references(context, card)
 
         if "owasp_asvs" in card:
             self._validate_asvs_mapping(context, card["owasp_asvs"], file_path)
@@ -424,6 +425,9 @@ class SourceValidator:
         for key, val in content.items():
             if key == "meta":
                 continue
+            if catalog_name in ("MASTG", "MASWE") and not isinstance(key, str):
+                self.errors.append(f"{file_path}: {catalog_name} catalog key {key!r} must be a string")
+                continue
             raw_key = str(key)
             if raw_key != raw_key.strip():
                 self.errors.append(
@@ -453,7 +457,7 @@ class SourceValidator:
 
     def _validate_mobile_references(self, context: str, val: dict[str, Any]) -> None:
         """Validate optional string list fields for mobile catalogs."""
-        for field in ("owasp_maswe", "owasp_mastg", "owasp_mastg_know", "owasp_mastg_best"):
+        for field in ("owasp_maswe", "owasp_mastg", "owasp_mastg_know", "owasp_mastg_best", "owasp_masvs"):
             references = val.get(field)
             if references is not None and (
                 not isinstance(references, list) or not all(isinstance(item, str) for item in references)

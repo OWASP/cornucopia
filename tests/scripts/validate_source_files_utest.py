@@ -651,6 +651,53 @@ suits:
         res = self.validator.validate_file(path)
         self.assertTrue(res)
 
+    def test_mobile_card_mapping_scalar_reference_rejected(self) -> None:
+        data = {
+            "meta": {"edition": "mobileapp", "component": "mappings", "version": "2.0"},
+            "suits": [
+                {
+                    "id": "PC",
+                    "name": "Platform & Code",
+                    "cards": [
+                        {
+                            "id": "PC2",
+                            "owasp_mastg": "0289",
+                        }
+                    ],
+                }
+            ],
+        }
+        path = self._write_yaml("mobileapp-mappings-2.0.yaml", data)
+        res = self.validator.validate_file(path)
+        self.assertFalse(res)
+        self.assertTrue(any("'owasp_mastg' must be a list of strings" in e for e in self.validator.errors))
+
+    def test_mobile_catalog_non_string_key_rejected(self) -> None:
+        maswe_data = {
+            "meta": {"edition": "mobileapp", "component": "maswe", "version": "2.0"},
+            1: {
+                "title": "Insecure Data Storage",
+                "owasp_masvs": ["MASVS-STORAGE-1"],
+            },
+        }
+        path = self._write_yaml("mobileapp-maswe-2.0.yaml", maswe_data)
+        res = self.validator.validate_file(path)
+        self.assertFalse(res)
+        self.assertTrue(any("MASWE catalog key 1 must be a string" in e for e in self.validator.errors))
+
+    def test_maswe_scalar_masvs_reference_rejected(self) -> None:
+        maswe_data = {
+            "meta": {"edition": "mobileapp", "component": "maswe", "version": "2.0"},
+            "0001": {
+                "title": "Insecure Data Storage",
+                "owasp_masvs": "MASVS-STORAGE-1",
+            },
+        }
+        path = self._write_yaml("mobileapp-maswe-2.0.yaml", maswe_data)
+        res = self.validator.validate_file(path)
+        self.assertFalse(res)
+        self.assertTrue(any("'owasp_masvs' must be a list of strings" in e for e in self.validator.errors))
+
     def test_legacy_asvs_4_catalog_resolution_and_validation(self) -> None:
         isolated_dir = Path(tempfile.mkdtemp())
         try:
