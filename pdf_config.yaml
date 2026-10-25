@@ -15,14 +15,14 @@ project:
   version: "3.0"
 
 paths:
-  source_root: "../../source"
-  asset_root: "../../resources"
-  card_data_path: "../../source/%edition%-cards-%edition_version%-%language%.yaml"
-  assets_config_path: "assets.yaml"
-  output_dir: "output"
-  qr_code_dir: "output/qrcodes"
-  log_file: "output/build_log.txt"
-  manifest_file: "output/build_manifest.json"
+  source_root: "source"
+  asset_root: "resources"
+  card_data_path: "source/%edition%-cards-%edition_version%-%language%.yaml"
+  assets_config_path: "scripts/pdf_generation/assets.yaml"
+  output_dir: "scripts/pdf_generation/output"
+  qr_code_dir: "scripts/pdf_generation/output/qrcodes"
+  log_file: "scripts/pdf_generation/output/build_log.txt"
+  manifest_file: "scripts/pdf_generation/output/build_manifest.json"
 
 # --------------------------------------------------------------------------
 # What to build.
@@ -50,7 +50,7 @@ generation_targets:
 # --------------------------------------------------------------------------
 size_profiles:
   bridge:
-    template: "small_master.sla"
+    template: "scripts/pdf_generation/small_master.sla"
     asset_key: "small"
     width_mm: 68.0
     height_mm: 99.0
@@ -62,7 +62,7 @@ size_profiles:
       special_text_joker: 8.0
 
   tarot:
-    template: "big_master.sla"
+    template: "scripts/pdf_generation/big_master.sla"
     asset_key: "big"
     width_mm: 82.0
     height_mm: 133.0

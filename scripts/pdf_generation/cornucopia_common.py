@@ -26,6 +26,10 @@ EDITION_PLACEHOLDER = "%edition%"
 # --------------------------------------------------------------------------
 
 
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+
+
 def load_yaml(path, default=None):
     """Load a YAML file, returning ``default`` when it is missing or empty."""
     if not path or not os.path.exists(path):
@@ -34,15 +38,70 @@ def load_yaml(path, default=None):
         return yaml.safe_load(handle) or ({} if default is None else default)
 
 
-def load_config(script_dir, config_name="pdf_config.yaml"):
+def find_config_path(base_dir=None, config_name="pdf_config.yaml"):
+    """
+    Locate the configuration file.
+
+    Checks candidate locations in priority order:
+      1. An absolute path as given.
+      2. Relative to ``base_dir`` (if provided and the file exists).
+      3. Relative to current working directory (if the file exists).
+      4. Relative to the repository root (where ``pdf_config.yaml`` lives).
+      5. Relative to this script's directory (legacy fallback).
+      6. Fallback path relative to ``base_dir`` or repository root.
+    """
+    if not config_name:
+        config_name = "pdf_config.yaml"
+    if os.path.isabs(config_name):
+        return config_name
+    if base_dir and os.path.isfile(os.path.join(base_dir, config_name)):
+        return os.path.abspath(os.path.join(base_dir, config_name))
+    if os.path.isfile(config_name):
+        return os.path.abspath(config_name)
+    if os.path.isfile(os.path.join(_REPO_ROOT, config_name)):
+        return os.path.join(_REPO_ROOT, config_name)
+    if os.path.isfile(os.path.join(_SCRIPT_DIR, config_name)):
+        return os.path.join(_SCRIPT_DIR, config_name)
+    return os.path.join(base_dir or _REPO_ROOT, config_name)
+
+
+def load_config(base_dir=None, config_name="pdf_config.yaml"):
     """Load the central control-panel config."""
-    return load_yaml(os.path.join(script_dir, config_name))
+    path = find_config_path(base_dir, config_name)
+    return load_yaml(path)
 
 
-def load_assets(config, script_dir):
+def infer_base_dir(config_path, explicit_base_dir=None):
+    """
+    Determine the base directory to resolve relative paths against.
+
+    If ``explicit_base_dir`` is provided, it is normalized and returned.
+    Otherwise, if ``config_path`` is provided, paths are relative to the
+    directory containing that configuration file. This preserves correct path
+    resolution for legacy configurations situated under ``scripts/pdf_generation/``
+    as well as new root-level configurations.
+    """
+    if explicit_base_dir:
+        return os.path.abspath(explicit_base_dir)
+    if config_path:
+        return os.path.dirname(os.path.abspath(config_path))
+    return _REPO_ROOT
+
+
+def load_assets(config, base_dir=None):
     """Load the optional assets.yaml override table."""
     rel = config.get("paths", {}).get("assets_config_path", "assets.yaml")
-    return load_yaml(os.path.join(script_dir, rel))
+    if os.path.isabs(rel):
+        path = rel
+    elif base_dir and os.path.isfile(os.path.join(base_dir, rel)):
+        path = os.path.join(base_dir, rel)
+    elif os.path.isfile(os.path.join(_REPO_ROOT, rel)):
+        path = os.path.join(_REPO_ROOT, rel)
+    elif os.path.isfile(os.path.join(_SCRIPT_DIR, rel)):
+        path = os.path.join(_SCRIPT_DIR, rel)
+    else:
+        path = os.path.join(base_dir or _REPO_ROOT, rel)
+    return load_yaml(path)
 
 
 # --------------------------------------------------------------------------
