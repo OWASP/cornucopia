@@ -39,6 +39,7 @@ export const apiPaths = [
   '/api/cre/dbd/en',
   '/api/cre/eop/en',
   '/api/cre/eop/es',
+  '/api/cre/eop/fa',
   '/api/cre/eop/ru'
 ];
 
