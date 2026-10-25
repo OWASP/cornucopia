@@ -1,6 +1,9 @@
 name: Validate Source Files
 
 on:
+  push:
+    branches:
+      - feat/3592-validate-source-files-ci
   pull_request:
     branches:
       - master
