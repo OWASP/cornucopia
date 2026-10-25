@@ -5,4 +5,5 @@ export type PageMetadata = {
     canonicalUrl: string;
     type?: 'website' | 'article';
     imageUrl?: string;
+    structuredData?: Record<string, unknown>;
 };

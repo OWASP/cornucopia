@@ -42,4 +42,28 @@ describe('config.js', () => {
         const { decks } = await loadConfig('just a string');
         expect(decks).toBeUndefined();
     });
+
+    it('returns undefined structuredData when structuredData key is missing', async () => {
+        const { structuredData } = await loadConfig('other: value');
+        expect(structuredData).toBeUndefined();
+    });
+
+    it('returns undefined structuredData when yaml is not an object', async () => {
+        const { structuredData } = await loadConfig('just a string');
+        expect(structuredData).toBeUndefined();
+    });
+
+    it('exposes structuredData when defined in yaml', async () => {
+        const yamlWithData = `
+decks: []
+structuredData:
+  website:
+    name: "OWASP Cornucopia"
+`;
+        const { structuredData } = await loadConfig(yamlWithData);
+        expect(structuredData).toEqual({
+            website: { name: 'OWASP Cornucopia' },
+        });
+    });
 });
+
