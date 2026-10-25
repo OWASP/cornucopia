@@ -86,7 +86,7 @@ jobs:
             if [ ${#VALIDATE_TARGETS[@]} -gt 0 ]; then
               echo "Validating changed source files:"
               printf ' - %s\n' "${VALIDATE_TARGETS[@]}"
-              pipenv run python scripts/validate_source_files.py 'source/*.yaml' # "${VALIDATE_TARGETS[@]}"
+              pipenv run python scripts/validate_source_files.py --source-dir source # "${VALIDATE_TARGETS[@]}"
             else
               echo "No source YAML files modified in this pull request."
               echo "Running smoke validation on representative source files..."
