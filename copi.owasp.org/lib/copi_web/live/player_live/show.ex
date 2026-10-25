@@ -236,39 +236,77 @@ defmodule CopiWeb.PlayerLive.Show do
               |> Enum.map(fn dc -> dc.id end)
 
             if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
-              vote = get_vote(dealt_card, player)
+              result =
+                Copi.Repo.transaction(fn ->
+                  case Copi.Repo.get(Game, game.id, lock: "FOR UPDATE") do
+                    nil ->
+                      Copi.Repo.rollback(:game_not_found)
 
-              if vote do
-                case Copi.Repo.delete_all(
-                       from v in Copi.Cornucopia.Vote,
-                         where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
-                     ) do
-                  {0, _} ->
-                    Logger.debug("Vote already removed (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                    %Game{started_at: nil} ->
+                      Copi.Repo.rollback(:unstarted)
 
-                  {n, _} ->
-                    Logger.debug("Removed #{n} vote(s) for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
-                end
-              else
-                case Copi.Repo.insert(
-                       %Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id},
-                       on_conflict: :nothing,
-                       conflict_target: [:player_id, :dealt_card_id]
-                     ) do
-                  {:ok, %{id: nil}} ->
-                    Logger.debug("Vote already exists (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                    %Game{finished_at: finished_at} when not is_nil(finished_at) ->
+                      Copi.Repo.rollback(:finished)
 
-                  {:ok, _vote} ->
-                    Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                    %Game{} ->
+                      vote = get_vote(dealt_card, player)
 
-                  {:error, changeset} ->
-                    Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
-                end
+                      if vote do
+                        case Copi.Repo.delete_all(
+                               from v in Copi.Cornucopia.Vote,
+                                 where: v.player_id == ^player.id and v.dealt_card_id == ^card_id
+                             ) do
+                          {0, _} ->
+                            Logger.debug("Vote already removed (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                            :vote_already_removed
+
+                          {n, _} ->
+                            Logger.debug("Removed #{n} vote(s) for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                            :vote_removed
+                        end
+                      else
+                        case Copi.Repo.insert(
+                               %Copi.Cornucopia.Vote{dealt_card_id: card_id, player_id: player.id},
+                               on_conflict: :nothing,
+                               conflict_target: [:player_id, :dealt_card_id]
+                             ) do
+                          {:ok, %{id: nil}} ->
+                            Logger.debug("Vote already exists (race), player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                            :vote_already_exists
+
+                          {:ok, _vote} ->
+                            Logger.debug("Vote added successfully for player_id: #{player.id}, dealt_card_id: #{card_id}, game_id: #{game.id}")
+                            :vote_added
+
+                          {:error, changeset} ->
+                            Logger.warning("Voting failed for player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+                            Copi.Repo.rollback({:insert_failed, changeset})
+                        end
+                      end
+                  end
+                end)
+
+              case result do
+                {:ok, _action} ->
+                  {:ok, updated_game} = game_module().find(game.id)
+                  CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+                  {:noreply, assign(socket, :game, updated_game)}
+
+                {:error, :unstarted} ->
+                  Logger.warning("Voting attempt on unstarted game: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+                  {:noreply, socket |> put_flash(:error, "Game has not started yet")}
+
+                {:error, :finished} ->
+                  Logger.warning("Voting attempt on finished game: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+                  {:noreply, socket |> put_flash(:error, "Game has already ended")}
+
+                {:error, :game_not_found} ->
+                  Logger.warning("Game not found during voting: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
+                  {:noreply, socket |> put_flash(:error, "Game not found. Please refresh and try again.")}
+
+                {:error, {:insert_failed, _changeset}} ->
+                  {:noreply, socket |> put_flash(:error, "Unable to record vote. Please try again.")}
               end
-
-              {:ok, updated_game} = game_module().find(game.id)
-              CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-              {:noreply, assign(socket, :game, updated_game)}
             else
               Logger.warning("Unauthorized vote attempt: player_id: #{inspect(player.id)}, dealt_card_id: #{inspect(card_id)}, game_id: #{inspect(game.id)}")
               {:noreply, socket |> put_flash(:error, "Invalid card selection")}

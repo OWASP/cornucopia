@@ -745,6 +745,70 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert refreshed_card.votes == []
     end
 
+    test "rejects toggle_vote add when game is finished before broadcast is processed", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Post Game Vote Race Add", edition: "webapp"})
+      {:ok, player1} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+      {:ok, player2} = Cornucopia.create_player(%{name: "Player Two", game_id: game.id})
+
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+      {:ok, _} = Cornucopia.update_game(game, %{started_at: now})
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "TV_POST_RACE", description: "D", edition: "webapp",
+        version: "3.0", external_id: "TV_POST_RACE_1", language: "en", misc: "m",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+
+      dc = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player2.id, card_id: card.id, played_in_round: 1
+      })
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player1.id), player_url(game.id, player1.id))
+
+      {:ok, _} = Cornucopia.update_game(game, %{finished_at: now})
+
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc.id)})
+
+      assert render(view) =~ "Game has already ended"
+
+      {:ok, refreshed_card} = DealtCard.find(dc.id)
+      assert refreshed_card.votes == []
+    end
+
+    test "rejects toggle_vote remove when game is finished before broadcast is processed", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Post Game Vote Race Remove", edition: "webapp"})
+      {:ok, player1} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+      {:ok, player2} = Cornucopia.create_player(%{name: "Player Two", game_id: game.id})
+
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+      {:ok, _} = Cornucopia.update_game(game, %{started_at: now})
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "TV_POST_RACE_REM", description: "D", edition: "webapp",
+        version: "3.0", external_id: "TV_POST_RACE_2", language: "en", misc: "m",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+
+      dc = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player2.id, card_id: card.id, played_in_round: 1
+      })
+
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{player_id: player1.id, dealt_card_id: dc.id})
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player1.id), player_url(game.id, player1.id))
+
+      {:ok, _} = Cornucopia.update_game(game, %{finished_at: now})
+
+      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc.id)})
+
+      assert render(view) =~ "Game has already ended"
+
+      {:ok, refreshed_card} = DealtCard.find(dc.id)
+      assert length(refreshed_card.votes) == 1
+    end
+
     test "returns 404 when player does not exist", %{conn: conn} do
       assert_error_sent 404, fn ->
         get(
