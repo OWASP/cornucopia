@@ -21,7 +21,7 @@ export const generateStructuredData = (
     };
 
     const productNode: Record<string, unknown> = {
-        '@type': 'Product',
+        '@type': ['Product', 'Game'],
         '@id': 'https://cornucopia.owasp.org#product',
         name: 'OWASP Cornucopia Card Game',
         description:

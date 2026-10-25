@@ -27,7 +27,7 @@ describe('generateStructuredData', () => {
         expect(website['name']).toBe('OWASP Cornucopia');
         expect(website['publisher']).toEqual({ '@id': 'https://owasp.org' });
 
-        expect(product['@type']).toBe('Product');
+        expect(product['@type']).toEqual(['Product', 'Game']);
         expect(product['@id']).toBe('https://cornucopia.owasp.org#product');
         expect(product['name']).toBe('OWASP Cornucopia Card Game');
         expect(product['brand']).toEqual({ '@id': 'https://owasp.org' });
@@ -101,7 +101,7 @@ describe('generateStructuredData', () => {
         expect(pageNode['isPartOf']).toEqual({ '@id': 'https://cornucopia.owasp.org' });
 
         expect(graph[1]['@type']).toBe('WebSite');
-        expect(graph[2]['@type']).toBe('Product');
+        expect(graph[2]['@type']).toEqual(['Product', 'Game']);
         expect(graph[3]['@type']).toBe('Organization');
     });
 
