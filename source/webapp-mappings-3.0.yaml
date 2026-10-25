@@ -1648,8 +1648,8 @@ suits:
     stride_print: [ 'Information Disclosure' ]
     owasp_dev_guide: [ SC12, SQ6, SQ7, SDA3, ACM8, SCM6, SCM7, PDR1 ]
     owasp_dev_guide_print: [ SC12, SQ6-7, SDA3, ACM8, SCM6-7, PDR1 ]
-    owasp_asvs: [ 11.1.1, 11.1.2, 11.1.3, 11.1.4, 13.1.4, 13.3.1-3, 14.2.2, 16.2.5, 17.2.1 ]
-    owasp_asvs_print: [ 11.1.1-4, 13.1.4, 13.3.1, 13.3.2, 13.3.3, 14.2.2, 16.2.5, 17.2.1 ]
+    owasp_asvs: [ 11.1.1, 11.1.2, 11.1.3, 11.1.4, 13.1.4, 13.3.1, 13.3.2, 13.3.3, 14.2.2, 16.2.5, 17.2.1 ]
+    owasp_asvs_print: [ 11.1.1-4, 13.1.4, 13.3.1-3, 14.2.2, 16.2.5, 17.2.1 ]
     capec: [ 37, 57, 155, 204, 474, 639 ]
     capec_map:
       37:
