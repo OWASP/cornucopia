@@ -25,11 +25,12 @@ describe('generateStructuredData', () => {
         expect(website['@id']).toBe('https://cornucopia.owasp.org');
         expect(website['url']).toBe('https://cornucopia.owasp.org');
         expect(website['name']).toBe('OWASP Cornucopia');
-        expect(website['publisher']).toEqual({ '@id': 'https://cornucopia.owasp.org' });
+        expect(website['publisher']).toEqual({ '@id': 'https://owasp.org' });
 
         expect(product['@type']).toBe('Product');
-        expect(product['@id']).toBe('https://cornucopia.owasp.org');
+        expect(product['@id']).toBe('https://cornucopia.owasp.org#product');
         expect(product['name']).toBe('OWASP Cornucopia Card Game');
+        expect(product['brand']).toEqual({ '@id': 'https://owasp.org' });
         expect(product['license']).toBe(
             'https://github.com/OWASP/cornucopia/blob/master/LICENSE.md',
         );
@@ -37,7 +38,7 @@ describe('generateStructuredData', () => {
             '@type': 'Offer',
             price: '0.00',
             priceCurrency: 'USD',
-            availability: 'https://schema.org',
+            availability: 'https://schema.org/InStock',
         });
 
         expect(organization['@type']).toBe('Organization');

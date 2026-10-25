@@ -17,23 +17,23 @@ export const generateStructuredData = (
         '@id': 'https://cornucopia.owasp.org',
         url: 'https://cornucopia.owasp.org',
         name: 'OWASP Cornucopia',
-        publisher: { '@id': 'https://cornucopia.owasp.org' },
+        publisher: { '@id': 'https://owasp.org' },
     };
 
     const productNode: Record<string, unknown> = {
         '@type': 'Product',
-        '@id': 'https://cornucopia.owasp.org',
+        '@id': 'https://cornucopia.owasp.org#product',
         name: 'OWASP Cornucopia Card Game',
         description:
             'An open-source card game to assist software development teams identify security requirements and map threat modeling.',
-        brand: { '@id': 'https://cornucopia.owasp.org' },
+        brand: { '@id': 'https://owasp.org' },
         license:
             'https://github.com/OWASP/cornucopia/blob/master/LICENSE.md',
         offers: {
             '@type': 'Offer',
             price: '0.00',
             priceCurrency: 'USD',
-            availability: 'https://schema.org',
+            availability: 'https://schema.org/InStock',
         },
     };
 
