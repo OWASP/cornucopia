@@ -26,6 +26,7 @@ import xml.etree.ElementTree as ET  # nosec B405
 
 # Make sibling modules importable when Scribus executes this by absolute path.
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
@@ -643,6 +644,10 @@ def parse_args():
     parser.add_argument("--output-dir", help="Override the configured output directory")
     parser.add_argument("--dry-run", action="store_true", help="Report the build matrix and asset problems, then exit")
     parser.add_argument("--skip-existing", action="store_true", help="Skip cards whose PDFs are already on disk")
+    parser.add_argument(
+        "--base-dir",
+        help="Base directory for relative paths (defaults to repository root)",
+    )
     # Scribus injects its own arguments, so ignore anything we do not recognise.
     args, _unknown = parser.parse_known_args()
     return args
@@ -656,7 +661,10 @@ def select_deck(target, args, config, base_dir, log):
     """
     edition, language, size_key = target["edition"], target["language"], target["size"]
     profile = (config.get("size_profiles", {}) or {}).get(size_key, {}) or {}
-    template_path = os.path.join(base_dir, profile.get("template", ""))
+    template_rel = profile.get("template", "")
+    template_path = os.path.join(base_dir, template_rel)
+    if not os.path.exists(template_path) and os.path.exists(os.path.join(SCRIPT_DIR, template_rel)):
+        template_path = os.path.join(SCRIPT_DIR, template_rel)
 
     if not os.path.exists(template_path):
         log.warn("Template missing for size '{0}': {1}".format(size_key, template_path))
@@ -776,7 +784,7 @@ def build_target(target, args, config, assets_data, base_dir, out_dir, profiles,
 
 def main():
     args = parse_args()
-    base_dir = SCRIPT_DIR
+    base_dir = args.base_dir or REPO_ROOT
 
     config = cc.load_config(base_dir, args.config)
     if not config:

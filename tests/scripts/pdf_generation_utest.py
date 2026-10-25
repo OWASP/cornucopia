@@ -594,5 +594,47 @@ class TestCheckEnvironment(unittest.TestCase):
         self.assertIn("These must be installed into THIS interpreter", text)
 
 
+class TestLoadConfig(unittest.TestCase):
+    def test_find_config_path_locates_root_config(self) -> None:
+        path = cc.find_config_path()
+        self.assertTrue(os.path.isabs(path))
+        self.assertTrue(os.path.isfile(path))
+        self.assertEqual(os.path.basename(path), "pdf_config.yaml")
+
+    def test_find_config_path_absolute(self) -> None:
+        abs_path = os.path.abspath(__file__)
+        self.assertEqual(cc.find_config_path(config_name=abs_path), abs_path)
+
+    def test_find_config_path_in_base_dir(self) -> None:
+        tmp = tempfile.mkdtemp()
+        custom = _write(os.path.join(tmp, "custom_config.yaml"), "project: test\n")
+        resolved = cc.find_config_path(base_dir=tmp, config_name="custom_config.yaml")
+        self.assertEqual(resolved, custom)
+
+    def test_find_config_path_missing_fallback(self) -> None:
+        tmp = tempfile.mkdtemp()
+        resolved = cc.find_config_path(base_dir=tmp, config_name="nonexistent.yaml")
+        self.assertEqual(resolved, os.path.join(tmp, "nonexistent.yaml"))
+
+    def test_load_config_loads_root_yaml(self) -> None:
+        config = cc.load_config()
+        self.assertIn("project", config)
+        self.assertIn("paths", config)
+        self.assertIn("generation_targets", config)
+        self.assertEqual(config["paths"]["source_root"], "source")
+        self.assertEqual(config["paths"]["asset_root"], "resources")
+
+    def test_load_config_missing_file_returns_empty_dict(self) -> None:
+        tmp = tempfile.mkdtemp()
+        config = cc.load_config(base_dir=tmp, config_name="nonexistent.yaml")
+        self.assertEqual(config, {})
+
+    def test_load_assets_resolution(self) -> None:
+        config = {"paths": {"assets_config_path": "scripts/pdf_generation/assets.yaml"}}
+        assets = cc.load_assets(config)
+        self.assertIsInstance(assets, dict)
+        self.assertIn("webapp", assets)
+
+
 if __name__ == "__main__":
     unittest.main()

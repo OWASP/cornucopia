@@ -20,6 +20,7 @@ import sys
 import zipfile
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
@@ -78,6 +79,10 @@ def parse_args():
         "decks have been written. Only the finished decks are kept.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Report what would be merged, then exit")
+    parser.add_argument(
+        "--base-dir",
+        help="Base directory for relative paths (defaults to repository root)",
+    )
     return parser.parse_args()
 
 
@@ -320,7 +325,7 @@ def prepare_merge(args, base_dir):
 
 def main():
     args = parse_args()
-    base_dir = SCRIPT_DIR
+    base_dir = args.base_dir or REPO_ROOT
 
     if pymupdf is None and not args.dry_run:
         # Say so before any work is done, rather than partway through a run.
