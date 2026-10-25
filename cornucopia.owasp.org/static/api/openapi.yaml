@@ -644,7 +644,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [en, es, ru]
+            enum: [en, es, ru, fa]
       responses:
         '200':
           description: Elevation of Privilege cards
