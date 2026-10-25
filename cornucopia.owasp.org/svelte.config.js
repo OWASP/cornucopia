@@ -20,14 +20,23 @@ export default {
 		},
 		prerender: {
 			concurrency: 1,
-			handleHttpError: ({ path, referrer, message }) => {
-                                if (path === '/mapping') return;
-                                if (path.startsWith('/edition')) return;
-                                console.log(message);
-				console.log(referrer);
-				console.log(path);
-				// otherwise fail the build
-				throw new Error(message);
+			handleHttpError: ({ status, path, referrer, referenceType, message }) => {
+				console.error(
+					`\n[prerender error] HTTP ${status} on ${path}\n` +
+					`  Referrer: ${referrer ?? '(direct entry)'}\n` +
+					`  Reference Type: ${referenceType}\n` +
+					`  Message: ${message}\n`
+				);
+
+				const errorCategory =
+					status >= 500
+						? 'Prerender SSR failure'
+						: status === 404
+							? 'Prerender route not found'
+							: 'Prerender HTTP error';
+
+				const linkedFrom = referrer ? ` (linked from ${referrer})` : '';
+				throw new Error(`${errorCategory} (HTTP ${status}) on ${path}${linkedFrom}: ${message}`);
 			},
 			handleMissingId: ({ _path, id, _referrers, message }) => {
 			 if (id == 'card') return;
@@ -418,14 +427,18 @@ export default {
 				'/api/cre/webapp/pt_pt',
 				'/api/cre/webapp/pt_br',
 				'/api/cre/webapp/no_nb',
+				'/api/cre/webapp/fa',
 				'/api/cre/mobileapp/en',
                 '/api/cre/mobileapp/ru',
                 '/api/cre/mobileapp/hi',
                 '/api/cre/mobileapp/uk',
+                '/api/cre/mobileapp/fa',
 				'/api/cre/companion/en',
+				'/api/cre/companion/fa',
 				'/api/lang/companion/1.0',
 				'/api/cre/eop/en',
 				'/api/cre/eop/es',
+				'/api/cre/eop/fa',
 				'/api/cre/eop/ru',
 				'/api/lang/eop/5.0',
 				'/api/cre/dbd/en',
@@ -442,6 +455,7 @@ export default {
                 '/api/mapping/companion/1.0',
 				'/edition/eop/SP2/5.0/en',
 				'/edition/eop/SP2/5.0/es',
+				'/edition/eop/SP2/5.0/fa',
                 '/edition/eop/SP2/5.0/ru',
 				'/edition/mobileapp/PC2/1.1/en',
 				'/edition/mobileapp/PC2/1.1/uk',
@@ -450,6 +464,8 @@ export default {
 				'/edition/mobileapp/PC2/2.0/uk',
                 '/edition/mobileapp/PC2/2.0/hi',
 				'/edition/mobileapp/PC2/2.0/ru',
+				'/edition/mobileapp/PC2/2.0/fa',
+				'/edition/companion/LLM2/1.0/fa',
 				'/edition/webapp/VE2/2.2',
 				'/edition/webapp/VE2/2.2/es',
 				'/edition/webapp/VE2/2.2/it',
