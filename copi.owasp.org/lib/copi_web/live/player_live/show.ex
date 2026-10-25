@@ -238,7 +238,7 @@ defmodule CopiWeb.PlayerLive.Show do
             if dealt_card.id in game_card_ids and dealt_card.player_id != player.id do
               result =
                 Copi.Repo.transaction(fn ->
-                  case Copi.Repo.get(Game, game.id, lock: "FOR UPDATE") do
+                  case Copi.Repo.get(from(g in Game, lock: "FOR UPDATE"), game.id) do
                     nil ->
                       Copi.Repo.rollback(:game_not_found)
 
