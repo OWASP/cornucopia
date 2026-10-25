@@ -102,6 +102,37 @@ defmodule Copi.CornucopiaTest do
       # 1 vote > div(1,2)=0 → true
       assert Game.majority_continue_votes_reached?(updated)
     end
+
+    test "Game.active?/1 and Game.game_active?/1 validate lifecycle status" do
+      alias Copi.Cornucopia.Game
+
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      # Unstarted game: started_at is nil
+      unstarted_game = %Game{started_at: nil, finished_at: nil}
+      refute Game.active?(unstarted_game)
+      refute Game.game_active?(unstarted_game)
+
+      # Active game: started_at is set, finished_at is nil
+      active_game = %Game{started_at: now, finished_at: nil}
+      assert Game.active?(active_game)
+      assert Game.game_active?(active_game)
+
+      # Finished game: both started_at and finished_at are set
+      finished_game = %Game{started_at: now, finished_at: now}
+      refute Game.active?(finished_game)
+      refute Game.game_active?(finished_game)
+
+      # Edge case: finished_at set without started_at
+      finished_unstarted = %Game{started_at: nil, finished_at: now}
+      refute Game.active?(finished_unstarted)
+      refute Game.game_active?(finished_unstarted)
+
+      # Non-game or nil input
+      refute Game.active?(nil)
+      refute Game.game_active?(nil)
+      refute Game.active?(%{started_at: now, finished_at: nil})
+    end
   end
 
   describe "players" do
