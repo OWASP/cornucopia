@@ -816,8 +816,8 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert sql =~ "FOR UPDATE"
     end
 
-    test "rejects toggle_vote when concurrent transaction locks and finishes game", %{conn: conn} do
-      {:ok, game} = Cornucopia.create_game(%{name: "Post Game Vote Overlapping Tx", edition: "webapp"})
+    test "rejects toggle_vote add when concurrent transaction locks and finishes game", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Post Game Vote Overlapping Tx Add", edition: "webapp"})
       {:ok, player1} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
       {:ok, player2} = Cornucopia.create_player(%{name: "Player Two", game_id: game.id})
 
@@ -825,8 +825,8 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       {:ok, _} = Cornucopia.update_game(game, %{started_at: now})
 
       {:ok, card} = Cornucopia.create_card(%{
-        category: "C", value: "TV_POST_LOCK", description: "D", edition: "webapp",
-        version: "3.0", external_id: "TV_POST_LOCK_1", language: "en", misc: "m",
+        category: "C", value: "TV_POST_LOCK_ADD", description: "D", edition: "webapp",
+        version: "3.0", external_id: "TV_POST_LOCK_ADD_1", language: "en", misc: "m",
         owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
         capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
       })
@@ -837,18 +837,95 @@ defmodule CopiWeb.PlayerLive.ShowTest do
 
       {:ok, view, _html} = live(authorize_player(conn, game.id, player1.id), player_url(game.id, player1.id))
 
-      # Overlapping transaction: lock and finish the game concurrently
-      Copi.Repo.transaction(fn ->
-        locked_game = Copi.Repo.get!(from(g in Game, lock: "FOR UPDATE"), game.id)
-        Copi.Repo.update!(Ecto.Changeset.change(locked_game, finished_at: now))
-      end)
+      parent = self()
 
-      render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc.id)})
+      lock_task =
+        Task.async(fn ->
+          Copi.Repo.transaction(fn ->
+            locked_game = Copi.Repo.get!(from(g in Game, lock: "FOR UPDATE"), game.id)
+            send(parent, :lock_acquired)
 
-      assert render(view) =~ "Game has already ended"
+            receive do
+              :commit_finish ->
+                Copi.Repo.update!(Ecto.Changeset.change(locked_game, finished_at: now))
+            end
+          end)
+        end)
+
+      assert_receive :lock_acquired, 2000
+
+      vote_task =
+        Task.async(fn ->
+          render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc.id)})
+        end)
+
+      Process.sleep(50)
+
+      send(lock_task.pid, :commit_finish)
+      {:ok, _} = Task.await(lock_task, 2000)
+
+      rendered = Task.await(vote_task, 2000)
+      assert rendered =~ "Game has already ended"
 
       {:ok, refreshed_card} = DealtCard.find(dc.id)
       assert refreshed_card.votes == []
+    end
+
+    test "rejects toggle_vote remove when concurrent transaction locks and finishes game", %{conn: conn} do
+      {:ok, game} = Cornucopia.create_game(%{name: "Post Game Vote Overlapping Tx Rem", edition: "webapp"})
+      {:ok, player1} = Cornucopia.create_player(%{name: "Player One", game_id: game.id})
+      {:ok, player2} = Cornucopia.create_player(%{name: "Player Two", game_id: game.id})
+
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+      {:ok, _} = Cornucopia.update_game(game, %{started_at: now})
+
+      {:ok, card} = Cornucopia.create_card(%{
+        category: "C", value: "TV_POST_LOCK_REM", description: "D", edition: "webapp",
+        version: "3.0", external_id: "TV_POST_LOCK_REM_1", language: "en", misc: "m",
+        owasp_scp: [], owasp_devguide: [], owasp_asvs: [], owasp_appsensor: [],
+        capec: [], safecode: [], owasp_mastg: [], owasp_masvs: []
+      })
+
+      dc = Copi.Repo.insert!(%Copi.Cornucopia.DealtCard{
+        player_id: player2.id, card_id: card.id, played_in_round: 1
+      })
+
+      Copi.Repo.insert!(%Copi.Cornucopia.Vote{player_id: player1.id, dealt_card_id: dc.id})
+
+      {:ok, view, _html} = live(authorize_player(conn, game.id, player1.id), player_url(game.id, player1.id))
+
+      parent = self()
+
+      lock_task =
+        Task.async(fn ->
+          Copi.Repo.transaction(fn ->
+            locked_game = Copi.Repo.get!(from(g in Game, lock: "FOR UPDATE"), game.id)
+            send(parent, :lock_acquired)
+
+            receive do
+              :commit_finish ->
+                Copi.Repo.update!(Ecto.Changeset.change(locked_game, finished_at: now))
+            end
+          end)
+        end)
+
+      assert_receive :lock_acquired, 2000
+
+      vote_task =
+        Task.async(fn ->
+          render_click(view, "toggle_vote", %{"dealt_card_id" => to_string(dc.id)})
+        end)
+
+      Process.sleep(50)
+
+      send(lock_task.pid, :commit_finish)
+      {:ok, _} = Task.await(lock_task, 2000)
+
+      rendered = Task.await(vote_task, 2000)
+      assert rendered =~ "Game has already ended"
+
+      {:ok, refreshed_card} = DealtCard.find(dc.id)
+      assert length(refreshed_card.votes) == 1
     end
 
     test "returns 404 when player does not exist", %{conn: conn} do
