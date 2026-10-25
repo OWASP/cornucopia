@@ -3,6 +3,10 @@ import type { PageMetadata } from '$lib/types/metadata.js';
 import {
     generateStructuredData,
     serializeJsonLd,
+    loadStructuredDataConfig,
+    DEFAULT_WEBSITE_NODE,
+    DEFAULT_PRODUCT_NODE,
+    DEFAULT_ORGANIZATION_NODE,
 } from './structuredData.js';
 
 describe('generateStructuredData', () => {
@@ -161,6 +165,81 @@ describe('generateStructuredData', () => {
         expect(graph1[0]['@id']).toBe('https://cornucopia.owasp.org/about');
         expect(graph2[0]['@id']).toBe('https://cornucopia.owasp.org/news');
         expect(graph1[0]['@id']).not.toBe(graph2[0]['@id']);
+    });
+
+    it('loads configured nodes from configOverride when provided', () => {
+        const customConfig = {
+            website: {
+                '@type': 'WebSite',
+                '@id': 'https://custom.example.org',
+                url: 'https://custom.example.org',
+                name: 'Custom Cornucopia',
+            },
+            product: {
+                '@type': ['Product', 'Game'],
+                '@id': 'https://custom.example.org#product',
+                name: 'Custom Game',
+            },
+            organization: {
+                '@type': 'Organization',
+                '@id': 'https://custom-org.example.org',
+                name: 'Custom Org',
+            },
+        };
+
+        const metadata: PageMetadata = {
+            title: 'Subpage',
+            description: 'Subpage desc',
+            keywords: 'test',
+            canonicalUrl: 'https://custom.example.org/test',
+        };
+
+        const result = generateStructuredData(metadata, customConfig);
+        const graph = result['@graph'] as Record<string, unknown>[];
+
+        expect(graph).toHaveLength(4);
+        expect(graph[0]['isPartOf']).toEqual({ '@id': 'https://custom.example.org' });
+        expect(graph[1]['name']).toBe('Custom Cornucopia');
+        expect(graph[2]['name']).toBe('Custom Game');
+        expect(graph[3]['name']).toBe('Custom Org');
+    });
+
+    it('falls back to default nodes if empty config is provided', () => {
+        const metadata: PageMetadata = {
+            title: 'Home',
+            description: 'Home desc',
+            keywords: 'test',
+            canonicalUrl: 'https://cornucopia.owasp.org',
+        };
+
+        const result = generateStructuredData(metadata, {});
+        const graph = result['@graph'] as Record<string, unknown>[];
+
+        expect(graph[0]).toEqual(DEFAULT_WEBSITE_NODE);
+        expect(graph[1]).toEqual(DEFAULT_PRODUCT_NODE);
+        expect(graph[2]).toEqual(DEFAULT_ORGANIZATION_NODE);
+    });
+
+    it('loadStructuredDataConfig returns an object and handles null source', () => {
+        const config = loadStructuredDataConfig();
+        expect(typeof config).toBe('object');
+        const fallbackConfig = loadStructuredDataConfig(null as any);
+        expect(fallbackConfig).toEqual({});
+    });
+
+    it('uses fallback siteId if website @id is not a string', () => {
+        const metadata: PageMetadata = {
+            title: 'Subpage',
+            description: 'Subpage desc',
+            keywords: 'test',
+            canonicalUrl: 'https://cornucopia.owasp.org/test',
+        };
+
+        const result = generateStructuredData(metadata, {
+            website: { '@type': 'WebSite' },
+        });
+        const graph = result['@graph'] as Record<string, unknown>[];
+        expect(graph[0]['isPartOf']).toEqual({ '@id': 'https://cornucopia.owasp.org' });
     });
 });
 
