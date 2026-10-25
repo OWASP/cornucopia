@@ -1,11 +1,14 @@
 <script lang="ts">
     import type { PageMetadata } from "$lib/types/metadata.js";
+    import { generateStructuredData, serializeJsonLd } from "$lib/utils/structuredData.js";
 
     interface Props {
         metadata: PageMetadata;
     }
 
     let { metadata }: Props = $props();
+
+    let jsonLdScript = $derived(serializeJsonLd(generateStructuredData(metadata)));
 </script>
 
 <svelte:head>
@@ -26,5 +29,8 @@
     <meta name="twitter:title" content="{metadata.title}" />
     <meta name="twitter:description" content="{metadata.description}" />
     <meta name="twitter:image" content="{metadata.imageUrl ?? 'https://cornucopia.owasp.org/images/opengraph.png'}" />
+    <!-- Structured Data (JSON-LD) -->
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+    {@html jsonLdScript}
     <!-- END of Tags -->
 </svelte:head>

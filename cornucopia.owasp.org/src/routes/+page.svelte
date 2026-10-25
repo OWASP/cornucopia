@@ -20,32 +20,9 @@
         const langSuits = data.suits.get(`webapp-${$lang}`);
         return langSuits || data.suits.get('webapp-en') as Suit[];
     });
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    let structuredData = $derived(JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Organization",
-                "name": "OWASP Cornucopia",
-                "url": "https://cornucopia.owasp.org",
-                "logo": "https://cornucopia.owasp.org/images/cornucopia_logo_in_devs_we_trust.svg",
-                "sameAs": ["https://github.com/OWASP/cornucopia"]
-            },
-            {
-                "@type": "WebSite",
-                "name": $t('layout.title'),
-                "url": "https://cornucopia.owasp.org",
-            }
-        ]
-    }).replace(/</g, '\\u003c'));
 </script>
 
 <Metadata metadata={data.metadata} />
-
-<svelte:head>
-    <script type="application/ld+json">{@html structuredData}</script>
-</svelte:head>
 
 <Hero cards={data.cards} {suits} mapping={data.mappingData.get('webapp')}></Hero>
 <TextImage id="top" title="OWASP Cornucopia - In devs we trust" src="/images/cornucopia_logo_in_devs_we_trust.svg" align="right">
