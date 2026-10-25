@@ -163,29 +163,41 @@ class SourceValidator:
 
         return candidates
 
+    @staticmethod
+    def _match_pattern_in_dir(directory: Path, pattern: str) -> Path | None:
+        """Find the first matching file for a pattern in a directory."""
+        if "*" in pattern:
+            matches = sorted(directory.glob(pattern))
+            return matches[0] if matches and matches[0].is_file() else None
+        target = directory / pattern
+        return target if target.is_file() else None
+
+    @staticmethod
+    def _expand_yaml_patterns(patterns: list[str]) -> list[str]:
+        """Expand .yaml and .yml pattern alternatives."""
+        expanded: list[str] = []
+        for p in patterns:
+            expanded.append(p)
+            if p.endswith(".yaml"):
+                expanded.append(p[:-5] + ".yml")
+            elif p.endswith(".yml"):
+                expanded.append(p[:-4] + ".yaml")
+        return expanded
+
     def _find_catalog_file(self, search_dirs: list[Path], candidate_patterns: list[str]) -> Path | None:
         """Search given directories for matching catalog files."""
+        patterns = self._expand_yaml_patterns(candidate_patterns)
         for d in search_dirs:
-            for pattern in candidate_patterns:
-                patterns_to_try = [pattern]
-                if pattern.endswith(".yaml"):
-                    patterns_to_try.append(pattern[:-5] + ".yml")
-                elif pattern.endswith(".yml"):
-                    patterns_to_try.append(pattern[:-4] + ".yaml")
-
-                for pat in patterns_to_try:
-                    if "*" in pat:
-                        matches = sorted(d.glob(pat))
-                        if matches and matches[0].is_file():
-                            return matches[0]
-                    elif (d / pat).is_file():
-                        return d / pat
+            for pat in patterns:
+                matched = self._match_pattern_in_dir(d, pat)
+                if matched:
+                    return matched
 
             if self.catalog_dir and not candidate_patterns:
                 for fallback_pat in ("*-asvs-*.yaml", "*-asvs-*.yml"):
-                    fallback = sorted(d.glob(fallback_pat))
-                    if fallback and fallback[0].is_file():
-                        return fallback[0]
+                    matched = self._match_pattern_in_dir(d, fallback_pat)
+                    if matched:
+                        return matched
 
         return None
 
@@ -240,6 +252,53 @@ class SourceValidator:
             self._asvs_catalog_cache[catalog_path] = keys
         return keys
 
+    @staticmethod
+    def _is_legacy_value_based(file_path: Path, suits: list[Any]) -> bool:
+        """Check whether a mappings file uses legacy value-based format (e.g. cre-mappings.yaml)."""
+        if file_path.name.startswith("cre-mappings"):
+            return True
+        dict_suits = [s for s in suits if isinstance(s, dict)]
+        cards = [c for s in dict_suits for c in s.get("cards", []) if isinstance(c, dict)]
+        if any("cre" in c for c in cards):
+            return True
+        return bool(cards) and all("id" not in c for c in cards) and any("value" in c for c in cards)
+
+    def _validate_card_entry(self, file_path: Path, suit_name: str, card: Any, is_legacy_value_based: bool) -> None:
+        """Validate an individual card dictionary within a suit."""
+        if not isinstance(card, dict):
+            self.errors.append(f"{file_path}: Card in suit '{suit_name}' must be a dictionary")
+            return
+
+        if is_legacy_value_based:
+            if "value" not in card or card["value"] is None or not str(card["value"]).strip():
+                self.errors.append(f"{file_path}: Card missing 'value' in suit '{suit_name}'")
+            card_id = card.get("value", "Unknown")
+        else:
+            if "id" not in card or card["id"] is None or not str(card["id"]).strip():
+                self.errors.append(f"{file_path}: Card missing 'id' in suit '{suit_name}'")
+            card_id = card.get("id", "Unknown")
+
+        self._validate_card_mappings(file_path, suit_name, card_id, card)
+
+    def _validate_suit_entry(self, file_path: Path, suit: Any, is_legacy_value_based: bool) -> None:
+        """Validate an individual suit entry and its cards."""
+        if not isinstance(suit, dict):
+            self.errors.append(f"{file_path}: Suit entry must be a dictionary")
+            return
+
+        if not is_legacy_value_based:
+            if "id" not in suit or suit["id"] is None or not str(suit["id"]).strip():
+                self.errors.append(f"{file_path}: Suit entry missing 'id'")
+
+        suit_name = str(suit.get("name", suit.get("id", "Unknown")))
+        cards = suit.get("cards")
+        if not isinstance(cards, list):
+            self.errors.append(f"{file_path}: Suit '{suit_name}' must contain a 'cards' list")
+            return
+
+        for card in cards:
+            self._validate_card_entry(file_path, suit_name, card, is_legacy_value_based)
+
     def _validate_mappings_file(self, file_path: Path, content: dict[str, Any]) -> bool:
         """Validate structure and mapping tokens of a *-mappings-*.yaml file."""
         initial_error_count = len(self.errors)
@@ -249,63 +308,9 @@ class SourceValidator:
             self.errors.append(f"{file_path}: 'suits' must be a list of suits")
             return False
 
-        is_legacy_value_based = (
-            file_path.name.startswith("cre-mappings")
-            or any(
-                isinstance(c, dict) and "cre" in c
-                for s in suits
-                if isinstance(s, dict)
-                for c in s.get("cards", [])
-                if isinstance(c, dict)
-            )
-            or (
-                all(
-                    isinstance(c, dict) and "id" not in c
-                    for s in suits
-                    if isinstance(s, dict)
-                    for c in s.get("cards", [])
-                    if isinstance(c, dict)
-                )
-                and any(
-                    isinstance(c, dict) and "value" in c
-                    for s in suits
-                    if isinstance(s, dict)
-                    for c in s.get("cards", [])
-                    if isinstance(c, dict)
-                )
-            )
-        )
-
+        is_legacy = self._is_legacy_value_based(file_path, suits)
         for suit in suits:
-            if not isinstance(suit, dict):
-                self.errors.append(f"{file_path}: Suit entry must be a dictionary")
-                continue
-
-            if not is_legacy_value_based:
-                if "id" not in suit or suit["id"] is None or not str(suit["id"]).strip():
-                    self.errors.append(f"{file_path}: Suit entry missing 'id'")
-
-            suit_name = str(suit.get("name", suit.get("id", "Unknown")))
-            cards = suit.get("cards")
-            if not isinstance(cards, list):
-                self.errors.append(f"{file_path}: Suit '{suit_name}' must contain a 'cards' list")
-                continue
-
-            for card in cards:
-                if not isinstance(card, dict):
-                    self.errors.append(f"{file_path}: Card in suit '{suit_name}' must be a dictionary")
-                    continue
-
-                if is_legacy_value_based:
-                    if "value" not in card or card["value"] is None or not str(card["value"]).strip():
-                        self.errors.append(f"{file_path}: Card missing 'value' in suit '{suit_name}'")
-                    card_id = card.get("value", "Unknown")
-                else:
-                    if "id" not in card or card["id"] is None or not str(card["id"]).strip():
-                        self.errors.append(f"{file_path}: Card missing 'id' in suit '{suit_name}'")
-                    card_id = card.get("id", "Unknown")
-
-                self._validate_card_mappings(file_path, suit_name, card_id, card)
+            self._validate_suit_entry(file_path, suit, is_legacy)
 
         return len(self.errors) == initial_error_count
 
@@ -459,6 +464,42 @@ class SourceValidator:
 
         return len(self.errors) == initial_error_count
 
+    def _validate_catalog_key(
+        self, file_path: Path, key: Any, key_pattern: re.Pattern[str], catalog_name: str
+    ) -> str | None:
+        """Validate key type, format, and pattern for a catalog entry."""
+        if catalog_name in ("MASTG", "MASWE") and not isinstance(key, str):
+            self.errors.append(f"{file_path}: {catalog_name} catalog key {key!r} must be a string")
+            return None
+        if catalog_name == "CAPEC" and (type(key) is not int or key < 0):
+            self.errors.append(f"{file_path}: CAPEC catalog key {key!r} must be an integer")
+            return None
+        raw_key = str(key)
+        if raw_key != raw_key.strip():
+            self.errors.append(
+                f"{file_path}: Malformed {catalog_name} catalog key '{key}' contains surrounding whitespace"
+            )
+            return None
+        if " " in raw_key:
+            self.errors.append(f"{file_path}: Malformed {catalog_name} catalog key '{raw_key}' contains whitespace")
+        elif not key_pattern.match(raw_key):
+            self.errors.append(f"{file_path}: Malformed {catalog_name} catalog key '{raw_key}' does not match pattern")
+        return raw_key
+
+    def _validate_catalog_entry_value(self, file_path: Path, raw_key: str, val: Any, catalog_name: str) -> None:
+        """Validate value dictionary and child mappings for a catalog entry."""
+        if not isinstance(val, dict):
+            self.errors.append(f"{file_path}: Catalog entry '{raw_key}' must be a dictionary")
+            return
+
+        context = f"{file_path} [{catalog_name} {raw_key}]"
+        if "owasp_asvs" in val:
+            self._validate_asvs_mapping(context, val["owasp_asvs"], file_path)
+        if "capec_codes" in val:
+            self._validate_capec_mapping(context, val["capec_codes"])
+        if catalog_name in ("MASTG", "MASWE"):
+            self._validate_mobile_references(context, val)
+
     def _validate_catalog_file(
         self,
         file_path: Path,
@@ -472,37 +513,9 @@ class SourceValidator:
         for key, val in content.items():
             if key == "meta":
                 continue
-            if catalog_name in ("MASTG", "MASWE") and not isinstance(key, str):
-                self.errors.append(f"{file_path}: {catalog_name} catalog key {key!r} must be a string")
-                continue
-            if catalog_name == "CAPEC":
-                if type(key) is not int or key < 0:
-                    self.errors.append(f"{file_path}: CAPEC catalog key {key!r} must be an integer")
-                    continue
-            raw_key = str(key)
-            if raw_key != raw_key.strip():
-                self.errors.append(
-                    f"{file_path}: Malformed {catalog_name} catalog key '{key}' contains surrounding whitespace"
-                )
-                continue
-            if " " in raw_key:
-                self.errors.append(f"{file_path}: Malformed {catalog_name} catalog key '{raw_key}' contains whitespace")
-            elif not key_pattern.match(raw_key):
-                self.errors.append(
-                    f"{file_path}: Malformed {catalog_name} catalog key '{raw_key}' does not match pattern"
-                )
-
-            if not isinstance(val, dict):
-                self.errors.append(f"{file_path}: Catalog entry '{raw_key}' must be a dictionary")
-                continue
-
-            context = f"{file_path} [{catalog_name} {raw_key}]"
-            if "owasp_asvs" in val:
-                self._validate_asvs_mapping(context, val["owasp_asvs"], file_path)
-            if "capec_codes" in val:
-                self._validate_capec_mapping(context, val["capec_codes"])
-            if catalog_name in ("MASTG", "MASWE"):
-                self._validate_mobile_references(context, val)
+            raw_key = self._validate_catalog_key(file_path, key, key_pattern, catalog_name)
+            if raw_key is not None:
+                self._validate_catalog_entry_value(file_path, raw_key, val, catalog_name)
 
         return len(self.errors) == initial_error_count
 
