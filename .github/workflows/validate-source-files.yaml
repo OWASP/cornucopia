@@ -56,7 +56,7 @@ jobs:
           pipenv install --ignore-pipfile --dev
 
       - name: Run validator unit tests
-        run: pipenv run python -m unittest tests/scripts/validate_source_files_utest.py --source-dir source
+        run: pipenv run python -m unittest tests/scripts/validate_source_files_utest.py
 
       - name: Determine changed source files and validate
         run: |
@@ -86,7 +86,7 @@ jobs:
             if [ ${#VALIDATE_TARGETS[@]} -gt 0 ]; then
               echo "Validating changed source files:"
               printf ' - %s\n' "${VALIDATE_TARGETS[@]}"
-              pipenv run python scripts/validate_source_files.py "${VALIDATE_TARGETS[@]}"
+              pipenv run python scripts/validate_source_files.py --source-dir source # "${VALIDATE_TARGETS[@]}"
             else
               echo "No source YAML files modified in this pull request."
               echo "Running smoke validation on representative source files..."
