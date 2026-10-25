@@ -606,15 +606,21 @@ class TestLoadConfig(unittest.TestCase):
         self.assertEqual(cc.find_config_path(config_name=abs_path), abs_path)
 
     def test_find_config_path_in_base_dir(self) -> None:
-        tmp = tempfile.mkdtemp()
-        custom = _write(os.path.join(tmp, "custom_config.yaml"), "project: test\n")
-        resolved = cc.find_config_path(base_dir=tmp, config_name="custom_config.yaml")
-        self.assertEqual(resolved, custom)
+        with tempfile.TemporaryDirectory() as tmp:
+            custom = _write(os.path.join(tmp, "custom_config.yaml"), "project: test\n")
+            resolved = cc.find_config_path(base_dir=tmp, config_name="custom_config.yaml")
+            self.assertEqual(resolved, custom)
+
+    def test_find_config_path_explicit_base_dir_takes_precedence_over_root(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            custom = _write(os.path.join(tmp, "pdf_config.yaml"), "project: custom\n")
+            resolved = cc.find_config_path(base_dir=tmp, config_name="pdf_config.yaml")
+            self.assertEqual(resolved, custom)
 
     def test_find_config_path_missing_fallback(self) -> None:
-        tmp = tempfile.mkdtemp()
-        resolved = cc.find_config_path(base_dir=tmp, config_name="nonexistent.yaml")
-        self.assertEqual(resolved, os.path.join(tmp, "nonexistent.yaml"))
+        with tempfile.TemporaryDirectory() as tmp:
+            resolved = cc.find_config_path(base_dir=tmp, config_name="nonexistent.yaml")
+            self.assertEqual(resolved, os.path.join(tmp, "nonexistent.yaml"))
 
     def test_load_config_loads_root_yaml(self) -> None:
         config = cc.load_config()
@@ -625,9 +631,9 @@ class TestLoadConfig(unittest.TestCase):
         self.assertEqual(config["paths"]["asset_root"], "resources")
 
     def test_load_config_missing_file_returns_empty_dict(self) -> None:
-        tmp = tempfile.mkdtemp()
-        config = cc.load_config(base_dir=tmp, config_name="nonexistent.yaml")
-        self.assertEqual(config, {})
+        with tempfile.TemporaryDirectory() as tmp:
+            config = cc.load_config(base_dir=tmp, config_name="nonexistent.yaml")
+            self.assertEqual(config, {})
 
     def test_load_assets_resolution(self) -> None:
         config = {"paths": {"assets_config_path": "scripts/pdf_generation/assets.yaml"}}

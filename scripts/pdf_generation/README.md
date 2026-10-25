@@ -188,7 +188,7 @@ It reads these files from elsewhere in the repository:
 | Fonts | `resources/templates/Fonts/` | Installed onto your system, see §4 |
 | Configuration | `pdf_config.yaml` | Build settings, at the root of the repository |
 
-Nothing else in the repository is used. Run the commands below from `scripts/pdf_generation/`; `output/` is created automatically.
+Nothing else in the repository is used. You can run the commands below either from `scripts/pdf_generation/` (where `output/` is created inside `scripts/pdf_generation/output/`) or from the repository root (e.g. `python3 scripts/pdf_generation/generate_deck.py --dry-run`); `scripts/pdf_generation/output/` is created automatically.
 
 ---
 

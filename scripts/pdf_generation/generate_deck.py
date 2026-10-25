@@ -784,7 +784,10 @@ def build_target(target, args, config, assets_data, base_dir, out_dir, profiles,
 
 def main():
     args = parse_args()
-    base_dir = args.base_dir or REPO_ROOT
+    base_dir = os.path.abspath(args.base_dir) if args.base_dir else REPO_ROOT
+    if not os.path.isdir(base_dir):
+        print("ERROR: base directory not found: {0}".format(base_dir))
+        return 1
 
     config = cc.load_config(base_dir, args.config)
     if not config:

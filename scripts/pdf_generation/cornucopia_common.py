@@ -44,8 +44,8 @@ def find_config_path(base_dir=None, config_name="pdf_config.yaml"):
 
     Checks candidate locations in priority order:
       1. An absolute path as given.
-      2. Relative to current working directory (if the file exists).
-      3. Relative to ``base_dir`` (if provided and the file exists).
+      2. Relative to ``base_dir`` (if provided and the file exists).
+      3. Relative to current working directory (if the file exists).
       4. Relative to the repository root (where ``pdf_config.yaml`` lives).
       5. Relative to this script's directory (legacy fallback).
       6. Fallback path relative to ``base_dir`` or repository root.
@@ -54,10 +54,10 @@ def find_config_path(base_dir=None, config_name="pdf_config.yaml"):
         config_name = "pdf_config.yaml"
     if os.path.isabs(config_name):
         return config_name
+    if base_dir and os.path.isfile(os.path.join(base_dir, config_name)):
+        return os.path.abspath(os.path.join(base_dir, config_name))
     if os.path.isfile(config_name):
         return os.path.abspath(config_name)
-    if base_dir and os.path.isfile(os.path.join(base_dir, config_name)):
-        return os.path.join(base_dir, config_name)
     if os.path.isfile(os.path.join(_REPO_ROOT, config_name)):
         return os.path.join(_REPO_ROOT, config_name)
     if os.path.isfile(os.path.join(_SCRIPT_DIR, config_name)):
