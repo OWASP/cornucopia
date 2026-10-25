@@ -784,14 +784,15 @@ def build_target(target, args, config, assets_data, base_dir, out_dir, profiles,
 
 def main():
     args = parse_args()
-    base_dir = os.path.abspath(args.base_dir) if args.base_dir else REPO_ROOT
-    if not os.path.isdir(base_dir):
-        print("ERROR: base directory not found: {0}".format(base_dir))
-        return 1
-
-    config = cc.load_config(base_dir, args.config)
+    config_path = cc.find_config_path(args.base_dir, args.config)
+    config = cc.load_yaml(config_path)
     if not config:
         print("ERROR: could not load {0}".format(args.config))
+        return 1
+
+    base_dir = cc.infer_base_dir(config_path, args.base_dir)
+    if not os.path.isdir(base_dir):
+        print("ERROR: base directory not found: {0}".format(base_dir))
         return 1
 
     assets_data = cc.load_assets(config, base_dir)

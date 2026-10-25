@@ -641,6 +641,31 @@ class TestLoadConfig(unittest.TestCase):
         self.assertIsInstance(assets, dict)
         self.assertIn("webapp", assets)
 
+    def test_infer_base_dir_default_and_explicit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg_path = os.path.join(tmp, "sub", "config.yaml")
+            self.assertEqual(cc.infer_base_dir(cfg_path), os.path.join(tmp, "sub"))
+            explicit = os.path.join(tmp, "custom_root")
+            self.assertEqual(cc.infer_base_dir(cfg_path, explicit_base_dir=explicit), os.path.abspath(explicit))
+
+    def test_legacy_config_discovery_and_path_resolution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            script_dir = os.path.join(tmp, "scripts", "pdf_generation")
+            os.makedirs(script_dir, exist_ok=True)
+            legacy_cfg = _write(
+                os.path.join(script_dir, "legacy_config.yaml"),
+                "paths:\n  source_root: ../../source\n  output_dir: output\n",
+            )
+            resolved = cc.find_config_path(config_name=legacy_cfg)
+            base = cc.infer_base_dir(resolved)
+            self.assertEqual(base, os.path.abspath(script_dir))
+            cfg = cc.load_yaml(resolved)
+            self.assertEqual(cc.output_dir(cfg, base), os.path.join(script_dir, "output"))
+            self.assertEqual(
+                os.path.normpath(os.path.join(base, cfg["paths"]["source_root"])),
+                os.path.normpath(os.path.join(tmp, "source")),
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

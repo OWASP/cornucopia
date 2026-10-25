@@ -283,14 +283,15 @@ def merge_one_target(target, config, base_dir, out_dir, bleed, marks, dry_run):
     return deck_path, ordered_pdfs, gap
 
 
-def prepare_merge(args, base_dir):
+def prepare_merge(args, base_dir, config=None):
     """
     Read the config and work out what to merge.
 
     Returns ``(config, out_dir, bleed, marks, targets)``, or None after
     explaining why there is nothing to do.
     """
-    config = cc.load_config(base_dir, args.config)
+    if config is None:
+        config = cc.load_config(base_dir, args.config)
     if not config:
         print("ERROR: could not load {0}".format(args.config))
         return None
@@ -325,7 +326,13 @@ def prepare_merge(args, base_dir):
 
 def main():
     args = parse_args()
-    base_dir = os.path.abspath(args.base_dir) if args.base_dir else REPO_ROOT
+    config_path = cc.find_config_path(args.base_dir, args.config)
+    config = cc.load_yaml(config_path)
+    if not config:
+        print("ERROR: could not load {0}".format(args.config))
+        return 1
+
+    base_dir = cc.infer_base_dir(config_path, args.base_dir)
     if not os.path.isdir(base_dir):
         print("ERROR: base directory not found: {0}".format(base_dir))
         return 1
@@ -335,7 +342,7 @@ def main():
         print(PYMUPDF_HELP.format(sys.prefix))
         return 1
 
-    prepared = prepare_merge(args, base_dir)
+    prepared = prepare_merge(args, base_dir, config=config)
     if not prepared:
         return 1
     config, out_dir, bleed, marks, targets = prepared

@@ -71,6 +71,23 @@ def load_config(base_dir=None, config_name="pdf_config.yaml"):
     return load_yaml(path)
 
 
+def infer_base_dir(config_path, explicit_base_dir=None):
+    """
+    Determine the base directory to resolve relative paths against.
+
+    If ``explicit_base_dir`` is provided, it is normalized and returned.
+    Otherwise, if ``config_path`` is provided, paths are relative to the
+    directory containing that configuration file. This preserves correct path
+    resolution for legacy configurations situated under ``scripts/pdf_generation/``
+    as well as new root-level configurations.
+    """
+    if explicit_base_dir:
+        return os.path.abspath(explicit_base_dir)
+    if config_path:
+        return os.path.dirname(os.path.abspath(config_path))
+    return _REPO_ROOT
+
+
 def load_assets(config, base_dir=None):
     """Load the optional assets.yaml override table."""
     rel = config.get("paths", {}).get("assets_config_path", "assets.yaml")
