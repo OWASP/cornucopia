@@ -56,7 +56,7 @@ jobs:
           pipenv install --ignore-pipfile --dev
 
       - name: Run validator unit tests
-        run: pipenv run python -m unittest tests/scripts/validate_source_files_utest.py
+        run: pipenv run python -m unittest tests/scripts/validate_source_files_utest.py --source-dir source
 
       - name: Determine changed source files and validate
         run: |
