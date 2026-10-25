@@ -136,6 +136,31 @@ describe('generateStructuredData', () => {
         const result = generateStructuredData(metadata);
         expect(result).toBe(customData);
     });
+
+    it('generates distinct WebPage nodes for distinct subpages', () => {
+        const page1: PageMetadata = {
+            title: 'About',
+            description: 'About us',
+            keywords: 'about',
+            canonicalUrl: 'https://cornucopia.owasp.org/about',
+        };
+        const page2: PageMetadata = {
+            title: 'News',
+            description: 'Latest news',
+            keywords: 'news',
+            canonicalUrl: 'https://cornucopia.owasp.org/news',
+        };
+
+        const result1 = generateStructuredData(page1);
+        const result2 = generateStructuredData(page2);
+
+        const graph1 = result1['@graph'] as Record<string, unknown>[];
+        const graph2 = result2['@graph'] as Record<string, unknown>[];
+
+        expect(graph1[0]['@id']).toBe('https://cornucopia.owasp.org/about');
+        expect(graph2[0]['@id']).toBe('https://cornucopia.owasp.org/news');
+        expect(graph1[0]['@id']).not.toBe(graph2[0]['@id']);
+    });
 });
 
 describe('serializeJsonLd', () => {

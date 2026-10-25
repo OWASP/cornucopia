@@ -7,10 +7,10 @@ export const generateStructuredData = (
         return metadata.structuredData;
     }
 
-    const isHome =
-        !metadata.canonicalUrl ||
-        metadata.canonicalUrl === 'https://cornucopia.owasp.org' ||
-        metadata.canonicalUrl === 'https://cornucopia.owasp.org/';
+    const normalizedUrl = metadata.canonicalUrl
+        ? metadata.canonicalUrl.trim().replace(/\/+$/, '')
+        : '';
+    const isHome = !normalizedUrl || normalizedUrl === 'https://cornucopia.owasp.org';
 
     const webSiteNode: Record<string, unknown> = {
         '@type': 'WebSite',
