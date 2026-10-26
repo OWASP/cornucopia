@@ -895,10 +895,7 @@ def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
     """Check if file is a mapping file for the specified version and edition."""
     base = os.path.basename(path)
     return (
-        not base.startswith(".")
-        and base.find("mappings") >= 0
-        and base.find(edition) >= 0
-        and base.find(version) >= 0
+        not base.startswith(".") and base.find("mappings") >= 0 and base.find(edition) >= 0 and base.find(version) >= 0
     )
 
 
