@@ -50,11 +50,7 @@ jobs:
           docker build -t copi-test-image copi.owasp.org
 
           echo "Generating SECRET_KEY_BASE"
-          SECRET_KEY_BASE=$(python - <<'PY'
-import secrets
-print(secrets.token_hex(64))
-PY
-)
+          SECRET_KEY_BASE=$(python -c 'import secrets; print(secrets.token_hex(64))')
 
           echo "Starting Copi application container"
           docker run -d --name copi-app --network copi-net -p 4000:4000 \
