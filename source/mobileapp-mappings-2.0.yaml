@@ -5,7 +5,7 @@ meta:
   version: '2.0'
   layouts: [cards, leaflet]
   templates: [bridge_qr, bridge, tarot, tarot_qr]
-  languages: [en, ru, uk]
+  languages: [en, ru, uk, fa]
 url_templates:
   owasp_mastg: https://mas.owasp.org/MASTG-TEST-{code}
   owasp_mastg_best: https://mas.owasp.org/MASTG-BEST-{code}

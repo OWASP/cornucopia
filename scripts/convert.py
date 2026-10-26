@@ -90,7 +90,7 @@ class ConvertVars:
 
         if os.path.isdir(source_dir):
             for filename in os.listdir(source_dir):
-                if filename.endswith(".yaml") and "mappings" in filename:
+                if not filename.startswith(".") and filename.endswith(".yaml") and "mappings" in filename:
                     filepath = os.path.join(source_dir, filename)
                     meta = self._parse_mapping_file(filepath)
                     if meta:
@@ -700,7 +700,8 @@ def get_files_from_of_type(path: str, ext: str) -> List[str]:
     files = []
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, "*." + str(ext)):
-            files.append(os.path.join(root, filename))
+            if not filename.startswith("."):
+                files.append(os.path.join(root, filename))
     if not files:
         logging.error("No language files found in folder: %s", str(os.sep.join([convert_vars.BASE_PATH, "source"])))
         return files
@@ -769,12 +770,12 @@ def get_mapping_data_for_edition(
     if not mappingfile:
         return data
 
-    with open(mappingfile, "r", encoding="utf-8") as f:
-        try:
-            data = yaml.safe_load(f)
-        except yaml.YAMLError as e:
-            logging.info(f"Error loading yaml file: {mappingfile}. Error = {e}")
-            data = {}
+    try:
+        with open(mappingfile, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+    except (yaml.YAMLError, OSError, UnicodeDecodeError) as e:
+        logging.info(f"Error loading yaml file: {mappingfile}. Error = {e}")
+        data = {}
     if "meta" in data.keys() and "component" in data["meta"].keys() and data["meta"]["component"] == "mappings":
         logging.debug(" --- found mappings file: " + os.path.split(mappingfile)[1])
     else:
@@ -892,16 +893,17 @@ def get_language_data(
 
 def is_mapping_file_for_version(path: str, version: str, edition: str) -> bool:
     """Check if file is a mapping file for the specified version and edition."""
+    base = os.path.basename(path)
     return (
-        os.path.basename(path).find("mappings") >= 0
-        and os.path.basename(path).find(edition) >= 0
-        and os.path.basename(path).find(version) >= 0
+        not base.startswith(".") and base.find("mappings") >= 0 and base.find(edition) >= 0 and base.find(version) >= 0
     )
 
 
 def is_lang_file_for_version(path: str, version: str, lang: str, edition: str) -> bool:
     """Check if file is a language file for the specified version, language, and edition."""
     filename = os.path.basename(path).lower()
+    if filename.startswith("."):
+        return False
     # Support both -en. and -en_US. style
     lang_patterns = ["-" + lang.lower() + ".", "-" + lang.lower().replace("-", "_") + "."]
     has_lang = any(filename.find(p) != -1 for p in lang_patterns)
@@ -916,7 +918,7 @@ def is_lang_file_for_version(path: str, version: str, lang: str, edition: str) -
 
 def is_yaml_file(path: str) -> bool:
     """Check if file has YAML extension."""
-    return os.path.splitext(path)[1] in (".yaml", ".yml")
+    return not os.path.basename(path).startswith(".") and os.path.splitext(path)[1] in (".yaml", ".yml")
 
 
 def map_language_data_to_template(input_data: Dict[str, Any]) -> Dict[str, str]:

@@ -90,6 +90,10 @@ font_handling:
     body: "Noto Sans Devanagari Light"
     heading: "Noto Sans Devanagari Medium"
     accent: "Noto Sans Devanagari Regular"
+  fa:
+    body: "Noto Sans Arabic Regular"
+    heading: "Noto Sans Arabic Bold"
+    accent: "Noto Sans Arabic Regular"
 
 # --------------------------------------------------------------------------
 # Per-language size offsets, in points, applied on top of the base size.
