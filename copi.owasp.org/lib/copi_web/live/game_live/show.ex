@@ -123,125 +123,70 @@ defmodule CopiWeb.GameLive.Show do
 
   @impl true
   def handle_event("start_game", _, socket) do
-
     game = socket.assigns.game
 
+    cond do
+      game.started_at ->
+        # Game already started, do nothing
+        {:noreply, socket}
 
+      length(game.players) < 3 ->
+        # Minimum 3 players required (aligned with UI requirement)
+        {:noreply,
+         socket
+         |> put_flash(:error, "Cannot start game: At least 3 players are required to start.")
+         |> assign(:game, game)}
 
-    if length(game.players) < 3 do
+      true ->
+        repo = repo_module()
 
-      {:noreply,
+        transaction_result =
+          repo.transaction(fn ->
+            # Re-read the game inside the transaction to guard against concurrent
+            # start_game events both passing the started_at == nil check above.
+            fresh_game = repo.get!(Copi.Cornucopia.Game, game.id)
 
-       socket
+            if fresh_game.started_at do
+              repo.rollback(:already_started)
+            else
+              all_cards = Copi.Cornucopia.list_cards_shuffled(fresh_game.edition, fresh_game.suits, latest_version(fresh_game.edition))
+              players = fresh_game.players
+              player_count = length(players)
 
-       |> put_flash(:error, "Cannot start game: At least 3 players are required to start.")
+              all_cards
+              |> Enum.with_index()
+              |> Enum.each(fn {card, i} ->
+                case repo.insert(%DealtCard{
+                       card_id: card.id,
+                       player_id: Enum.at(players, rem(i, player_count)).id
+                     }) do
+                  {:ok, _dealt_card} -> :ok
+                  {:error, changeset} -> repo.rollback(changeset)
+                end
+              end)
 
-       |> assign(:game, game)}
-
-    else
-
-      repo = repo_module()
-
-
-
-      transaction_result =
-
-        repo.transaction(fn ->
-
-          # Re-fetch game with a row-level FOR UPDATE lock inside the transaction.
-
-          # This forces any concurrent start_game request to wait here until the
-
-          # first one commits. The second request then sees started_at is set and
-
-          # rolls back cleanly, preventing duplicate card dealing.
-
-          locked_game = repo.get!(Copi.Cornucopia.Game, game.id, lock: "FOR UPDATE")
-
-
-
-          if locked_game.started_at do
-
-            repo.rollback(:already_started)
-
-          else
-
-            all_cards = Copi.Cornucopia.list_cards_shuffled(locked_game.edition, locked_game.suits, latest_version(locked_game.edition))
-
-            players = locked_game.players
-
-            player_count = length(players)
-
-
-
-            all_cards
-
-            |> Enum.with_index()
-
-            |> Enum.each(fn {card, i} ->
-
-              case repo.insert(%DealtCard{
-
-                     card_id: card.id,
-
-                     player_id: Enum.at(players, rem(i, player_count)).id
-
-                   }) do
-
-                {:ok, _dealt_card} -> :ok
-
+              case Copi.Cornucopia.update_game(fresh_game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
+                {:ok, updated_game} -> updated_game
                 {:error, changeset} -> repo.rollback(changeset)
-
               end
-
-            end)
-
-
-
-            case Copi.Cornucopia.update_game(locked_game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
-
-              {:ok, updated_game} -> updated_game
-
-              {:error, changeset} -> repo.rollback(changeset)
-
             end
+          end)
 
-          end
+        case transaction_result do
+          {:ok, updated_game} ->
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
 
-        end)
+          {:error, :already_started} ->
+            {:noreply, socket}
 
-
-
-      case transaction_result do
-
-        {:ok, updated_game} ->
-
-          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-          {:noreply, assign(socket, :game, updated_game)}
-
-
-
-        {:error, :already_started} ->
-
-          {:noreply, socket}
-
-
-
-        {:error, _reason} ->
-
-          {:noreply,
-
-           socket
-
-           |> put_flash(:error, "Failed to start game due to a system error. Please try again.")
-
-           |> assign(:game, game)}
-
-      end
-
+          {:error, _reason} ->
+            {:noreply,
+             socket
+             |> put_flash(:error, "Failed to start game due to a system error. Please try again.")
+             |> assign(:game, game)}
+        end
     end
-
   end
   def topic(game_id) do
     "game:#{game_id}"
