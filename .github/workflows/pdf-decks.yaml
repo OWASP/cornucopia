@@ -61,23 +61,34 @@ jobs:
           python3 - <<'PYTHON' >> "$GITHUB_OUTPUT"
           import json
           import os
+          import sys
 
-          # Kept in step with generation_targets in pdf_config.yaml.
-          combinations = [
-              {"edition": "webapp", "language": language}
-              for language in ("en", "es", "fr", "hi", "it", "nl", "no_nb", "pt_br", "pt_pt", "ru", "uk", "fa")
-          ] + [
-              {"edition": "mobileapp", "language": language} for language in ("en", "hi", "ru", "uk", "fa")
-          ] + [
-              {"edition": "companion", "language": language} for language in ("en", "fa")
-          ]
+          # Dynamically discover targets matching pdf_config.yaml and source/
+          sys.path.insert(0, "scripts/pdf_generation")
+          import cornucopia_common as cc
 
+          config = cc.load_config(".")
           edition = os.environ.get("WANTED_EDITION", "all")
           language = os.environ.get("WANTED_LANGUAGE", "all")
-          if edition != "all":
-              combinations = [c for c in combinations if c["edition"] == edition]
-          if language != "all":
-              combinations = [c for c in combinations if c["language"] == language]
+
+          targets, warnings = cc.resolve_targets(
+              config,
+              ".",
+              editions=edition,
+              languages=language,
+          )
+
+          for warning in warnings:
+              print(f"::warning::{warning}", file=sys.stderr)
+
+          # Deduplicate targets by (edition, language) preserving discovery order
+          seen = set()
+          combinations = []
+          for target in targets:
+              pair = (target["edition"], target["language"])
+              if pair not in seen:
+                  seen.add(pair)
+                  combinations.append({"edition": pair[0], "language": pair[1]})
 
           if not combinations:
               raise SystemExit("No edition and language combination matches that request")
