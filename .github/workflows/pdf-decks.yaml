@@ -65,11 +65,11 @@ jobs:
           # Kept in step with generation_targets in pdf_config.yaml.
           combinations = [
               {"edition": "webapp", "language": language}
-              for language in ("en", "es", "fr", "hi", "it", "nl", "no_nb", "pt_br", "pt_pt", "ru", "uk")
+              for language in ("en", "es", "fr", "hi", "it", "nl", "no_nb", "pt_br", "pt_pt", "ru", "uk", "fa")
           ] + [
-              {"edition": "mobileapp", "language": language} for language in ("en", "hi", "ru", "uk")
+              {"edition": "mobileapp", "language": language} for language in ("en", "hi", "ru", "uk", "fa")
           ] + [
-              {"edition": "companion", "language": "en"},
+              {"edition": "companion", "language": language} for language in ("en", "fa")
           ]
 
           edition = os.environ.get("WANTED_EDITION", "all")
@@ -110,7 +110,7 @@ jobs:
       - name: Install Scribus
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends scribus xvfb
+          sudo apt-get install -y --no-install-recommends scribus xvfb fonts-noto-core
           scribus --version || true
 
       # Scribus runs scripts in the system Python here, so these go into the
