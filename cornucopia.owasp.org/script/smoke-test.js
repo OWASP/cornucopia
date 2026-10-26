@@ -1,4 +1,4 @@
-import { getSvelteEntries } from './deck-config.js';
+import { getSvelteEntries } from './app-config.js';
 
 const baseUrl = 'http://localhost:3000';
 

@@ -1,7 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { config } from 'dotenv';
-import { getSvelteEntries } from './script/deck-config.js';
+import { getSvelteEntries } from './script/app-config.js';
 config();
 
 // Hardcoded card entries — these are stable card slugs that don't

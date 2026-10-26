@@ -1,6 +1,19 @@
 import fs from 'fs';
 import path from 'path';
-import { getApiRoutes } from './deck-config.js';
+import { fileURLToPath } from 'url';
+import { load as parse } from 'js-yaml';
+import { getApiRoutes } from './app-config.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const DECKS_YAML = path.resolve(__dirname, '../decks.yaml');
+
+function getCloudflareHeaders() {
+  const content = fs.readFileSync(DECKS_YAML, 'utf-8');
+  const { cloudflare } = parse(content);
+  return cloudflare.headers;
+}
 
 export const apiPaths = getApiRoutes();
 
@@ -17,40 +30,51 @@ export function getBuildDir() {
   return undefined;
 }
 
+function renderHeaderBlock(routePath, headers) {
+  const lines = [routePath];
+  for (const [key, value] of Object.entries(headers)) {
+    lines.push(`  ${key}: ${value}`);
+  }
+  return lines.join('\n');
+}
+
 export function writeHeaders({
   buildDir,
   origin,
   includeGlobalRobotsTag = false,
   includeNotFound = false
 }) {
-  const globalHeaders = [
-    '/*',
-    `  Access-Control-Allow-Origin: ${origin}`,
-    '  Cross-Origin-Opener-Policy: same-origin',
-    ...(includeGlobalRobotsTag ? ['  X-Robots-Tag: noindex'] : []),
-    '  X-Frame-Options: SAMEORIGIN',
-    '  X-XSS-Protection: 1; mode=block',
-    '  X-Content-Type-Options: nosniff',
-    '  Referrer-Policy: same-origin',
-    '  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self "https://www.youtube.com/"), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()',
-    '  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
-    "  Content-Security-Policy: base-uri 'self'; default-src 'none'; frame-src 'self' https://www.youtube.com youtube.com; connect-src 'self'; img-src 'self' i.ytimg.com; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'; upgrade-insecure-requests"
-  ].join('\n');
+  const headers = getCloudflareHeaders();
 
-  const notFoundHeaders = includeNotFound
+  const envBlock =
+    origin === 'https://cornucopia.owasp.org'
+      ? headers.production
+      : headers.stage;
+
+  const allHeaders = headers.all['/*'];
+  const envGlobalHeaders = envBlock['/*'] || {};
+
+  const merged = { ...allHeaders, ...envGlobalHeaders };
+  if (includeGlobalRobotsTag) {
+    merged['X-Robots-Tag'] = 'noindex';
+  }
+
+  const globalBlock = renderHeaderBlock('/*', merged);
+
+  const notFoundBlock = includeNotFound
     ? '\n/404\n  X-Robots-Tag: noindex'
     : '';
 
-  const apiHeaders = apiPaths.map((apiPath) => [
+  const resetLines = (headers.reset || []).map(r => `  ${r}`).join('\n');
+  const apiBlock = apiPaths.map((apiPath) => [
     apiPath,
-    '  ! Access-Control-Allow-Origin',
+    resetLines,
     '  Access-Control-Allow-Origin: *',
-    '  ! Content-Type',
     '  Content-Type: application/json; charset=UTF-8'
   ].join('\n')).join('\n');
 
   fs.writeFileSync(
     path.join(buildDir, '_headers'),
-    `${globalHeaders}${notFoundHeaders}\n${apiHeaders}\n`
+    `${globalBlock}${notFoundBlock}\n${apiBlock}\n`
   );
 }
