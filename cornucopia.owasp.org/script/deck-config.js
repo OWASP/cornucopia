@@ -47,7 +47,7 @@ function getAvailableLanguages(edition, version, draftLanguages = []) {
 /**
  * Generates /edition/{edition}/{defaultPreviewCard}/{version}/{lang} entries
  * for svelte.config.js prerender entries.
- * webapp/2.2 is special — it has no /en suffix in the route.
+ * webapp/2.2 is special Ã¢â‚¬â€ it has no /en suffix in the route.
  */
 function getEditionRoutes() {
   const decks = getDecks();
@@ -107,10 +107,13 @@ function getApiRoutes() {
       routes.push(`/api/mapping/${deck.edition}/${version}`);
     }
 
-    // Standards-based routes
+    // Standards-based routes - only add ASVS route if source file exists
     if (deck.standards?.asvs) {
       for (const version of Object.keys(deck.standards.asvs.versionMap)) {
-        routes.push(`/api/asvs/${deck.edition}/${version}`);
+        const asvsFile = path.resolve(SOURCE_DIR, `${deck.edition}-asvs-${version}.yaml`);
+        if (fs.existsSync(asvsFile)) {
+          routes.push(`/api/asvs/${deck.edition}/${version}`);
+        }
       }
     }
     if (deck.standards?.capec) {

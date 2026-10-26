@@ -35,9 +35,7 @@ def get_available_languages(edition: str, version: str, draft_languages: list) -
     Scans source/ for files matching {edition}-cards-{version}-{lang}.yaml
     and returns languages not in draft_languages.
     """
-    pattern = re.compile(
-        rf"^{re.escape(edition)}-cards-{re.escape(version)}-([a-z]{{2}}(?:_[a-z]{{2}})?)\\.yaml$"
-    )
+    pattern = re.compile(rf"^{re.escape(edition)}-cards-{re.escape(version)}-([a-z]{{2}}(?:_[a-z]{{2}})?)\\.yaml$")
     langs = []
     for f in SOURCE_DIR.iterdir():
         match = pattern.match(f.name)
@@ -125,9 +123,7 @@ class CornucopiaWebsiteSmokeTests(unittest.TestCase):
                 failures.append(f"{resp.status_code} {url}")
 
         if failures:
-            self.fail(
-                f"{len(failures)} route(s) failed:\n" + "\n".join(failures)
-            )
+            self.fail(f"{len(failures)} route(s) failed:\n" + "\n".join(failures))
 
     def test_api_lang_routes(self):
         """
@@ -144,9 +140,7 @@ class CornucopiaWebsiteSmokeTests(unittest.TestCase):
                 failures.append(f"{resp.status_code} {url}")
 
         if failures:
-            self.fail(
-                f"{len(failures)} API route(s) failed:\n" + "\n".join(failures)
-            )
+            self.fail(f"{len(failures)} API route(s) failed:\n" + "\n".join(failures))
 
 
 if __name__ == "__main__":
