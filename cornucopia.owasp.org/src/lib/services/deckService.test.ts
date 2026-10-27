@@ -261,6 +261,12 @@ describe('DeckService tests', () => {
            expect(languages).toEqual(['en', 'hi', 'uk']);
         });
 
+        it('should return each language only once when versions share languages', () => {
+            const languages = DeckService.getLanguages('webapp');
+            expect(languages).toHaveLength(12);
+            expect(new Set(languages).size).toBe(languages.length);
+        });
+
         it('should return en for companion', () => {
             const languages = DeckService.getLanguages('companion');
             expect(languages).toContain('en');

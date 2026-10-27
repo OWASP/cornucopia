@@ -93,7 +93,7 @@ export class DeckService {
     }
 
     public static getLanguages(edition: string): string[] {
-        const languages: string[] = DeckService.getAllDecks().filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang);
+        const languages = [...new Set(DeckService.getAllDecks().filter((deck) => deck.edition == edition).flatMap((deck) => deck.lang))];
         return languages.length !== 0 ? languages : ['en'];
     }
     public static getLanguagesForEditionVersion(edition: string, version: string): string[] {
