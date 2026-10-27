@@ -138,32 +138,37 @@ defmodule CopiWeb.GameLive.Show do
          |> assign(:game, game)}
 
       true ->
-        # Valid player count (3+), proceed with game start
-        all_cards = Copi.Cornucopia.list_cards_shuffled(game.edition, game.suits, latest_version(game.edition))
-        players = game.players
-        player_count = length(players)
         repo = repo_module()
 
-        # Deal cards and start the game atomically: either everything
-        # succeeds, or nothing is persisted, preventing partial card
-        # distribution if a failure occurs mid-loop.
         transaction_result =
           repo.transaction(fn ->
-            all_cards
-            |> Enum.with_index()
-            |> Enum.each(fn {card, i} ->
-              case repo.insert(%DealtCard{
-                     card_id: card.id,
-                     player_id: Enum.at(players, rem(i, player_count)).id
-                   }) do
-                {:ok, _dealt_card} -> :ok
+            # Re-read the game inside the transaction to guard against concurrent
+            # start_game events both passing the started_at == nil check above.
+            fresh_game = repo.get!(Copi.Cornucopia.Game, game.id) |> repo.preload([:continue_votes, players: :dealt_cards])
+
+            if fresh_game.started_at do
+              repo.rollback(:already_started)
+            else
+              all_cards = Copi.Cornucopia.list_cards_shuffled(fresh_game.edition, fresh_game.suits, latest_version(fresh_game.edition))
+              players = fresh_game.players
+              player_count = length(players)
+
+              all_cards
+              |> Enum.with_index()
+              |> Enum.each(fn {card, i} ->
+                case repo.insert(%DealtCard{
+                       card_id: card.id,
+                       player_id: Enum.at(players, rem(i, player_count)).id
+                     }) do
+                  {:ok, _dealt_card} -> :ok
+                  {:error, changeset} -> repo.rollback(changeset)
+                end
+              end)
+
+              case Copi.Cornucopia.update_game(fresh_game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
+                {:ok, updated_game} -> updated_game
                 {:error, changeset} -> repo.rollback(changeset)
               end
-            end)
-
-            case Copi.Cornucopia.update_game(game, %{started_at: DateTime.truncate(DateTime.utc_now(), :second)}) do
-              {:ok, updated_game} -> updated_game
-              {:error, changeset} -> repo.rollback(changeset)
             end
           end)
 
@@ -171,6 +176,9 @@ defmodule CopiWeb.GameLive.Show do
           {:ok, updated_game} ->
             CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
             {:noreply, assign(socket, :game, updated_game)}
+
+          {:error, :already_started} ->
+            {:noreply, socket}
 
           {:error, _reason} ->
             {:noreply,
@@ -180,7 +188,6 @@ defmodule CopiWeb.GameLive.Show do
         end
     end
   end
-
   def topic(game_id) do
     "game:#{game_id}"
   end
