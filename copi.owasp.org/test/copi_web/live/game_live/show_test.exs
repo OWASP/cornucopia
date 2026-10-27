@@ -41,6 +41,10 @@ defmodule CopiWeb.GameLive.ShowTest do
     end
 
     def rollback(reason), do: Copi.Repo.rollback(reason)
+
+    def get!(schema, id), do: Copi.Repo.get!(schema, id)
+
+    def preload(struct, association), do: Copi.Repo.preload(struct, association, [])
   end
 
   @game_attrs %{name: "Edge Case Test Game", edition: "webapp", suits: ["hearts", "clubs"]}

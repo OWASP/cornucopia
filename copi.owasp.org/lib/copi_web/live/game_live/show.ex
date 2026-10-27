@@ -144,7 +144,7 @@ defmodule CopiWeb.GameLive.Show do
           repo.transaction(fn ->
             # Re-read the game inside the transaction to guard against concurrent
             # start_game events both passing the started_at == nil check above.
-            fresh_game = repo.get!(Copi.Cornucopia.Game, game.id)
+            fresh_game = repo.get!(Copi.Cornucopia.Game, game.id) |> repo.preload([:continue_votes, players: :dealt_cards])
 
             if fresh_game.started_at do
               repo.rollback(:already_started)
