@@ -168,6 +168,7 @@ class TranslationChecker:
             "pt_br": "Portuguese (Brazil)",
             "pt_pt": "Portuguese (Portugal)",
             "ru": "Russian",
+            "uk": "Ukrainian",
         }
 
         for base_name in sorted(self.results.keys()):
