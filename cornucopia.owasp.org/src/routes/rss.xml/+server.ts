@@ -85,15 +85,13 @@ function generateDescription(post: Blogpost) {
 }
 
 function generateDate(post: Blogpost): string {
+  // Blogpost dates use the YYYYMMDD format (for example 20231201).
   const date: string = post.date.toString();
-  const year = date.slice(0, 4);
-  const month = date.slice(4, 2);
-  const day = date.slice(6, 2);
+  const year = Number.parseInt(date.slice(0, 4), 10);
+  const month = Number.parseInt(date.slice(4, 6), 10);
+  const day = Number.parseInt(date.slice(6, 8), 10);
 
-  const d: Date = new Date();
-  d.setDate(Number.parseInt(day));
-  d.setMonth(Number.parseInt(month));
-  d.setFullYear(Number.parseInt(year));
+  const d: Date = new Date(Date.UTC(year, month - 1, day));
   return d.toUTCString();
 }
 
