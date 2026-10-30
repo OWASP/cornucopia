@@ -1,47 +1,21 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { load as parse } from 'js-yaml';
+import { getApiRoutes } from './app-config.js';
 
-export const apiPaths = [
-  '/api/lang/mobileapp/1.1',
-  '/api/lang/mobileapp/2.0',
-  '/api/lang/webapp/2.2',
-  '/api/lang/webapp/3.0',
-  '/api/lang/dbd/1.0',
-  '/api/lang/companion/1.0',
-  '/api/lang/eop/5.0',
-  '/api/asvs/webapp/3.0',
-  '/api/capec/webapp/3.0',
-  '/api/mastg/mobileapp/2.0',
-  '/api/maswe/mobileapp/2.0',
-  '/api/mapping/eop/5.0',
-  '/api/mapping/webapp/2.2',
-  '/api/mapping/webapp/3.0',
-  '/api/mapping/mobileapp/1.1',
-  '/api/mapping/mobileapp/2.0',
-  '/api/mapping/companion/1.0',
-  '/api/cre/mobileapp/en',
-  '/api/cre/mobileapp/ru',
-  '/api/cre/mobileapp/hi',
-  '/api/cre/mobileapp/uk',
-  '/api/cre/mobileapp/fa',
-  '/api/cre/webapp/en',
-  '/api/cre/webapp/es',
-  '/api/cre/webapp/fr',
-  '/api/cre/webapp/nl',
-  '/api/cre/webapp/no_nb',
-  '/api/cre/webapp/it',
-  '/api/cre/webapp/pt_pt',
-  '/api/cre/webapp/pt_br',
-  '/api/cre/webapp/ru',
-  '/api/cre/webapp/fa',
-  '/api/cre/companion/en',
-  '/api/cre/companion/fa',
-  '/api/cre/dbd/en',
-  '/api/cre/eop/en',
-  '/api/cre/eop/es',
-  '/api/cre/eop/fa',
-  '/api/cre/eop/ru'
-];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const APP_YAML = path.resolve(__dirname, '../application.yaml');
+
+function getCloudflareHeaders() {
+  const content = fs.readFileSync(APP_YAML, 'utf-8');
+  const { cloudflare } = parse(content);
+  return cloudflare.headers;
+}
+
+export const apiPaths = getApiRoutes();
 
 export function getBuildDir() {
   const root = path.resolve();
@@ -56,39 +30,51 @@ export function getBuildDir() {
   return undefined;
 }
 
+function renderHeaderBlock(routePath, headers) {
+  const lines = [routePath];
+  for (const [key, value] of Object.entries(headers)) {
+    lines.push(`  ${key}: ${value}`);
+  }
+  return lines.join('\n');
+}
+
 export function writeHeaders({
   buildDir,
   origin,
   includeGlobalRobotsTag = false,
   includeNotFound = false
 }) {
-  const globalHeaders = [
-    '/*',
-    `  Access-Control-Allow-Origin: ${origin}`,
-    '  Cross-Origin-Opener-Policy: same-origin',
-    ...(includeGlobalRobotsTag ? ['  X-Robots-Tag: noindex'] : []),
-    '  X-Frame-Options: SAMEORIGIN',
-    '  X-XSS-Protection: 1; mode=block',
-    '  X-Content-Type-Options: nosniff',
-    '  Referrer-Policy: same-origin',
-    '  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self "https://www.youtube.com/"), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()',
-    '  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
-    "  Content-Security-Policy: base-uri 'self'; default-src 'none'; frame-src 'self' www.youtube.com youtube.com; connect-src 'self'; img-src 'self' i.ytimg.com; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'; upgrade-insecure-requests"
-  ].join('\n');
+  const headers = getCloudflareHeaders();
 
-  const notFoundHeaders = includeNotFound
+  const envBlock =
+    origin === 'https://cornucopia.owasp.org'
+      ? headers.production
+      : headers.stage;
+
+  const allHeaders = headers.all['/*'];
+  const envGlobalHeaders = envBlock['/*'] || {};
+
+  const merged = { ...allHeaders, ...envGlobalHeaders };
+  if (includeGlobalRobotsTag) {
+    merged['X-Robots-Tag'] = 'noindex';
+  }
+
+  const globalBlock = renderHeaderBlock('/*', merged);
+
+  const notFoundBlock = includeNotFound
     ? '\n/404\n  X-Robots-Tag: noindex'
     : '';
-  const apiHeaders = apiPaths.map((apiPath) => [
+
+  const resetLines = (headers.reset || []).map(r => `  ${r}`).join('\n');
+  const apiBlock = apiPaths.map((apiPath) => [
     apiPath,
-    '  ! Access-Control-Allow-Origin',
+    resetLines,
     '  Access-Control-Allow-Origin: *',
-    '  ! Content-Type',
     '  Content-Type: application/json; charset=UTF-8'
   ].join('\n')).join('\n');
 
   fs.writeFileSync(
     path.join(buildDir, '_headers'),
-    `${globalHeaders}${notFoundHeaders}\n${apiHeaders}\n`
+    `${globalBlock}${notFoundBlock}\n${apiBlock}\n`
   );
 }
