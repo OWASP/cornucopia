@@ -21,12 +21,12 @@ from pathlib import Path
 BASE_URL = os.environ.get("CORNUCOPIA_BASE_URL", "https://cornucopia.owasp.org")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-application.yaml = REPO_ROOT / "cornucopia.owasp.org" / "application.yaml"
+APP_YAML = REPO_ROOT / "cornucopia.owasp.org" / "application.yaml"
 SOURCE_DIR = REPO_ROOT / "source"
 
 
 def get_decks():
-    with open(application.yaml, "r", encoding="utf-8") as f:
+    with open(APP_YAML, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)["decks"]
 
 
