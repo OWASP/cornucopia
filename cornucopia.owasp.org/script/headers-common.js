@@ -7,10 +7,10 @@ import { getApiRoutes } from './app-config.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DECKS_YAML = path.resolve(__dirname, '../decks.yaml');
+const application.yaml = path.resolve(__dirname, '../application.yaml');
 
 function getCloudflareHeaders() {
-  const content = fs.readFileSync(DECKS_YAML, 'utf-8');
+  const content = fs.readFileSync(application.yaml, 'utf-8');
   const { cloudflare } = parse(content);
   return cloudflare.headers;
 }

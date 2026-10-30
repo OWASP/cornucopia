@@ -1,8 +1,8 @@
 /**
- * Returns the full parsed application config from decks.yaml
+ * Returns the full parsed application config from application.yaml
  */
 function getAppConfig() {
-  const content = fs.readFileSync(DECKS_YAML, 'utf-8');
+  const content = fs.readFileSync(application.yaml, 'utf-8');
   return parse(content);
 }
 

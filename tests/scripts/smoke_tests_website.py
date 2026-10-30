@@ -2,7 +2,7 @@
 Smoke tests for cornucopia.owasp.org website.
 
 Dynamically derives all translation routes from:
-- cornucopia.owasp.org/decks.yaml (editions, versions, draft languages)
+- cornucopia.owasp.org/application.yaml (editions, versions, draft languages)
 - source/ directory (available language files)
 
 Tests that at least one card route per edition/version/language
@@ -21,12 +21,12 @@ from pathlib import Path
 BASE_URL = os.environ.get("CORNUCOPIA_BASE_URL", "https://cornucopia.owasp.org")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DECKS_YAML = REPO_ROOT / "cornucopia.owasp.org" / "decks.yaml"
+application.yaml = REPO_ROOT / "cornucopia.owasp.org" / "application.yaml"
 SOURCE_DIR = REPO_ROOT / "source"
 
 
 def get_decks():
-    with open(DECKS_YAML, "r", encoding="utf-8") as f:
+    with open(application.yaml, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)["decks"]
 
 
@@ -114,7 +114,7 @@ class CornucopiaWebsiteSmokeTests(unittest.TestCase):
         return 200 and not 404 or 500.
         """
         routes = build_test_routes()
-        self.assertGreater(len(routes), 0, "No routes found — check decks.yaml and source/")
+        self.assertGreater(len(routes), 0, "No routes found — check application.yaml and source/")
 
         failures = []
         for edition, version, lang, url in routes:
