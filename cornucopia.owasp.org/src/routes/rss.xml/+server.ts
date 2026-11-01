@@ -38,21 +38,21 @@ export async function GET() {
 
     // Title
     body += "<title>";
-    body += Text.Format(post.title);
+    body += escapeXml(Text.Format(post.title));
     body += "</title>";
    
     // Link
     body += "<link>";
-    body += generateLink(post);
+    body += escapeXml(generateLink(post));
     body += "</link>";
     // Description
     body += "<description>";
-    body += generateDescription(post);
+    body += escapeXml(generateDescription(post));
     body += "</description>";
 
     // Guid
     body += '<guid isPermaLink="true">';
-    body += generateLink(post);
+    body += escapeXml(generateLink(post));
     body += "</guid>";
 
     // Guid
@@ -63,7 +63,7 @@ export async function GET() {
     // Category
     for (let j = 0; j < post.tags.length; j++) {
       body += "<category>";
-      body += post.tags[j].trim();
+      body += escapeXml(post.tags[j].trim());
       body += "</category>";
     }
 
@@ -99,4 +99,13 @@ function generateDate(post: Blogpost): string {
 
 function generateLink(post: Blogpost): string {
   return "https://cornucopia.owasp.org/news/" + post.path;
+}
+
+function escapeXml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
