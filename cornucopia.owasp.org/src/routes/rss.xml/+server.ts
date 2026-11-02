@@ -28,6 +28,8 @@ const bodyStart =
 
 const bodyEnd = "</channel>" + "</rss>";
 
+const MAX_DESCRIPTION_LENGTH = 200;
+
 export async function GET() {
   const json = await LocalCache(() => getBlogposts(), 20, "posts");
 
@@ -80,8 +82,9 @@ export async function GET() {
 }
 
 function generateDescription(post: Blogpost) {
-  const desc: string = post.description?.slice(0, 200)+ "...";
-  return desc;
+  const description: string = post.description ?? "";
+  if (description.length <= MAX_DESCRIPTION_LENGTH) return description;
+  return description.slice(0, MAX_DESCRIPTION_LENGTH) + "...";
 }
 
 function generateDate(post: Blogpost): string {

@@ -54,7 +54,7 @@ describe('GET /rss.xml XML escaping', () => {
 
         expect(body).toContain('<title>Research &amp; Development &lt;2026&gt;</title>');
         expect(body).toContain('<link>https://cornucopia.owasp.org/news/research?a=1&amp;b=2</link>');
-        expect(body).toContain('<description>A &amp; B &lt;script&gt; &quot;quoted&quot;...</description>');
+        expect(body).toContain('<description>A &amp; B &lt;script&gt; &quot;quoted&quot;</description>');
         expect(body).toContain(
             '<guid isPermaLink="true">https://cornucopia.owasp.org/news/research?a=1&amp;b=2</guid>'
         );
