@@ -1312,6 +1312,38 @@ class TestGetFilesFromOfType(unittest.TestCase):
         self.assertEqual(ll.output, want_logging_error_message)
         self.assertListEqual(got_files, want_files)
 
+    def test_get_files_from_of_type_ignores_dot_and_appledouble_files(self) -> None:
+        c.convert_vars.args = argparse.Namespace(debug=False)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            valid_file = os.path.join(tmpdir, "mobileapp-mappings-2.0.yaml")
+            dot_file = os.path.join(tmpdir, "._mobileapp-mappings-2.0.yaml")
+            with open(valid_file, "w") as f:
+                f.write("meta: test\n")
+            with open(dot_file, "wb") as f:
+                f.write(b"\x00\x05\x16\x07\x00\x02\x00\x00")
+            files = c.get_files_from_of_type(tmpdir, "yaml")
+            self.assertEqual(files, [valid_file])
+
+
+class TestFileFilterHelpers(unittest.TestCase):
+    def test_is_yaml_file_rejects_dot_and_appledouble_files(self) -> None:
+        self.assertTrue(c.is_yaml_file("valid.yaml"))
+        self.assertTrue(c.is_yaml_file("path/to/valid.yml"))
+        self.assertFalse(c.is_yaml_file("._valid.yaml"))
+        self.assertFalse(c.is_yaml_file("path/to/._valid.yaml"))
+        self.assertFalse(c.is_yaml_file(".hidden.yaml"))
+        self.assertFalse(c.is_yaml_file("file.txt"))
+
+    def test_is_mapping_file_for_version_rejects_dot_and_appledouble_files(self) -> None:
+        self.assertTrue(c.is_mapping_file_for_version("mobileapp-mappings-2.0.yaml", "2.0", "mobileapp"))
+        self.assertFalse(c.is_mapping_file_for_version("._mobileapp-mappings-2.0.yaml", "2.0", "mobileapp"))
+        self.assertFalse(c.is_mapping_file_for_version("source/._mobileapp-mappings-2.0.yaml", "2.0", "mobileapp"))
+
+    def test_is_lang_file_for_version_rejects_dot_and_appledouble_files(self) -> None:
+        self.assertTrue(c.is_lang_file_for_version("mobileapp-cards-2.0-fa.yaml", "2.0", "fa", "mobileapp"))
+        self.assertFalse(c.is_lang_file_for_version("._mobileapp-cards-2.0-fa.yaml", "2.0", "fa", "mobileapp"))
+        self.assertFalse(c.is_lang_file_for_version("source/._mobileapp-cards-2.0-fa.yaml", "2.0", "fa", "mobileapp"))
+
 
 class TestGetDocxDocument(unittest.TestCase):
     def test_get_docx_document_success(self) -> None:

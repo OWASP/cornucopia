@@ -594,5 +594,78 @@ class TestCheckEnvironment(unittest.TestCase):
         self.assertIn("These must be installed into THIS interpreter", text)
 
 
+class TestLoadConfig(unittest.TestCase):
+    def test_find_config_path_locates_root_config(self) -> None:
+        path = cc.find_config_path()
+        self.assertTrue(os.path.isabs(path))
+        self.assertTrue(os.path.isfile(path))
+        self.assertEqual(os.path.basename(path), "pdf_config.yaml")
+
+    def test_find_config_path_absolute(self) -> None:
+        abs_path = os.path.abspath(__file__)
+        self.assertEqual(cc.find_config_path(config_name=abs_path), abs_path)
+
+    def test_find_config_path_in_base_dir(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            custom = _write(os.path.join(tmp, "custom_config.yaml"), "project: test\n")
+            resolved = cc.find_config_path(base_dir=tmp, config_name="custom_config.yaml")
+            self.assertEqual(resolved, custom)
+
+    def test_find_config_path_explicit_base_dir_takes_precedence_over_root(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            custom = _write(os.path.join(tmp, "pdf_config.yaml"), "project: custom\n")
+            resolved = cc.find_config_path(base_dir=tmp, config_name="pdf_config.yaml")
+            self.assertEqual(resolved, custom)
+
+    def test_find_config_path_missing_fallback(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            resolved = cc.find_config_path(base_dir=tmp, config_name="nonexistent.yaml")
+            self.assertEqual(resolved, os.path.join(tmp, "nonexistent.yaml"))
+
+    def test_load_config_loads_root_yaml(self) -> None:
+        config = cc.load_config()
+        self.assertIn("project", config)
+        self.assertIn("paths", config)
+        self.assertIn("generation_targets", config)
+        self.assertEqual(config["paths"]["source_root"], "source")
+        self.assertEqual(config["paths"]["asset_root"], "resources")
+
+    def test_load_config_missing_file_returns_empty_dict(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            config = cc.load_config(base_dir=tmp, config_name="nonexistent.yaml")
+            self.assertEqual(config, {})
+
+    def test_load_assets_resolution(self) -> None:
+        config = {"paths": {"assets_config_path": "scripts/pdf_generation/assets.yaml"}}
+        assets = cc.load_assets(config)
+        self.assertIsInstance(assets, dict)
+        self.assertIn("webapp", assets)
+
+    def test_infer_base_dir_default_and_explicit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg_path = os.path.join(tmp, "sub", "config.yaml")
+            self.assertEqual(cc.infer_base_dir(cfg_path), os.path.join(tmp, "sub"))
+            explicit = os.path.join(tmp, "custom_root")
+            self.assertEqual(cc.infer_base_dir(cfg_path, explicit_base_dir=explicit), os.path.abspath(explicit))
+
+    def test_legacy_config_discovery_and_path_resolution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            script_dir = os.path.join(tmp, "scripts", "pdf_generation")
+            os.makedirs(script_dir, exist_ok=True)
+            legacy_cfg = _write(
+                os.path.join(script_dir, "legacy_config.yaml"),
+                "paths:\n  source_root: ../../source\n  output_dir: output\n",
+            )
+            resolved = cc.find_config_path(config_name=legacy_cfg)
+            base = cc.infer_base_dir(resolved)
+            self.assertEqual(base, os.path.abspath(script_dir))
+            cfg = cc.load_yaml(resolved)
+            self.assertEqual(cc.output_dir(cfg, base), os.path.join(script_dir, "output"))
+            self.assertEqual(
+                os.path.normpath(os.path.join(base, cfg["paths"]["source_root"])),
+                os.path.normpath(os.path.join(tmp, "source")),
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

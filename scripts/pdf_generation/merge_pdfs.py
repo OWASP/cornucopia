@@ -20,6 +20,7 @@ import sys
 import zipfile
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
@@ -78,6 +79,10 @@ def parse_args():
         "decks have been written. Only the finished decks are kept.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Report what would be merged, then exit")
+    parser.add_argument(
+        "--base-dir",
+        help="Base directory for relative paths (defaults to repository root)",
+    )
     return parser.parse_args()
 
 
@@ -278,14 +283,15 @@ def merge_one_target(target, config, base_dir, out_dir, bleed, marks, dry_run):
     return deck_path, ordered_pdfs, gap
 
 
-def prepare_merge(args, base_dir):
+def prepare_merge(args, base_dir, config=None):
     """
     Read the config and work out what to merge.
 
     Returns ``(config, out_dir, bleed, marks, targets)``, or None after
     explaining why there is nothing to do.
     """
-    config = cc.load_config(base_dir, args.config)
+    if config is None:
+        config = cc.load_config(base_dir, args.config)
     if not config:
         print("ERROR: could not load {0}".format(args.config))
         return None
@@ -320,14 +326,23 @@ def prepare_merge(args, base_dir):
 
 def main():
     args = parse_args()
-    base_dir = SCRIPT_DIR
+    config_path = cc.find_config_path(args.base_dir, args.config)
+    config = cc.load_yaml(config_path)
+    if not config:
+        print("ERROR: could not load {0}".format(args.config))
+        return 1
+
+    base_dir = cc.infer_base_dir(config_path, args.base_dir)
+    if not os.path.isdir(base_dir):
+        print("ERROR: base directory not found: {0}".format(base_dir))
+        return 1
 
     if pymupdf is None and not args.dry_run:
         # Say so before any work is done, rather than partway through a run.
         print(PYMUPDF_HELP.format(sys.prefix))
         return 1
 
-    prepared = prepare_merge(args, base_dir)
+    prepared = prepare_merge(args, base_dir, config=config)
     if not prepared:
         return 1
     config, out_dir, bleed, marks, targets = prepared

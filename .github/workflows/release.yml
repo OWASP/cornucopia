@@ -172,6 +172,7 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_ru.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_hi.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_uk.odt
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_fa.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_en.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_es.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_fr.odt
@@ -181,6 +182,7 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_pt_br.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_pt_pt.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_ru.odt
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_fa.odt
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_en.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_es.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_fr.pdf
@@ -192,6 +194,7 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_ru.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_hi.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_uk.pdf
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_fa.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_en.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_es.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_fr.pdf
@@ -203,6 +206,7 @@
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_ru.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_hi.pdf
                 output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_uk.pdf
+                output/owasp_cornucopia_webapp_3.0_guide_bridge_qr_fa.pdf
                 resources/case/*\3.0_case_*.pdf
                 resources/case/owasp_cornucopia_mobileapp*\2.0_case_*.pdf
                 resources/case/*\1.0_case_*.pdf

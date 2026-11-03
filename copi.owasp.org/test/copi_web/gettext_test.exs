@@ -1,6 +1,11 @@
 defmodule CopiWeb.GettextTest do
   use ExUnit.Case, async: true
-  
+
+  setup_all do
+    Code.ensure_loaded!(CopiWeb.Gettext)
+    :ok
+  end
+
   test "gettext backend is configured" do
     # Verify the module exists and uses Gettext
     assert function_exported?(CopiWeb.Gettext, :__gettext__, 1)

@@ -743,6 +743,9 @@ paragraphs:
     id: "T01410"
     text: "Procurez-vous un jeu, ou imprimez votre propre jeu de cartes Cornucopia (voir page 2 de ce document), et séparez/découpez les cartes. "
   -
+    id: "T01411"
+    text: "Utilisez les cartes de ce paquet"
+  -
     id: "T01420"
     text: "Identifiez une application ou processus à évaluer, cela peut être un concept, une spécification ou une véritable implémentation. "
   -

@@ -168,10 +168,15 @@ scripts/pdf_generation/
     cornucopia_common.py        shared code used by both scripts
     generate_deck.py            the engine
     merge_pdfs.py               the deck assembler
-    pdf_config.yaml             build settings
     README.md                   this instruction file
     small_master.sla            small (Bridge) template
     output/                     generated PDFs and logs (gitignored)
+```
+
+The central configuration file lives at the root of the repository:
+
+```
+pdf_config.yaml                 deck generation build settings
 ```
 
 It reads these files from elsewhere in the repository:
@@ -181,8 +186,9 @@ It reads these files from elsewhere in the repository:
 | Card text | `source/<edition>-cards-<version>-<language>.yaml` | e.g. `source/webapp-cards-3.0-en.yaml`. Read in place, never copied, so there is no second copy to keep in step. Edit these to customise card text. |
 | Card artwork | `resources/card_artwork/<edition>/` | Card faces and backs, as PNG |
 | Fonts | `resources/templates/Fonts/` | Installed onto your system, see §4 |
+| Configuration | `pdf_config.yaml` | Build settings, at the root of the repository |
 
-Nothing else in the repository is used. Run the commands below from `scripts/pdf_generation/`; `output/` is created automatically.
+Nothing else in the repository is used. You can run the commands below either from `scripts/pdf_generation/` (where `output/` is created inside `scripts/pdf_generation/output/`) or from the repository root (e.g. `python3 scripts/pdf_generation/generate_deck.py --dry-run`); `scripts/pdf_generation/output/` is created automatically.
 
 ---
 
@@ -384,7 +390,7 @@ Two YAML files provide the configurable options. One sets the default PDF editio
 
 ### `pdf_config.yaml`
 
-Set defaults so you do not have to type flags. Each accepts `"all"` or a list:
+Located at the root of the repository (`pdf_config.yaml`). Set defaults so you do not have to type flags. Each accepts `"all"` or a list:
 
 ```yaml
 generation_targets:

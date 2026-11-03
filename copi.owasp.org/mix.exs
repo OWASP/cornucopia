@@ -80,18 +80,20 @@ defmodule Copi.MixProject do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
+    npm = if match?({:win32, _}, :os.type()), do: "cmd.exe /d /c npm", else: "npm"
+
     [
-      setup: ["deps.get", "ecto.setup", "cmd --cd assets npm install"],
+      setup: ["deps.get", "ecto.setup", "cmd --cd assets #{npm} install"],
       "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "cmd --cd assets node build.js"],
       "assets.build": ["tailwind copi", "cmd --cd assets node build.js"],
-      "assets.test": ["cmd --cd assets npm ci", "cmd --cd assets npm test"],
-      "assets.coverage": ["cmd --cd assets npm ci", "cmd --cd assets npm run coverage"],
+      "assets.test": ["cmd --cd assets #{npm} ci", "cmd --cd assets #{npm} test"],
+      "assets.coverage": ["cmd --cd assets #{npm} ci", "cmd --cd assets #{npm} run coverage"],
       "assets.deploy": [
         "tailwind copi --minify",
-        "cmd --cd assets npm install",
+        "cmd --cd assets #{npm} install",
         "cmd --cd assets node build.js --deploy",
         "phx.digest"
       ]

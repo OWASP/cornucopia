@@ -89,4 +89,12 @@ defmodule Copi.Cornucopia.Game do
 
     Enum.count(players_still_to_play) > 0
   end
+
+  def active?(%__MODULE__{started_at: started_at, finished_at: finished_at}) do
+    not is_nil(started_at) and is_nil(finished_at)
+  end
+
+  def active?(_), do: false
+
+  def game_active?(game), do: active?(game)
 end
