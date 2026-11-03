@@ -1,5 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import fs from 'node:fs';
 import config from './svelte.config.js';
+
+describe('asset cache migration', () => {
+	it('uses a fresh namespace instead of reusing assets cached with HTML MIME metadata', () => {
+		expect(config.kit.appDir).toBe('_app-v2');
+	});
+
+	it('versions static stylesheet URLs outside the generated asset namespace', () => {
+		const template = fs.readFileSync(new URL('./src/app.html', import.meta.url), 'utf8');
+		expect(template).toContain('href="/css/base.css?v=2"');
+		expect(template).toContain('href="/css/noscript.css?v=2"');
+	});
+});
 
 describe('svelte.config.js prerender error handling', () => {
 	let consoleErrorSpy: ReturnType<typeof vi.spyOn>;

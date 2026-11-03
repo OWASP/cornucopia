@@ -10,7 +10,7 @@ decks:
 
 async function loadConfig(yamlText: string) {
     vi.resetModules();
-    vi.doMock('../../decks.yaml?raw', () => ({ default: yamlText }));
+    vi.doMock('../../application.yaml?raw', () => ({ default: yamlText }));
     return import('./config.js');
 }
 

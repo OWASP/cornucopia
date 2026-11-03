@@ -1,47 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { getApiRoutes, getAppConfig } from './app-config.js';
 
-export const apiPaths = [
-  '/api/lang/mobileapp/1.1',
-  '/api/lang/mobileapp/2.0',
-  '/api/lang/webapp/2.2',
-  '/api/lang/webapp/3.0',
-  '/api/lang/dbd/1.0',
-  '/api/lang/companion/1.0',
-  '/api/lang/eop/5.0',
-  '/api/asvs/webapp/3.0',
-  '/api/capec/webapp/3.0',
-  '/api/mastg/mobileapp/2.0',
-  '/api/maswe/mobileapp/2.0',
-  '/api/mapping/eop/5.0',
-  '/api/mapping/webapp/2.2',
-  '/api/mapping/webapp/3.0',
-  '/api/mapping/mobileapp/1.1',
-  '/api/mapping/mobileapp/2.0',
-  '/api/mapping/companion/1.0',
-  '/api/cre/mobileapp/en',
-  '/api/cre/mobileapp/ru',
-  '/api/cre/mobileapp/hi',
-  '/api/cre/mobileapp/uk',
-  '/api/cre/mobileapp/fa',
-  '/api/cre/webapp/en',
-  '/api/cre/webapp/es',
-  '/api/cre/webapp/fr',
-  '/api/cre/webapp/nl',
-  '/api/cre/webapp/no_nb',
-  '/api/cre/webapp/it',
-  '/api/cre/webapp/pt_pt',
-  '/api/cre/webapp/pt_br',
-  '/api/cre/webapp/ru',
-  '/api/cre/webapp/fa',
-  '/api/cre/companion/en',
-  '/api/cre/companion/fa',
-  '/api/cre/dbd/en',
-  '/api/cre/eop/en',
-  '/api/cre/eop/es',
-  '/api/cre/eop/fa',
-  '/api/cre/eop/ru'
-];
+export const apiPaths = getApiRoutes();
 
 export function getBuildDir() {
   const root = path.resolve();
@@ -56,39 +17,85 @@ export function getBuildDir() {
   return undefined;
 }
 
-export function writeHeaders({
-  buildDir,
-  origin,
-  includeGlobalRobotsTag = false,
-  includeNotFound = false
-}) {
-  const globalHeaders = [
-    '/*',
-    `  Access-Control-Allow-Origin: ${origin}`,
-    '  Cross-Origin-Opener-Policy: same-origin',
-    ...(includeGlobalRobotsTag ? ['  X-Robots-Tag: noindex'] : []),
-    '  X-Frame-Options: SAMEORIGIN',
-    '  X-XSS-Protection: 1; mode=block',
-    '  X-Content-Type-Options: nosniff',
-    '  Referrer-Policy: same-origin',
-    '  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), document-domain=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com/"), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self "https://www.youtube.com/"), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()',
-    '  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload',
-    "  Content-Security-Policy: base-uri 'self'; default-src 'none'; frame-src 'self' www.youtube.com youtube.com; connect-src 'self'; img-src 'self' i.ytimg.com; script-src 'self' 'nonce-DhcnhD3khTMePgXw'; style-src 'self'; style-src-elem 'self'; upgrade-insecure-requests"
-  ].join('\n');
+/**
+ * @param {unknown} value
+ * @returns {value is Record<string, unknown>}
+ */
+function isRecord(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
 
-  const notFoundHeaders = includeNotFound
-    ? '\n/404\n  X-Robots-Tag: noindex'
-    : '';
-  const apiHeaders = apiPaths.map((apiPath) => [
-    apiPath,
-    '  ! Access-Control-Allow-Origin',
-    '  Access-Control-Allow-Origin: *',
-    '  ! Content-Type',
-    '  Content-Type: application/json; charset=UTF-8'
-  ].join('\n')).join('\n');
+/**
+ * @param {unknown} value
+ * @returns {value is Record<string, Record<string, string>>}
+ */
+function isHeaderRules(value) {
+  return isRecord(value) && Object.values(value).every(
+    headers => isRecord(headers) && Object.values(headers).every(header => typeof header === 'string')
+  );
+}
+
+/**
+ * @param {string} routePath
+ * @param {Record<string, string>} headers
+ * @param {string[]} resets
+ */
+function renderHeaderBlock(routePath, headers, resets = []) {
+  const lines = [routePath];
+  for (const reset of resets) {
+    if (Object.hasOwn(headers, reset.replace(/^! /, ''))) {
+      lines.push(`  ${reset}`);
+    }
+  }
+  for (const [key, value] of Object.entries(headers)) {
+    lines.push(`  ${key}: ${value}`);
+  }
+  return lines.join('\n');
+}
+
+/**
+ * @param {{ buildDir: string, environment: 'stage' | 'production' }} options
+ */
+export function writeHeaders({ buildDir, environment }) {
+  const config = getAppConfig();
+  if (!isRecord(config) || !isRecord(config.cloudflare) || !isRecord(config.cloudflare.headers)) {
+    throw new Error('Missing Cloudflare headers in application.yaml');
+  }
+  const headers = config.cloudflare.headers;
+  const envHeaders = headers[environment];
+  if (envHeaders === undefined) {
+    throw new Error(`Missing Cloudflare headers for environment: ${environment}`);
+  }
+  if (!isHeaderRules(headers.all) || !isHeaderRules(envHeaders)) {
+    throw new Error(`Invalid Cloudflare header rules for environment: ${environment}`);
+  }
+
+  const resets = headers.reset ?? [];
+  if (!Array.isArray(resets) || !resets.every(reset => typeof reset === 'string' && reset.startsWith('! '))) {
+    throw new Error('Invalid Cloudflare header reset directives in application.yaml');
+  }
+  const blocks = [renderHeaderBlock('/*', {
+    ...headers.all['/*'],
+    ...envHeaders['/*']
+  })];
+  const routePaths = new Set([...Object.keys(headers.all), ...Object.keys(envHeaders)]);
+
+  for (const routePath of routePaths) {
+    if (routePath === '/*' || routePath === '/api/*') continue;
+    blocks.push(renderHeaderBlock(routePath, {
+      ...headers.all[routePath],
+      ...envHeaders[routePath]
+    }, resets));
+  }
+
+  // Expand JSON headers to known API endpoints so /api/docs keeps its HTML MIME type.
+  const apiHeaders = { ...headers.all['/api/*'], ...envHeaders['/api/*'] };
+  for (const apiPath of apiPaths) {
+    blocks.push(renderHeaderBlock(apiPath, apiHeaders, resets));
+  }
 
   fs.writeFileSync(
     path.join(buildDir, '_headers'),
-    `${globalHeaders}${notFoundHeaders}\n${apiHeaders}\n`
+    `${blocks.join('\n')}\n`
   );
 }
