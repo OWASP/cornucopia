@@ -139,6 +139,8 @@ cloudflare:
         Access-Control-Allow-Origin: 'https://cornucopia.owasp.org'
         Content-Type: 'text/html; charset=utf-8'
     all:
+      '/error':
+        Content-Type: 'text/html; charset=utf-8'
       '/api/*':
         Access-Control-Allow-Origin: '*'
         Content-Type: 'application/json; charset=UTF-8'
