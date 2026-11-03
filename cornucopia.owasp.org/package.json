@@ -32,7 +32,7 @@
 		"eslint-plugin-svelte": "^3.23.1",
 		"globals": "^17.13.0",
 		"serve": "^14.2.6",
-		"svelte": "^5.57.2",
+		"svelte": "^5.57.3",
 		"svelte-check": "^4.7.7",
 		"svelte-eslint-parser": "^1.10.0",
 		"svelte-sitemap": "^4.1.2",
