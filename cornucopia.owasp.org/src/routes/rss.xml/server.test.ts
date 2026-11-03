@@ -20,26 +20,28 @@ vi.mock('$lib/utils/text.js', () => ({
 
 import { GET } from './+server';
 
+const createPost = (overrides: Record<string, unknown> = {}) => ({
+    title: 'Test post',
+    path: 'test-post',
+    author: 'test-author',
+    markdown: '',
+    tags: ['test'],
+    hidden: false,
+    date: '20231201',
+    description: 'A test post',
+    ...overrides,
+});
+
 describe('GET /rss.xml', () => {
     beforeEach(() => {
-        getBlogposts.mockReturnValue([
-            {
-                title: 'Test post',
-                path: 'test-post',
-                author: 'test-author',
-                markdown: '',
-                tags: ['test'],
-                hidden: false,
-                date: '20231201',
-                description: 'A test post',
-            },
-        ]);
+        getBlogposts.mockReturnValue([createPost()]);
     });
 
-    it('renders a valid RFC 822 pubDate', async () => {
+    it('points the item source at the published RSS feed', async () => {
         const response = await GET();
         const body = await response.text();
 
-        expect(body).toContain('<pubDate>Fri, 01 Dec 2023 00:00:00 GMT</pubDate>');
+        expect(body).toContain('<source url="https://cornucopia.owasp.org/rss.xml">');
+        expect(body).not.toContain('<source url="https://cornucopia.owasp.org/rss">');
     });
 });
