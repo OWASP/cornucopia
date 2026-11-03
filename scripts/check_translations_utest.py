@@ -233,6 +233,31 @@ class TestCompoundLocales(unittest.TestCase):
         self.assertIn("Portuguese (Brazil)", report, "Portuguese (Brazil) display name should appear for pt_br")
 
 
+class TestLanguageDisplayNames(unittest.TestCase):
+    """Regression tests for locale display names in the markdown report."""
+
+    def setUp(self) -> None:
+        self.checker = TranslationChecker(Path("."))
+
+    def test_ukrainian_lang_name_in_report(self) -> None:
+        """Ukrainian issues should be labelled by language name, not by the 'uk' code."""
+        self.checker.results = {
+            "test-cards-1.0": {
+                "uk": {
+                    "missing": ["T00004"],
+                    "untranslated": [],
+                    "empty": [],
+                    "file": "test-cards-1.0-uk.yaml",
+                }
+            }
+        }
+
+        report = self.checker.generate_markdown_report()
+
+        self.assertIn("## Ukrainian", report)
+        self.assertNotIn("## uk", report)
+
+
 class TestCoverageBranches(unittest.TestCase):
     """Tests to ensure branch coverage for edge cases."""
 
