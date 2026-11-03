@@ -11,6 +11,7 @@ export default {
         preprocess: vitePreprocess(),
         kit:
         {
+                appDir: svelteConfig.appDir,
                 adapter: adapter({
                         routes: {
                                 include: ['/*'],
