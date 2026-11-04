@@ -50,11 +50,19 @@ jobs:
           docker build -t copi-test-image copi.owasp.org
 
           echo "Generating SECRET_KEY_BASE"
-          SECRET_KEY_BASE=$(python - <<'PY'
-import secrets
-print(secrets.token_hex(64))
-PY
-)
+          SECRET_KEY_BASE=$(python -c 'import secrets; print(secrets.token_hex(64))')
+
+          echo "Waiting for Postgres"
+          for i in {1..30}; do
+            docker exec copi-postgres pg_isready -h 127.0.0.1 -U postgres && break
+            sleep 2
+          done
+
+          echo "Running database migrations"
+          docker run --rm --network copi-net \
+            -e DATABASE_URL=ecto://postgres:postgres@copi-postgres:5432/copi \
+            -e SECRET_KEY_BASE="$SECRET_KEY_BASE" \
+            copi-test-image /app/bin/migrate
 
           echo "Starting Copi application container"
           docker run -d --name copi-app --network copi-net -p 4000:4000 \
