@@ -5,7 +5,7 @@ meta:
   language: ALL
   version: "1.0"
   layouts: [ cards ]
-  templates: [ bridge_qr, bridge, tarot, tarot_qr ]
+  templates: [ bridge, tarot ]
   languages: ["en"]
 suits:
 -

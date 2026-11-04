@@ -5,7 +5,7 @@ meta:
   language: "ALL"
   version: "2.2"
   layouts: ["cards", "leaflet", "guide"]
-  templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
+  templates: ["bridge", "tarot"]
   languages: ["en", "es", "fr", "nl", "no_nb", "pt_br", "pt_pt", "it", "ru", "hu"]
 url_templates:
   capec: '/taxonomy/capec-3.9/{code}'

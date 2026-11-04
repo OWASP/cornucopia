@@ -8,10 +8,8 @@ meta:
   - leaflet
   - guide
   templates:
-  - bridge_qr
   - bridge
   - tarot
-  - tarot_qr
   languages:
   - en
   - es
