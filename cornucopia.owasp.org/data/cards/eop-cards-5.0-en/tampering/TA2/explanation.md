@@ -2,9 +2,9 @@
 
 ### Example
 
-The Grand Bodge hotel's CTO rejected a commercial keycard system as too expensive, so he built BodgeLock. Each card holds the room number, checkout date, and role (`guest` or `staff`), encrypted with a key derived by repeating those public values and XORing a salt printed in every lock's maintenance manual. A CRC-16 covers the card.
+The Grand Bodge hotel's CTO rejected a commercial keycard system as too expensive, so he built BodgeLock. Each card held the room number, checkout date, and role (guest or staff), encrypted with a key derived by repeating those public values and XORing a salt printed in every lock's maintenance manual. A CRC-16 covered the card.
 
-Guest Sam reads his card, derives the key, changes `412` to `999`, flips `guest` to `staff`, re-encrypts with the penthouse key, and recalculates the CRC with a free online tool. The penthouse and minibar open. No encryption was broken; it was never protecting anything.
+Guest Sam read his card, derived the key, changed 412 to 999, flipped guest to staff, re-encrypted the card with the penthouse key, and recalculated the CRC with a free online tool. The penthouse and minibar opened. No encryption was broken; it was never protecting anything.
 
 WEP made the same mistake at scale. IEEE 802.11 combined RC4, a 24-bit IV, and a CRC-32 integrity check — standard primitives in a homemade protocol. CRC-32 is linear and unkeyed, so frames can be altered and the checksum repaired without the key; short IVs repeat and leak keystream. FMS (2001) broke WEP on paper, PTW (2007) recovered a 104-bit key from under 40,000 frames in about a minute, and the FBI demonstrated a three-minute 128-bit crack in 2005. WEP was deprecated in 2004, yet routers kept shipping it with a reassuring padlock.
 
@@ -14,7 +14,7 @@ Sources: [FMS's RC4 key-scheduling analysis](https://www.cs.cornell.edu/people/e
 
 ### STRIDE
 
-**Tampering** is primary: Sam changes the room number and role, re-encrypts the card, and recalculates the checksum, so the lock accepts modified data. **Spoofing** follows because a forged `staff` card lets him act as an employee, and a cloned card lets him act as another guest. **Elevation of Privilege** is the same edit one field later, from `guest` to `staff`. **Information Disclosure** covers the derivable key: the lock's "secret" is built from data printed on the card and a salt shipped in every lock, so anyone who reads the manual can decrypt any card. **Repudiation** is weak because the lock log records the room number from the card, which the attacker controls. **Denial of Service** is possible by writing malformed cards that crash the lock, or by reusing an old checkout date to lock a guest out.
+**Tampering** is primary: Sam changed the room number and role, re-encrypted the card, and recalculated the checksum, so the lock accepts modified data. **Spoofing** follows because a forged `staff` card lets him act as an employee, and a cloned card lets him act as another guest. **Elevation of Privilege** is the same edit one field later, from `guest` to `staff`. **Information Disclosure** covers the derivable key: the lock's "secret" is built from data printed on the card and a salt shipped in every lock, so anyone who reads the manual can decrypt any card. **Repudiation** is weak because the lock log records the room number from the card, which the attacker controls. **Denial of Service** is possible by writing malformed cards that crash the lock, or by reusing an old checkout date to lock a guest out.
 
 ### What can go wrong?
 
