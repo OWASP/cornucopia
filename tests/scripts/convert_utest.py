@@ -573,6 +573,19 @@ class TestValidMeta(unittest.TestCase):
         self.assertFalse(valid)
         self.assertIn(want_logging_error_message, " ".join(ll.output))
 
+    def test_valid_meta_mobileapp_hindi(self) -> None:
+        meta = {
+            "edition": "mobileapp",
+            "component": "mappings",
+            "language": "ALL",
+            "version": "2.0",
+            "languages": ["en", "ru", "uk", "fa", "hi"],
+            "layouts": ["cards", "leaflet"],
+            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
+        }
+        self.assertTrue(c.valid_meta(meta, "hi", "mobileapp", "2.0", "tarot", "cards"))
+        self.assertTrue(c.valid_meta(meta, "hi", "mobileapp", "2.0", "bridge", "cards"))
+
 
 class TestGetMetaData(unittest.TestCase):
     def setUp(self) -> None:
@@ -1591,6 +1604,14 @@ class TestGetMappingForEdition(unittest.TestCase):
             got_mapping_dict = c.get_mapping_for_edition(input_yaml_files, "3.0", "en", "webapp", "bridge", "cards")
         self.assertIn("WARNING:root:No mapping file found", " ".join(ll.output))
         self.assertDictEqual(want_mapping_dict, got_mapping_dict)
+
+    def test_get_mapping_for_edition_mobileapp_hindi(self) -> None:
+        yaml_files = c.get_files_from_of_type(os.path.join(c.convert_vars.BASE_PATH, "source"), "yaml")
+        mapping = c.get_mapping_for_edition(yaml_files, "2.0", "hi", "mobileapp", "tarot", "cards")
+        self.assertGreater(len(mapping), 0)
+        self.assertEqual(mapping.get("${PC_PC2_capec}"), "37, 155, 498, 648")
+        self.assertEqual(mapping.get("${PC_PCA_id}"), "PCA")
+        self.assertEqual(mapping.get("${PC_PCA_value}"), "A")
 
 
 class TestcreateEditionFromTemplate(unittest.TestCase):
