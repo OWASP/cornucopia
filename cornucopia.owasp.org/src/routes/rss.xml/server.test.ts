@@ -44,4 +44,12 @@ describe('GET /rss.xml', () => {
         expect(body).toContain('<source url="https://cornucopia.owasp.org/rss.xml">');
         expect(body).not.toContain('<source url="https://cornucopia.owasp.org/rss">');
     });
+
+    it('uses the standard s-maxage Cache-Control directive', async () => {
+        const response = await GET();
+        const cacheControl = response.headers.get('Cache-Control');
+
+        expect(cacheControl).toContain('s-maxage=600');
+        expect(cacheControl).not.toContain('s-max-age');
+    });
 });

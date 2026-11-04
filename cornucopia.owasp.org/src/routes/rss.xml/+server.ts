@@ -6,7 +6,7 @@ export const prerender = true;
 // Header options
 const responseInit: ResponseInit = {
   headers: {
-    "Cache-Control": `max-age=0, s-max-age=${600}`,
+    "Cache-Control": `max-age=0, s-maxage=${600}`,
     "Content-Type": "application/xml",
   },
 };
