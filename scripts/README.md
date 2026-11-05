@@ -38,11 +38,10 @@ options:
   -l LANGUAGE, --language LANGUAGE
                         Output language to produce. [`en`, `es`, `fr`, `nl`, `no_nb`, `pt_br`, `pt_pt`, `it`, `ru`, `uk`, `hi`] you can also specify your own language file. If so, there needs to be a yaml file in the source folder where the name ends with the language code. Eg. edition-template-ver-lang.yaml
   -t TEMPLATE, --template TEMPLATE
-                        From which template to produce the document. [`bridge`, `bridge_qr`, `tarot` or  `tarot_qr`]
+                        From which template to produce the document. [`bridge` or `tarot`]
                         Templates need to be added to ./resource/templates or specified with (-i or --inputfile)
                         Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them,
-                        tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large,
-                        qr cards have a QRCode that points to an maintained list.
+                        tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large.
                         You can also specify your own template. If so, there needs to be a file in the templates folder where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml
   -e EDITION, --edition EDITION
                         Output decks to produce. [`all`, `webapp` or `mobileapp`]
