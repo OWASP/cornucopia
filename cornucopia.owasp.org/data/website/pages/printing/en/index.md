@@ -20,7 +20,6 @@ Here is the current version of Cornucopia Website App, Mobile App and Companion 
     - Companion Edition 1.0 card decks and leaflets: [[EN]](https://github.com/OWASP/cornucopia/releases/download/v3.5.10/owasp_cornucopia_companion_1.0_en.zip '[external]')
     - Elevation of Privilege card decks and leaflets (Tarot): [[EN & ES]](https://github.com/OWASP/cornucopia/releases/download/v3.5.10/eop-5.0.zip '[external]')
     -  Elevation of Privilege card decks and leaflets (Bridge): [[EN]](https://github.com/OWASP/cornucopia/releases/download/v3.5.10/eop-5.0-cards-bridge-en.zip '[external]'), [[ES]](https://github.com/OWASP/cornucopia/releases/download/v3.5.10/eop-5.0-cards-bridge-es.zip '[external]')
-    -  
 
 ## Printing instructions
 
