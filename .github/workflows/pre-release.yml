@@ -50,7 +50,7 @@
           - name: Check Mobile App enrichment coverage - Report
             run: pipenv run coverage report --fail-under 95 scripts/enrich_mobileapp_mappings/*.py
           - name: Check PDF generation test coverage - Report
-            run: pipenv run coverage report --fail-under 52 scripts/pdf_generation/*.py
+            run: pipenv run coverage report --fail-under 95 scripts/pdf_generation/*.py
           # Upload Code Coverage for Codeclimate
           - uses: qltysh/qlty-action/coverage@a19242102d17e497f437d7466aa01b528537e899 # v2.2.0
             with:
