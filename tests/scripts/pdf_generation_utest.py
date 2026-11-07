@@ -1253,8 +1253,22 @@ class TestMergePdfsMain(unittest.TestCase):
                             self.assertEqual(merge_pdfs.main(), 0)
 
     def test_run_as_script(self) -> None:
-        with mock.patch("sys.argv", ["merge_pdfs.py"]):
-            with mock.patch("merge_pdfs.main", return_value=0):
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch(
+                "sys.argv",
+                [
+                    "merge_pdfs.py",
+                    "--dry-run",
+                    "--edition",
+                    "webapp",
+                    "--language",
+                    "en",
+                    "--size",
+                    "bridge",
+                    "--output-dir",
+                    tmp,
+                ],
+            ):
                 with self.assertRaises(SystemExit) as ctx:
                     runpy.run_path(os.path.join(_PDF_GENERATION, "merge_pdfs.py"), run_name="__main__")
                 self.assertEqual(ctx.exception.code, 0)
@@ -1421,15 +1435,22 @@ class TestGenerateDeckQrAndArtwork(unittest.TestCase):
             # Simulate png missing but Pillow present
             original_import = __import__
 
-            def fake_import_no_png(name, *args, **kwargs):
+            def fake_import_pil_fallback(name, *args, **kwargs):
                 if name == "png":
                     raise ImportError("No png module")
+                if name == "PIL":
+                    return mock.MagicMock()
                 return original_import(name, *args, **kwargs)
 
-            with mock.patch("builtins.__import__", side_effect=fake_import_no_png):
-                qr_file2 = os.path.join(tmp, "qr2.png")
-                generate_deck.create_qr_image("https://owasp.org", qr_file2, {})
-                self.assertTrue(os.path.exists(qr_file2))
+            mock_img = mock.MagicMock()
+            with mock.patch("builtins.__import__", side_effect=fake_import_pil_fallback):
+                with mock.patch.object(
+                    generate_deck.qrcode.QRCode, "make_image", return_value=mock_img
+                ) as mock_make_image:
+                    qr_file2 = os.path.join(tmp, "qr2.png")
+                    generate_deck.create_qr_image("https://owasp.org", qr_file2, {})
+                    mock_make_image.assert_called_once_with(fill_color="black", back_color="transparent")
+                    mock_img.save.assert_called_once_with(qr_file2)
 
             # Simulate both png and PIL missing
             def fake_import_no_png_no_pil(name, *args, **kwargs):
