@@ -44,4 +44,43 @@ describe('GET /rss.xml', () => {
         expect(body).toContain('<source url="https://cornucopia.owasp.org/rss.xml">');
         expect(body).not.toContain('<source url="https://cornucopia.owasp.org/rss">');
     });
+
+    it('does not append an ellipsis to a description that is already short', async () => {
+        getBlogposts.mockReturnValue([createPost({ description: 'A short description' })]);
+
+        const response = await GET();
+        const body = await response.text();
+
+        expect(body).toContain('<description>A short description</description>');
+    });
+
+    it('keeps a description of exactly 200 characters unchanged', async () => {
+        const description = 'A'.repeat(200);
+        getBlogposts.mockReturnValue([createPost({ description })]);
+
+        const response = await GET();
+        const body = await response.text();
+
+        expect(body).toContain(`<description>${description}</description>`);
+    });
+
+    it('truncates a longer description and marks it with an ellipsis', async () => {
+        const description = 'A'.repeat(200) + 'B';
+        getBlogposts.mockReturnValue([createPost({ description })]);
+
+        const response = await GET();
+        const body = await response.text();
+
+        expect(body).toContain(`<description>${'A'.repeat(200)}...</description>`);
+        expect(body).not.toContain(description);
+    });
+
+    it('renders an empty description when the blogpost has none', async () => {
+        getBlogposts.mockReturnValue([createPost({ description: undefined })]);
+
+        const response = await GET();
+        const body = await response.text();
+
+        expect(body).toContain('<description></description>');
+    });
 });
