@@ -613,12 +613,15 @@ class TestCheckEnvironment(unittest.TestCase):
             self.assertIn("Running inside: Scribus", text)
 
     def test_check_environment_main(self) -> None:
-        runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
-        out_txt = os.path.join(_PDF_GENERATION, "check_environment.txt")
-        self.assertTrue(os.path.exists(out_txt))
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with mock.patch("os.getcwd", return_value=tmpdir):
+                runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
+            out_txt = os.path.join(tmpdir, "check_environment.txt")
+            self.assertTrue(os.path.exists(out_txt))
 
-        with mock.patch("builtins.open", side_effect=OSError("Read only")):
-            runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
+            with mock.patch("builtins.open", side_effect=OSError("Read only")):
+                with mock.patch("os.getcwd", return_value=tmpdir):
+                    runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
 
 
 class TestLoadConfig(unittest.TestCase):
