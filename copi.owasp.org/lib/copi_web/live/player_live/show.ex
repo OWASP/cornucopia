@@ -102,28 +102,48 @@ defmodule CopiWeb.PlayerLive.Show do
     game = socket.assigns.game
 
     cond do
-      is_nil(game.started_at) ->
-        {:noreply, socket}
-
-      not is_nil(game.finished_at) ->
+      is_nil(game.started_at) or not is_nil(game.finished_at) ->
         {:noreply, socket}
 
       true ->
-        # Clear all continue votes for this game before proceeding to next round
-        Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^game.id)
+        result =
+          Copi.Repo.transaction(fn ->
+            case Copi.Repo.get(from(g in Game, lock: "FOR UPDATE"), game.id) do
+              nil ->
+                Copi.Repo.rollback(:game_not_found)
 
-        # Now proceed to next round
-        Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+              %Game{started_at: nil} ->
+                Copi.Repo.rollback(:unstarted)
 
-        if last_round?(game) do
-          Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+              %Game{finished_at: finished_at} when not is_nil(finished_at) ->
+                Copi.Repo.rollback(:finished)
+
+              %Game{} = locked_game ->
+                # Clear all continue votes for this game before proceeding to next round
+                Copi.Repo.delete_all(from cv in Copi.Cornucopia.ContinueVote, where: cv.game_id == ^locked_game.id)
+
+                {:ok, fresh_game} = game_module().find(locked_game.id)
+                attrs = %{rounds_played: fresh_game.rounds_played + 1, round_open: true}
+                attrs =
+                  if last_round?(fresh_game) do
+                    Map.put(attrs, :finished_at, DateTime.truncate(DateTime.utc_now(), :second))
+                  else
+                    attrs
+                  end
+
+                Copi.Cornucopia.update_game(locked_game, attrs)
+            end
+          end)
+
+        case result do
+          {:ok, {:ok, _}} ->
+            {:ok, updated_game} = game_module().find(game.id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
+
+          _ ->
+            {:noreply, socket}
         end
-
-        {:ok, updated_game} = game_module().find(game.id)
-
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-        {:noreply, assign(socket, :game, updated_game)}
     end
   end
 
@@ -145,29 +165,92 @@ defmodule CopiWeb.PlayerLive.Show do
         if round_open?(game) do
           # Check if we can continue due to majority continue votes
           if Copi.Cornucopia.Game.can_continue_round?(game) do
-            # Close the round and proceed
-            Copi.Cornucopia.update_game(game, %{round_open: false})
+            result =
+              Copi.Repo.transaction(fn ->
+                case Copi.Repo.get(from(g in Game, lock: "FOR UPDATE"), game.id) do
+                  nil ->
+                    Copi.Repo.rollback(:game_not_found)
 
-            # Wait a moment then proceed to next round
-            Process.send_after(self(), :proceed_to_next_round, 100)
+                  %Game{started_at: nil} ->
+                    Copi.Repo.rollback(:unstarted)
 
-            {:noreply, assign(socket, :game, game)}
+                  %Game{finished_at: finished_at} when not is_nil(finished_at) ->
+                    Copi.Repo.rollback(:finished)
+
+                  %Game{} = locked_game ->
+                    Copi.Cornucopia.update_game(locked_game, %{round_open: false})
+                end
+              end)
+
+            case result do
+              {:ok, {:ok, _}} ->
+                # Wait a moment then proceed to next round
+                Process.send_after(self(), :proceed_to_next_round, 100)
+                {:noreply, assign(socket, :game, game)}
+
+              {:error, :unstarted} ->
+                Logger.warning("next_round attempt on unstarted game: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+                {:noreply, socket |> put_flash(:error, "Game has not started yet")}
+
+              {:error, :finished} ->
+                Logger.warning("next_round attempt on finished game: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+                {:noreply, socket |> put_flash(:error, "Game has already ended")}
+
+              _ ->
+                {:noreply, socket}
+            end
           else
             # Somehow we've had a request to advance to the next round with players still to play, possibly a race condition, ignore
             {:noreply, socket}
           end
         else
-          Copi.Cornucopia.update_game(game, %{rounds_played: game.rounds_played + 1, round_open: true})
+          result =
+            Copi.Repo.transaction(fn ->
+              case Copi.Repo.get(from(g in Game, lock: "FOR UPDATE"), game.id) do
+                nil ->
+                  Copi.Repo.rollback(:game_not_found)
 
-          if last_round?(game) do
-            Copi.Cornucopia.update_game(game, %{finished_at: DateTime.truncate(DateTime.utc_now(), :second)} )
+                %Game{started_at: nil} ->
+                  Copi.Repo.rollback(:unstarted)
+
+                %Game{finished_at: finished_at} when not is_nil(finished_at) ->
+                  Copi.Repo.rollback(:finished)
+
+                %Game{} = locked_game ->
+                  {:ok, fresh_game} = game_module().find(locked_game.id)
+                  attrs = %{rounds_played: fresh_game.rounds_played + 1, round_open: true}
+                  attrs =
+                    if last_round?(fresh_game) do
+                      Map.put(attrs, :finished_at, DateTime.truncate(DateTime.utc_now(), :second))
+                    else
+                      attrs
+                    end
+
+                  Copi.Cornucopia.update_game(locked_game, attrs)
+              end
+            end)
+
+          case result do
+            {:ok, {:ok, _}} ->
+              {:ok, updated_game} = game_module().find(game.id)
+              CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+              {:noreply, assign(socket, :game, updated_game)}
+
+            {:error, :unstarted} ->
+              Logger.warning("next_round attempt on unstarted game: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+              {:noreply, socket |> put_flash(:error, "Game has not started yet")}
+
+            {:error, :finished} ->
+              Logger.warning("next_round attempt on finished game: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+              {:noreply, socket |> put_flash(:error, "Game has already ended")}
+
+            {:error, :game_not_found} ->
+              Logger.warning("Game not found during next_round: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+              {:noreply, socket |> put_flash(:error, "Game not found. Please refresh and try again.")}
+
+            _ ->
+              {:noreply, socket}
           end
-
-          {:ok, updated_game} = game_module().find(game.id)
-
-          CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-          {:noreply, assign(socket, :game, updated_game)}
         end
     end
   end
@@ -187,39 +270,81 @@ defmodule CopiWeb.PlayerLive.Show do
         {:noreply, socket |> put_flash(:error, "Game has already ended")}
 
       true ->
-        # Check if player already voted
-        if Copi.Cornucopia.Game.has_continue_vote?(game, player) do
-          # Remove their vote (conflict-safe: match on keys, not a stale struct)
-          case Copi.Repo.delete_all(
-                 from cv in Copi.Cornucopia.ContinueVote,
-                   where: cv.player_id == ^player.id and cv.game_id == ^game.id
-               ) do
-            {0, _} ->
-              Logger.debug("Continue vote already removed (race), player_id: #{player.id}, game_id: #{game.id}")
-            {n, _} ->
-              Logger.debug("Removed #{n} continue vote(s) for player_id: #{player.id}, game_id: #{game.id}")
-          end
-        else
-          # Add their vote
-          case Copi.Repo.insert(
-                 %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id},
-                 on_conflict: :nothing,
-                 conflict_target: [:player_id, :game_id]
-               ) do
-            {:ok, %{id: nil}} ->
-              Logger.debug("Continue vote already exists (race), player_id: #{player.id}, game_id: #{game.id}")
-            {:ok, _vote} ->
-              Logger.debug("Continue vote added for player_id: #{player.id}, game_id: #{game.id}")
-            {:error, changeset} ->
-              Logger.warning("Continue vote failed for player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
-          end
+        result =
+          Copi.Repo.transaction(fn ->
+            case Copi.Repo.get(from(g in Game, lock: "FOR UPDATE"), game.id) do
+              nil ->
+                Copi.Repo.rollback(:game_not_found)
+
+              %Game{started_at: nil} ->
+                Copi.Repo.rollback(:unstarted)
+
+              %Game{finished_at: finished_at} when not is_nil(finished_at) ->
+                Copi.Repo.rollback(:finished)
+
+              %Game{} ->
+                existing_vote =
+                  Copi.Repo.one(
+                    from cv in Copi.Cornucopia.ContinueVote,
+                      where: cv.player_id == ^player.id and cv.game_id == ^game.id
+                  )
+
+                if existing_vote do
+                  case Copi.Repo.delete_all(
+                         from cv in Copi.Cornucopia.ContinueVote,
+                           where: cv.player_id == ^player.id and cv.game_id == ^game.id
+                       ) do
+                    {0, _} ->
+                      Logger.debug("Continue vote already removed (race), player_id: #{player.id}, game_id: #{game.id}")
+                      :vote_already_removed
+
+                    {n, _} ->
+                      Logger.debug("Removed #{n} continue vote(s) for player_id: #{player.id}, game_id: #{game.id}")
+                      :vote_removed
+                  end
+                else
+                  case Copi.Repo.insert(
+                         %Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game.id},
+                         on_conflict: :nothing,
+                         conflict_target: [:player_id, :game_id]
+                       ) do
+                    {:ok, %{id: nil}} ->
+                      Logger.debug("Continue vote already exists (race), player_id: #{player.id}, game_id: #{game.id}")
+                      :vote_already_exists
+
+                    {:ok, _vote} ->
+                      Logger.debug("Continue vote added for player_id: #{player.id}, game_id: #{game.id}")
+                      :vote_added
+
+                    {:error, changeset} ->
+                      Logger.warning("Continue vote failed for player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}, errors: #{inspect(changeset.errors)}")
+                      Copi.Repo.rollback({:insert_failed, changeset})
+                  end
+                end
+            end
+          end)
+
+        case result do
+          {:ok, _action} ->
+            {:ok, updated_game} = game_module().find(game.id)
+            CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
+            {:noreply, assign(socket, :game, updated_game)}
+
+          {:error, :unstarted} ->
+            Logger.warning("Continue vote attempt on unstarted game: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+            {:noreply, socket |> put_flash(:error, "Game has not started yet")}
+
+          {:error, :finished} ->
+            Logger.warning("Continue vote attempt on finished game: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+            {:noreply, socket |> put_flash(:error, "Game has already ended")}
+
+          {:error, :game_not_found} ->
+            Logger.warning("Game not found during continue vote: player_id: #{inspect(player.id)}, game_id: #{inspect(game.id)}")
+            {:noreply, socket |> put_flash(:error, "Game not found. Please refresh and try again.")}
+
+          {:error, {:insert_failed, _changeset}} ->
+            {:noreply, socket |> put_flash(:error, "Unable to record continue vote. Please try again.")}
         end
-
-        {:ok, updated_game} = game_module().find(game.id)
-
-        CopiWeb.Endpoint.broadcast(topic(updated_game.id), "game:updated", updated_game)
-
-        {:noreply, assign(socket, :game, updated_game)}
     end
   end
 
