@@ -1696,12 +1696,11 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
             edition="webapp",
         )
 
-        with mock.patch("scripts.convert.convert_to_pdf"):
+        with mock.patch("scripts.convert.convert_to_pdf", side_effect=Exception("forced error")):
             with self.assertLogs(logging.getLogger(), logging.WARNING) as l2:
-                # Trigger a warning by using an invalid layout first or just mock logs
-                logging.getLogger().warning("\nConvert error: forced error")
                 c.create_edition_from_template("guide", "es")
-        self.assertIn("WARNING:root:\nConvert error: ", " ".join(l2.output))
+        self.assertIn("Convert error", " ".join(l2.output))
+        self.assertIn("forced error", " ".join(l2.output))
 
     def test_create_edition_from_template_with_wrong_layout(self) -> None:
 
