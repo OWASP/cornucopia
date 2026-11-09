@@ -19,6 +19,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Free up disk space on runner
+        run: |
+          sudo swapoff -a || true
+          sudo rm -f /swapfile || true
+          sudo apt-get clean || true
+          docker system prune -af --volumes || true
+          sudo rm -rf /usr/local/lib/android || true
+          sudo rm -rf /usr/share/dotnet || true
+          sudo rm -rf /opt/ghc || true
+          sudo rm -rf /usr/local/share/boost || true
+          sudo rm -rf /usr/lib/jvm || true
+          sudo rm -rf /opt/hostedtoolcache/CodeQL || true
+          df -h
 
       - name: Copy source data into build context
         run: cp -r source cornucopia.owasp.org/source
@@ -49,7 +62,7 @@ jobs:
             -x website_dast_report.xml \
             -a \
             -d \
-            -z "-config ajaxSpider.maxDuration=10 -config scanner.maxScanDurationInMins=180" \
+            -z "-config ajaxSpider.maxDuration=10 -config scanner.maxScanDurationInMins=60" \
             || true
 
       - name: Stop website and ZAP containers
@@ -84,6 +97,7 @@ jobs:
           else
             echo "ZAP report not found, skipping vulnerability check"
           fi
+
 
       - name: Upload reports to pre-release
         if: always()

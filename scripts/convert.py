@@ -85,7 +85,7 @@ class ConvertVars:
         languages: set[str] = set(["en"])
         versions: set[str] = set()
         layouts: set[str] = set(["cards", "leaflet", "guide"])
-        templates: set[str] = set(["bridge", "bridge_qr", "tarot", "tarot_qr"])
+        templates: set[str] = set(["bridge", "tarot"])
         edition_version_map: Dict[str, Dict[str, str]] = {}
 
         if os.path.isdir(source_dir):
@@ -602,7 +602,6 @@ def parse_arguments(input_args: List[str]) -> argparse.Namespace:
             "Templates need to be added to ./resource/templates or specified with (-i or --inputfile)\n"
             "Bridge cards are 2.25 x 3.5 inch and have the mappings printed on them, \n"
             "tarot cards are 2.75 x 4.75 (71 x 121 mm) inch large, \n"
-            "qr cards have a QRCode that points to an maintained list.\n"
             "You can also speficy your own template. If so, there needs to be a file in the templates folder "
             "where the name contains the template code. Eg. owasp_cornucopia_edition_ver_layout_template_lang.idml"
         ),
@@ -1122,7 +1121,6 @@ def get_valid_templates() -> List[str]:
             templates.append(template)
     elif convert_vars.args.template == "":
         templates.append("bridge")
-        templates.append("tarot_qr")
     else:
         templates.append(convert_vars.args.template)
     return templates
