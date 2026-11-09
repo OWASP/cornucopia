@@ -1725,7 +1725,9 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         )
 
     def test_create_edition_from_template_spanish(self) -> None:
-        want_file = os.path.join(c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_es.odt")
+        self.want_file = os.path.join(
+            c.convert_vars.BASE_PATH, "output", "owasp_cornucopia_webapp_3.0_guide_bridge_es.odt"
+        )
         if os.path.isfile(self.want_file):
             os.remove(self.want_file)
 
@@ -1734,7 +1736,7 @@ class TestcreateEditionFromTemplate(unittest.TestCase):
         self.assertIn("INFO:root:New file saved:", " ".join(ll.output))
         self.assertIn("owasp_cornucopia_webapp_3.0_guide_bridge_es.odt", " ".join(ll.output))
 
-        self.assertTrue(os.path.isfile(want_file))
+        self.assertTrue(os.path.isfile(self.want_file))
 
     def test_create_edition_from_template_en_idml(self) -> None:
         self.want_file = os.path.join(
