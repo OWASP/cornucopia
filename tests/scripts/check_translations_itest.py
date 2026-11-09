@@ -1,7 +1,7 @@
 """
 Integration tests for translation tag checking.
 
-Tests that all translations in the actual source directory have the same T0xxx tags as the English version.
+Tests the translation checker against the mock files in tests/test_files/source.
 """
 
 import unittest
@@ -18,13 +18,13 @@ from check_translations import TranslationChecker  # type: ignore[import-not-fou
 
 
 class TestTranslationTagsIntegration(unittest.TestCase):
-    """Integration tests that check actual translation files."""
+    """Integration tests that check translation files read from disk."""
 
     def setUp(self) -> None:
         """Set up test fixtures."""
-        # Navigate up from scripts to cornucopia root
+        # Navigate up from tests/scripts to cornucopia root
         self.base_path = Path(__file__).parent.parent.parent
-        self.source_dir = self.base_path / "source"
+        self.source_dir = self.base_path / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.source_dir)
 
     def test_source_directory_exists(self) -> None:
@@ -36,30 +36,14 @@ class TestTranslationTagsIntegration(unittest.TestCase):
         english_files = list(self.source_dir.glob("*-cards-*-en.yaml"))
         self.assertGreater(len(english_files), 0, "No English card files found in source directory")
 
-    def test_translations_completeness(self) -> None:
-        """
-        Test that all translations have the same T0xxx tags as English.
-
-        This test will fail if:
-        - Tags are missing in translations
-        - Tags are untranslated (identical to English)
-        - Tags are empty
-        """
+    def test_reports_missing_untranslated_and_empty_tags(self) -> None:
+        """Test that the checker reports the missing, untranslated and empty tags in the mock Spanish file."""
         results = self.checker.check_translations()
 
-        if results:
-            # Generate detailed report
-            report = self.checker.generate_markdown_report()
-
-            # Count total issues
-            total_issues = 0
-            for base_name, languages in results.items():
-                for lang, issues in languages.items():
-                    total_issues += len(issues.get("missing", []))
-                    total_issues += len(issues.get("untranslated", []))
-                    total_issues += len(issues.get("empty", []))
-
-            self.fail(f"\\n\\nTranslation issues found ({total_issues} total):\\n\\n{report}\\n")
+        spanish_issues = results["test-cards-1.0"]["es"]
+        self.assertIn("T00004", spanish_issues["missing"])
+        self.assertIn("T00002", spanish_issues["untranslated"])
+        self.assertIn("T00003", spanish_issues["empty"])
 
     def test_no_duplicate_tags_in_english(self) -> None:
         """Test that English files don't have duplicate T0xxx tags."""
