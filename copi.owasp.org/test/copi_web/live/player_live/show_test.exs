@@ -345,6 +345,99 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert length(updated_game2.continue_votes) == 0
     end
 
+    test "rejects next_round before game starts (started_at is nil)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      assert is_nil(game.started_at)
+      assert is_nil(game.finished_at)
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      assert render(show_live) =~ "Game has not started yet"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+      assert updated_game.started_at == nil
+      assert updated_game.finished_at == nil
+    end
+
+    test "rejects next_round after game ends (finished_at is set)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: now, finished_at: now)
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      assert render(show_live) =~ "Game has already ended"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+    end
+
+    test "rejects toggle_continue_vote before game starts (started_at is nil)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      assert is_nil(game.started_at)
+      assert is_nil(game.finished_at)
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      assert render(show_live) =~ "Game has not started yet"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.continue_votes == []
+    end
+
+    test "rejects toggle_continue_vote after game ends (finished_at is set)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: now, finished_at: now)
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      assert render(show_live) =~ "Game has already ended"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.continue_votes == []
+    end
+
+    test "proceed_to_next_round message is ignored when game is unstarted or finished", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Send on unstarted game
+      send(show_live.pid, :proceed_to_next_round)
+      :timer.sleep(50)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+
+      # Finish the game and send again
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+      {:ok, _} = Cornucopia.update_game(updated_game, %{started_at: now, finished_at: now})
+
+      send(show_live.pid, :proceed_to_next_round)
+      :timer.sleep(50)
+
+      {:ok, final_game} = Cornucopia.Game.find(game_id)
+      assert final_game.rounds_played == 0
+    end
+
     test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
