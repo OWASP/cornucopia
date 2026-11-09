@@ -1,4 +1,4 @@
-﻿defmodule Copi.Repo.Migrations.AddUniqueIndexToDealtCards do
+defmodule Copi.Repo.Migrations.AddUniqueIndexToDealtCards do
   use Ecto.Migration
 
   def change do
