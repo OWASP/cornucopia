@@ -1,6 +1,6 @@
 # Printing
 
-The primary source document is a Word document. You can find it named [owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).odt](https://github.com/OWASP/cornucopia/releases/tag/v3.5.10 'OWASP Cornucopia on GitHub [external]') as part of the latest release.
+The primary source document is an OpenDocument Text (ODT) document. You can find it named [owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).odt](https://github.com/OWASP/cornucopia/releases/tag/v3.5.10 'OWASP Cornucopia on GitHub [external]') as part of the latest release.
 
 Pre-printed card decks may, however, be more useful. To get this, click on [webshop](/webshop) in the upper right corner.
 
