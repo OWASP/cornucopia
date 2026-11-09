@@ -1878,13 +1878,24 @@ class TestGenerateDeckMain(unittest.TestCase):
             self.assertEqual(ctx.exception.code, 1)
 
         # Exception caught, logged to build_log.txt, and re-raised
-        with mock.patch("sys.argv", ["generate_deck.py", "--config", "nonexistent.yaml"]):
-            with mock.patch("cornucopia_common.find_config_path", side_effect=RuntimeError("Fatal deck crash")):
-                with self.assertRaises(RuntimeError):
-                    runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"), run_name="__main__")
-                log_file = os.path.join(_PDF_GENERATION, "build_log.txt")
-                if os.path.exists(log_file):
-                    os.remove(log_file)
+        log_file = os.path.join(_PDF_GENERATION, "build_log.txt")
+        had_log_before = os.path.exists(log_file)
+        original_log_bytes = None
+        if had_log_before:
+            with open(log_file, "rb") as f:
+                original_log_bytes = f.read()
+
+        try:
+            with mock.patch("sys.argv", ["generate_deck.py", "--config", "nonexistent.yaml"]):
+                with mock.patch("cornucopia_common.find_config_path", side_effect=RuntimeError("Fatal deck crash")):
+                    with self.assertRaises(RuntimeError):
+                        runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"), run_name="__main__")
+        finally:
+            if had_log_before:
+                with open(log_file, "wb") as f:
+                    f.write(original_log_bytes if original_log_bytes is not None else b"")
+            elif os.path.exists(log_file):
+                os.remove(log_file)
 
 
 if __name__ == "__main__":
