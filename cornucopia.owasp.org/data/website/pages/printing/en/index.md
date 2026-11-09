@@ -77,7 +77,7 @@ DO NOT PRINT an 18 Page leaflet! It won't look good.
 
 #### Bleed:
 
-A standard bleed set to 3mm for all 4 sides.
+A standard bleed is set to 3 mm on all four sides.
 
 #### Paper:
 
