@@ -11,6 +11,7 @@ No Scribus is required.
 """
 
 import os
+import shutil
 import sys
 import tempfile
 import unittest
@@ -614,14 +615,14 @@ class TestCheckEnvironment(unittest.TestCase):
 
     def test_check_environment_main(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
-            with mock.patch("os.getcwd", return_value=tmpdir):
-                runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
+            script_path = os.path.join(tmpdir, "check_environment.py")
+            shutil.copyfile(os.path.join(_PDF_GENERATION, "check_environment.py"), script_path)
+            runpy.run_path(script_path, run_name="__main__")
             out_txt = os.path.join(tmpdir, "check_environment.txt")
             self.assertTrue(os.path.exists(out_txt))
 
             with mock.patch("builtins.open", side_effect=OSError("Read only")):
-                with mock.patch("os.getcwd", return_value=tmpdir):
-                    runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
+                runpy.run_path(script_path, run_name="__main__")
 
 
 class TestLoadConfig(unittest.TestCase):
