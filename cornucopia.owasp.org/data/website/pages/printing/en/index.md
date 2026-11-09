@@ -31,7 +31,7 @@ In case the printing facility doesn't have the fonts at hand, you'll find the in
 
 ### The following fonts are used:
 - Leaflet: Noto Sans (Light/Regular/Italic/Medium (Italic)/SemiBoldItalic/Extra Bold)
-- Leaflet: Noto Sans (Thin/Light (Italic)/Italic/Medium//Extra Bold)
+- Leaflet: Noto Sans (Thin/Light (Italic)/Italic/Medium/Extra Bold)
 - Cases:
     - Noto Sans Condensed Bold
     - Noto Sans Condensed Extra Bold
