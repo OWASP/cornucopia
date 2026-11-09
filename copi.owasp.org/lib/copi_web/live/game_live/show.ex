@@ -156,10 +156,14 @@ defmodule CopiWeb.GameLive.Show do
               all_cards
               |> Enum.with_index()
               |> Enum.each(fn {card, i} ->
-                case repo.insert(%DealtCard{
-                       card_id: card.id,
-                       player_id: Enum.at(players, rem(i, player_count)).id
-                     }) do
+                case repo.insert(
+                       %DealtCard{
+                         card_id: card.id,
+                         player_id: Enum.at(players, rem(i, player_count)).id
+                       }
+                       |> Ecto.Changeset.change()
+                       |> Ecto.Changeset.unique_constraint([:card_id, :player_id])
+                     ) do
                   {:ok, _dealt_card} -> :ok
                   {:error, changeset} -> repo.rollback(changeset)
                 end
