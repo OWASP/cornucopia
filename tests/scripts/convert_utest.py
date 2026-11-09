@@ -2013,7 +2013,7 @@ class TestReplaceTextInXmlFileFail(unittest.TestCase):
         self.assertEqual(want_data, got_data)
 
 
-class Test1(unittest.TestCase):
+class TestGetReplacementValueFromDict(unittest.TestCase):
     def setUp(self) -> None:
         self.replacement_values = [
             ("${VE_suit}", "Validation & Encoding"),
