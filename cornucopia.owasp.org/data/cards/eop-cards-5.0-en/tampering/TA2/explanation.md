@@ -28,7 +28,7 @@ The primary STRIDE category is **Tampering**. Sam changed the room number and ro
 
 ### What are we going to do about it?
 
-**Use a vetted protocol instead of designing one.** For transport, TLS 1.3, WireGuard, or Noise; for access cards, a current product with published cryptanalysis and a real key-management story. Do not let a facilities manager with a soldering iron specify the cipher suite. See [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446), the [Noise Protocol Framework](https://noiseprotocol.org/noise.html), [NIST SP 800-52 Rev. 2](https://csrc.nist.gov/pubs/sp/800/52/r2/final), and [OWASP ASVS 5.0 V11.6.2](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+**Use a vetted protocol instead of designing one.** For transport, use TLS 1.2-1.3. For access cards, use a current product with published cryptanalysis and proper key management. See [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446), [NIST SP 800-52 Rev. 2](https://csrc.nist.gov/pubs/sp/800/52/r2/final), and [OWASP ASVS 5.0 V11.6.2](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
 
 **Use AEAD or a proper MAC, never a CRC.** AES-GCM or ChaCha20-Poly1305 for messages; AES-CMAC or HMAC when encryption and integrity are separate, combined encrypt-then-MAC with independent keys. See [NIST SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final), [NIST SP 800-38B](https://csrc.nist.gov/pubs/sp/800/38/b/upd1/final), [RFC 5116](https://www.rfc-editor.org/rfc/rfc5116), and [OWASP ASVS 5.0 V11.3.2 and V11.3.5](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
 
