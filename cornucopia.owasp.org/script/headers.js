@@ -5,7 +5,6 @@ const buildDir = getBuildDir();
 if (buildDir) {
   writeHeaders({
     buildDir,
-    origin: 'https://cornucopia.owasp.org',
-    includeNotFound: true
+    environment: 'production'
   });
 }

@@ -123,3 +123,47 @@ To add a deck with this image-based card style (a picture for each card, shown b
 ## Our Threat Model
 
 You may review the threat model for cornucopia.owasp.org by using [OWASP Threat Dragon](https://www.threatdragon.com/#/dashboard) and opening [../ThreatDragonModels/cornucopia.json](../ThreatDragonModels/cornucopia.json).
+
+## Troubleshooting deployment
+
+Run from this directory to deploy to `owaspcornucopia.org`:
+
+```sh
+pnpm install
+npm run build-stage
+pnpm exec wrangler deploy script/nonce-worker.js --config script/wrangler.toml --env staging
+pnpm exec wrangler pages deploy build --project-name=cornucopia --branch head
+```
+
+The custom domain must be attached to the Pages branch receiving the deployment.
+
+Cloudflare response headers are configured under `cloudflare.headers` in
+`application.yaml`. The build scripts generate `build/_headers` from the shared
+`all` section and the selected `stage` or `production` section.
+The `/api/*` configuration is expanded to the generated JSON API routes, but
+`/api/docs` still needs to be served as HTML. To apply header replacements use the reset option directives to avoid combining CORS or MIME header values.
+
+After deploying, check that `/css/base.css` returns `text/css` and a JavaScript
+URL from the page returns a JavaScript MIME type. If cached responses still have
+the old MIME type, purge the affected Cloudflare cache entries and hard-refresh
+the browser. Do not disable `X-Content-Type-Options: nosniff` to work around this.
+
+NB: Keep `Content-Type` out of the global `/*` rule: Cloudflare determines MIME types for static CSS, JavaScript, images, fonts and HTML. Overriding every response with `text/html` causes browsers to reject scripts and stylesheets when `nosniff` is enabled.
+
+### Troubleshooting stale asset MIME types
+
+A deployment does not necessarily clear custom-domain CDN or browser caches.
+An unchanged asset can return `304 Not Modified` without a `Content-Type`, leaving
+the browser's old, incorrect MIME metadata intact. Preloaded modules can also
+retain a failed load. A correct `200` response in a fresh browser is therefore
+not always enough.
+
+To troubleshoot, you can set `svelte.appDir` to `_app-v{next version}` in `application.yaml`, that will give all generated JavaScript and CSS new URLs. Static stylesheet links can also be forced loaded by adding `?v=2` to the end.
+A normal page reload can then download correctly assets.
+
+If an asset URL returns `text/html` but the same URL with a fresh query string
+(for example `?diagnostic=1`) returns `text/css` or a JavaScript MIME type, purge
+the stale entries in the Cloudflare dashboard for `cornucopia.owasp.org` (or your selected domain) under **Caching > Configuration > Purge Cache**. Purge the affected URLs, including `/css/base.css` and any failing `/_app/immutable/` files. If the list is large, **Purge Everything** clears the zone cache but temporarily increases origin traffic. Then hard-refresh the browser with its cache disabled. Verify the original asset URLs, not just URLs with query strings. If fresh URLs also return HTML, check the Pages deployment and domain routing instead.
+
+If a card suit does not expand, check whether the page hydrated.
+Failed module requests with old MIME headers can remain in the browser's own cache after the CDN is fixed. Open browser developer tools, enable **Disable cache** in the Network panel, and reload `/cards`. Then click a suit heading and verify its card links appear.

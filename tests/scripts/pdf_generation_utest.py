@@ -26,6 +26,8 @@ if _PDF_GENERATION not in sys.path:
 import cornucopia_common as cc  # noqa: E402  (needs the sys.path line above)
 import check_environment  # noqa: E402
 import merge_pdfs  # noqa: E402
+import generate_deck  # noqa: E402
+import runpy  # noqa: E402
 
 # Repeated fixture values, named once so a change lands in one place.
 _DATA_PATTERN = "source/%edition%.yaml"
@@ -593,6 +595,31 @@ class TestCheckEnvironment(unittest.TestCase):
         self.assertIn("Missing: yaml", text)
         self.assertIn("These must be installed into THIS interpreter", text)
 
+    def test_check_optional_finds_modules(self) -> None:
+        original_import = __import__
+
+        def fake_import(name, *args, **kwargs):
+            if name == "defusedxml":
+                return mock.MagicMock()
+            return original_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=fake_import):
+            lines = check_environment.check_optional()
+        self.assertTrue(any("found       defusedxml" in line for line in lines))
+
+    def test_report_inside_scribus(self) -> None:
+        with mock.patch.dict("sys.modules", {"scribus": mock.MagicMock()}):
+            text = check_environment.report()
+            self.assertIn("Running inside: Scribus", text)
+
+    def test_check_environment_main(self) -> None:
+        runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
+        out_txt = os.path.join(_PDF_GENERATION, "check_environment.txt")
+        self.assertTrue(os.path.exists(out_txt))
+
+        with mock.patch("builtins.open", side_effect=OSError("Read only")):
+            runpy.run_path(os.path.join(_PDF_GENERATION, "check_environment.py"), run_name="__main__")
+
 
 class TestLoadConfig(unittest.TestCase):
     def test_find_config_path_locates_root_config(self) -> None:
@@ -665,6 +692,1199 @@ class TestLoadConfig(unittest.TestCase):
                 os.path.normpath(os.path.join(base, cfg["paths"]["source_root"])),
                 os.path.normpath(os.path.join(tmp, "source")),
             )
+
+    def test_find_config_path_empty_defaults_to_pdf_config_yaml(self) -> None:
+        self.assertEqual(cc.find_config_path(config_name=None), cc.find_config_path(config_name="pdf_config.yaml"))
+
+    def test_find_config_path_repo_and_script_dir(self) -> None:
+        self.assertTrue(os.path.isfile(cc.find_config_path(config_name="pdf_config.yaml")))
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch("cornucopia_common._SCRIPT_DIR", tmp):
+                _write(os.path.join(tmp, "script_only.yaml"), "x: 1")
+                self.assertEqual(
+                    cc.find_config_path(config_name="script_only.yaml"), os.path.join(tmp, "script_only.yaml")
+                )
+
+    def test_infer_base_dir_none(self) -> None:
+        self.assertEqual(cc.infer_base_dir(None, None), cc._REPO_ROOT)
+
+    def test_load_assets_variants(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            abs_yaml = _write(os.path.join(tmp, "abs_assets.yaml"), "default: {}\n")
+            self.assertEqual(cc.load_assets({"paths": {"assets_config_path": abs_yaml}}), {"default": {}})
+            _write(os.path.join(tmp, "local_assets.yaml"), "default: {}\n")
+            self.assertEqual(
+                cc.load_assets({"paths": {"assets_config_path": "local_assets.yaml"}}, base_dir=tmp),
+                {"default": {}},
+            )
+            with mock.patch("cornucopia_common._SCRIPT_DIR", tmp):
+                _write(os.path.join(tmp, "script_assets.yaml"), "default: {}\n")
+                self.assertEqual(
+                    cc.load_assets({"paths": {"assets_config_path": "script_assets.yaml"}}),
+                    {"default": {}},
+                )
+            self.assertEqual(cc.load_assets({"paths": {"assets_config_path": "missing_assets.yaml"}}, base_dir=tmp), {})
+
+
+class TestCornucopiaCommonEdgeCases(unittest.TestCase):
+    def test_resolve_asset_path_assets_prefix_and_abs_root(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = {"paths": {"asset_root": "resources"}}
+            res = cc.resolve_asset_path(tmp, cfg, "assets/images/pic.png")
+            self.assertEqual(res, os.path.join(tmp, "resources", "images", "pic.png").replace("\\", "/"))
+
+            cfg_abs = {"paths": {"asset_root": "/var/assets"}}
+            res_abs = cc.resolve_asset_path(tmp, cfg_abs, "pic.png")
+            self.assertEqual(res_abs, "/var/assets/pic.png")
+
+    def test_card_data_path_edition_version(self) -> None:
+        cfg = {"paths": {"card_data_path": "source/%edition%-%edition_version%-%language%.yaml"}}
+        p = cc.card_data_path(cfg, "/tmp", "webapp", "en", version="3.0")
+        self.assertEqual(p, "/tmp/source/webapp-3.0-en.yaml")
+        with mock.patch("cornucopia_common.edition_data_version", return_value="3.0"):
+            p2 = cc.card_data_path(cfg, "/tmp", "webapp", "en")
+            self.assertEqual(p2, "/tmp/source/webapp-3.0-en.yaml")
+
+    def test_data_pattern_regex_unknown_token(self) -> None:
+        cfg = {"paths": {"card_data_path": "source/%edition%-%custom_token%-%language%.yaml"}}
+        regex = cc._data_pattern_regex(cfg)
+        self.assertIsNotNone(regex)
+
+    def test_scan_and_misnamed_non_directory(self) -> None:
+        cfg = {"paths": {"source_root": "nonexistent_source"}}
+        self.assertEqual(cc.scan_card_files(cfg, "/tmp"), [])
+        self.assertEqual(cc.find_misnamed_files(cfg, "/tmp"), [])
+
+    def test_discover_editions_unconfigured(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config("source/%edition%-cards-1.0-%language%.yaml")
+            cfg["editions"] = {}
+            _write(os.path.join(tmp, "source", "alpha-cards-1.0-en.yaml"), _card_yaml(_EMPTY_SUIT))
+            eds = cc.discover_editions(cfg, tmp)
+            self.assertEqual(eds, ["alpha"])
+
+    def test_expand_selection_none(self) -> None:
+        warnings = []
+        sel = cc.expand_selection(None, ["a", "b"], "items", warnings)
+        self.assertEqual(sel, ["a", "b"])
+
+    def test_get_font_size_non_dict_scaling(self) -> None:
+        cfg = {
+            "size_profiles": {"bridge": {"base_font_sizes": {"frame": 10.0}}},
+            "font_scaling": {"frame": 2.5},
+        }
+        self.assertEqual(cc.get_font_size(cfg, "bridge", "frame", "en"), 12.5)
+
+    def test_suit_entry_and_colors_flat_suits(self) -> None:
+        assets_data = {"suits": [{"id": "aa", "color": "Custom_AA", "court_color": "Custom_Court_AA"}]}
+        cfg = _base_config(_DATA_PATTERN)
+        cfg["editions"]["demo"]["suit_colors"] = {"aa": "Edition_AA"}
+        card = {"suit_id": "aa", "card_id": "AA1"}
+        suit_col, num_col, _defs = cc.card_colors(cfg, assets_data, "demo", card)
+        self.assertEqual(suit_col, "Custom_AA")
+        self.assertTrue(cc.has_suit_color(cfg, assets_data, "demo", "aa"))
+
+        self.assertTrue(cc.has_suit_color(cfg, {}, "demo", "aa"))
+
+    def test_assets_override_flat_suits(self) -> None:
+        assets_data = {
+            "suits": [
+                {
+                    "id": "aa",
+                    "cards": [{"id": "aa1", "small": "custom_card.png"}],
+                    "court_backgrounds": {"small": "court.png"},
+                    "backgrounds": {"small": "bg.png"},
+                }
+            ]
+        }
+        card_level, court_level, suit_level = cc._assets_override(assets_data, "demo", "aa", "aa1", "small")
+        self.assertEqual(card_level, "custom_card.png")
+        self.assertEqual(court_level, "court.png")
+        self.assertEqual(suit_level, "bg.png")
+
+    def test_resolve_background_global_default(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            bg_path = _write(os.path.join(tmp, "resources", "Backgrounds", "global_bg.png"), "image")
+            assets_data = {"default": {"backgrounds": {"small": "global_bg.png"}}}
+            cfg = _base_config(_DATA_PATTERN)
+            cfg["paths"]["asset_root"] = "resources"
+            cfg["assets"]["image_dir"] = "Backgrounds"
+            card = {"card_id": "AA1", "suit_id": "aa"}
+            full, found = cc.resolve_background(cfg, assets_data, tmp, "demo", card, "bridge")
+            self.assertTrue(found)
+            self.assertEqual(full, bg_path.replace("\\", "/"))
+
+    def test_zip_name_and_sla_name(self) -> None:
+        cfg = {
+            "project": {"version": "2.0"},
+            "packaging": {"zip_name": "Archive_%edition%_%version%.zip"},
+            "output": {"sla_filename_format": "SLA_%edition%_%card_id%_%size%_%language%.sla"},
+        }
+        self.assertEqual(cc.zip_name(cfg, "demo"), "Archive_demo_2.0.zip")
+        self.assertEqual(cc.sla_name(cfg, "demo", "AA1", "bridge", "en"), "SLA_demo_AA1_bridge_en.sla")
+
+
+class TestMergePdfsCli(unittest.TestCase):
+    def test_parse_args_defaults_and_options(self) -> None:
+        test_argv = [
+            "merge_pdfs.py",
+            "--config",
+            "custom_config.yaml",
+            "--edition",
+            "webapp",
+            "--edition",
+            "mobileapp",
+            "--language",
+            "en",
+            "--size",
+            "bridge",
+            "--profile",
+            "print",
+            "--bleed-mm",
+            "3.0",
+            "--printers-marks",
+            "--output-dir",
+            "custom_out",
+            "--zip",
+            "--clean",
+            "--dry-run",
+            "--base-dir",
+            "/tmp/base",
+        ]
+        with mock.patch("sys.argv", test_argv):
+            args = merge_pdfs.parse_args()
+            self.assertEqual(args.config, "custom_config.yaml")
+            self.assertEqual(args.edition, ["webapp", "mobileapp"])
+            self.assertEqual(args.language, ["en"])
+            self.assertEqual(args.size, ["bridge"])
+            self.assertEqual(args.profile, "print")
+            self.assertEqual(args.bleed_mm, 3.0)
+            self.assertTrue(args.printers_marks)
+            self.assertEqual(args.output_dir, "custom_out")
+            self.assertTrue(args.do_zip)
+            self.assertTrue(args.clean)
+            self.assertTrue(args.dry_run)
+            self.assertEqual(args.base_dir, "/tmp/base")
+
+    def test_parse_args_negated_flags(self) -> None:
+        test_argv = [
+            "merge_pdfs.py",
+            "--no-printers-marks",
+            "--no-zip",
+        ]
+        with mock.patch("sys.argv", test_argv):
+            args = merge_pdfs.parse_args()
+            self.assertFalse(args.printers_marks)
+            self.assertFalse(args.do_zip)
+
+
+class TestMergePdfsHelpers(unittest.TestCase):
+    def test_files_with_suffix_non_directory(self) -> None:
+        self.assertEqual(merge_pdfs.files_with_suffix("/nonexistent/dir", ".pdf"), [])
+
+    def test_files_with_suffix_matches(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            _write(os.path.join(tmp, "a.PDF"))
+            _write(os.path.join(tmp, "b.pdf"))
+            _write(os.path.join(tmp, "c.txt"))
+            matched = merge_pdfs.files_with_suffix(tmp, ".pdf")
+            self.assertEqual(len(matched), 2)
+            self.assertTrue(all(p.lower().endswith(".pdf") for p in matched))
+
+    def test_clean_intermediates_handles_os_errors(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = os.path.join(tmp, "output")
+            qr_dir = os.path.join(out, "qrcodes")
+            pdf1 = _write(os.path.join(out, "card1.pdf"), "content")
+            _write(os.path.join(out, "card1.sla"), "sla")
+            _write(os.path.join(qr_dir, "qr1.png"), "qr")
+            cfg = {"paths": {"qr_code_dir": "output/qrcodes"}}
+
+            with mock.patch("os.remove", side_effect=OSError("Permission denied")):
+                with mock.patch("os.rmdir", side_effect=OSError("Dir not empty")):
+                    removed, freed = merge_pdfs.clean_intermediates([pdf1], cfg, tmp, out)
+                    self.assertEqual(removed, 0)
+                    self.assertEqual(freed, 0)
+
+    def test_match_card_pdfs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            deck = [{"card_id": "AA1"}, {"card_id": "AA2"}]
+            c1_name = cc.card_pdf_name(cfg, "demo", "AA1", "bridge", "en", 3.0, False)
+            _write(os.path.join(tmp, c1_name), "pdf")
+
+            found, missing = merge_pdfs.match_card_pdfs(deck, "demo", "en", "bridge", cfg, tmp, 3.0, False)
+            self.assertEqual(len(found), 1)
+            self.assertEqual(missing, ["AA2"])
+
+
+class TestMergeDeck(unittest.TestCase):
+    def test_merge_deck_raises_if_pymupdf_missing(self) -> None:
+        with mock.patch.object(merge_pdfs, "pymupdf", None):
+            with self.assertRaises(RuntimeError) as ctx:
+                merge_pdfs.merge_deck(["dummy.pdf"], "out.pdf")
+            self.assertIn("PyMuPDF", str(ctx.exception))
+
+    def test_merge_deck_success_multi_page_and_single_page(self) -> None:
+        mock_merged = mock.MagicMock()
+        mock_merged.__len__.return_value = 4
+
+        mock_card2 = mock.MagicMock()
+        mock_card2.__len__.return_value = 2
+
+        mock_card1 = mock.MagicMock()
+        mock_card1.__len__.return_value = 1
+
+        mock_pymupdf = mock.MagicMock()
+        mock_pymupdf.open.side_effect = [mock_merged, mock_card2, mock_card1]
+
+        with mock.patch.object(merge_pdfs, "pymupdf", mock_pymupdf):
+            pages = merge_pdfs.merge_deck(["card2.pdf", "card1.pdf"], "deck.pdf")
+            self.assertEqual(pages, 4)
+            mock_merged.insert_pdf.assert_any_call(mock_card2, from_page=1, to_page=1)
+            mock_merged.insert_pdf.assert_any_call(mock_card2, from_page=0, to_page=0)
+            mock_merged.insert_pdf.assert_any_call(mock_card1, from_page=0, to_page=0)
+            mock_merged.save.assert_called_once_with("deck.pdf", garbage=4, deflate=True)
+            mock_merged.close.assert_called_once()
+
+
+class TestPackageDecks(unittest.TestCase):
+    def test_package_decks_per_edition(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = {
+                "packaging": {"zip_scope": "per_edition", "zip_name": "OWASP_%edition%.zip"},
+                "project": {"version": "1.0"},
+            }
+            deck1 = _write(os.path.join(tmp, "deck1.pdf"), "deck1")
+            merge_pdfs.package_decks({"demo": [deck1]}, cfg["packaging"], cfg, tmp)
+            archive = os.path.join(tmp, "OWASP_demo.zip")
+            self.assertTrue(os.path.exists(archive))
+
+    def test_package_decks_single_scope(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = {
+                "packaging": {"zip_scope": "single", "zip_name": "OWASP_%edition%.zip"},
+                "project": {"version": "1.0"},
+            }
+            deck1 = _write(os.path.join(tmp, "deck1.pdf"), "deck1")
+            deck2 = _write(os.path.join(tmp, "deck2.pdf"), "deck2")
+            merge_pdfs.package_decks({"demo1": [deck1], "demo2": [deck2]}, cfg["packaging"], cfg, tmp)
+            archive = os.path.join(tmp, "OWASP_demo1.zip")
+            self.assertTrue(os.path.exists(archive))
+
+    def test_maybe_package_skipped_when_empty_or_disabled(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            args = mock.Mock(do_zip=False)
+            merge_pdfs.maybe_package(args, {}, {}, tmp)
+            merge_pdfs.maybe_package(args, {}, {"demo": ["deck.pdf"]}, tmp)
+
+    def test_maybe_package_enabled_by_args_or_config(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            deck = _write(os.path.join(tmp, "deck.pdf"), "deck")
+            args = mock.Mock(do_zip=True)
+            cfg = {
+                "packaging": {"create_zip": False, "zip_name": "bundle_%edition%.zip"},
+                "project": {"version": "1.0"},
+            }
+            merge_pdfs.maybe_package(args, cfg, {"demo": [deck]}, tmp)
+            self.assertTrue(os.path.exists(os.path.join(tmp, "bundle_demo.zip")))
+
+            args_none = mock.Mock(do_zip=None)
+            cfg["packaging"]["create_zip"] = True
+            cfg["packaging"]["zip_name"] = "bundle2_%edition%.zip"
+            merge_pdfs.maybe_package(args_none, cfg, {"demo": [deck]}, tmp)
+            self.assertTrue(os.path.exists(os.path.join(tmp, "bundle2_demo.zip")))
+
+
+class TestMergePdfsReportingAndTidy(unittest.TestCase):
+    def test_report_gaps(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            merge_pdfs.report_gaps([], tmp)
+            self.assertFalse(os.path.exists(os.path.join(tmp, "merge_gaps.json")))
+
+            merge_pdfs.report_gaps([{"target": "demo", "missing": ["AA1"]}], tmp)
+            report_file = os.path.join(tmp, "merge_gaps.json")
+            self.assertTrue(os.path.exists(report_file))
+
+    def test_tidy_up_conditions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = {"paths": {"qr_code_dir": "output/qrcodes"}}
+            out = os.path.join(tmp, "output")
+            merge_pdfs.tidy_up([{"target": "demo"}], {"demo": ["deck.pdf"]}, ["card.pdf"], cfg, tmp, out)
+            merge_pdfs.tidy_up([], {}, ["card.pdf"], cfg, tmp, out)
+            card = _write(os.path.join(out, "card.pdf"), "card")
+            merge_pdfs.tidy_up([], {"demo": ["deck.pdf"]}, [card], cfg, tmp, out)
+            self.assertFalse(os.path.exists(card))
+
+
+class TestMergeOneTarget(unittest.TestCase):
+    def test_merge_one_target_no_cards(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+            deck_path, used, gap = merge_pdfs.merge_one_target(target, cfg, tmp, tmp, 3.0, False, False)
+            self.assertIsNone(deck_path)
+            self.assertEqual(used, [])
+            self.assertIsNone(gap)
+
+    def test_merge_one_target_not_built(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            _write(os.path.join(tmp, "source", "demo.yaml"), _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"))
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+            deck_path, used, gap = merge_pdfs.merge_one_target(target, cfg, tmp, tmp, 3.0, False, False)
+            self.assertIsNone(deck_path)
+            self.assertEqual(used, [])
+            self.assertIsNone(gap)
+
+    def test_merge_one_target_dry_run_and_missing_gaps(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            cards_yaml = "  - id: AA\n    cards:\n" + "".join("      - id: AA{0}\n".format(i) for i in range(1, 13))
+            _write(os.path.join(tmp, "source", "demo.yaml"), _card_yaml(cards_yaml))
+            c1_name = cc.card_pdf_name(cfg, "demo", "AA1", "bridge", "en", 3.0, False)
+            _write(os.path.join(tmp, c1_name), "pdf")
+
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+            deck_path, used, gap = merge_pdfs.merge_one_target(target, cfg, tmp, tmp, 3.0, False, dry_run=True)
+            self.assertIsNone(deck_path)
+            self.assertIsNotNone(gap)
+            self.assertEqual(len(gap["missing"]), 11)
+
+    def test_merge_one_target_success(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            _write(os.path.join(tmp, "source", "demo.yaml"), _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"))
+            c1_name = cc.card_pdf_name(cfg, "demo", "AA1", "bridge", "en", 3.0, False)
+            _write(os.path.join(tmp, c1_name), "pdf")
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+
+            with mock.patch("merge_pdfs.merge_deck", return_value=2):
+                deck_path, used, gap = merge_pdfs.merge_one_target(target, cfg, tmp, tmp, 3.0, False, dry_run=False)
+                self.assertIsNotNone(deck_path)
+                self.assertEqual(len(used), 1)
+                self.assertIsNone(gap)
+
+
+class TestPrepareMerge(unittest.TestCase):
+    def test_prepare_merge_config_none_or_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            args = mock.Mock(config="missing.yaml", output_dir=None)
+            self.assertIsNone(merge_pdfs.prepare_merge(args, tmp, config={}))
+
+    def test_prepare_merge_output_dir_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            args = mock.Mock(config="cfg.yaml", output_dir=os.path.join(tmp, "nonexistent"))
+            self.assertIsNone(merge_pdfs.prepare_merge(args, tmp, config=cfg))
+
+    def test_prepare_merge_invalid_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            args = mock.Mock(
+                config="cfg.yaml",
+                output_dir=out,
+                profile="unknown_profile",
+                bleed_mm=None,
+                printers_marks=None,
+            )
+            self.assertIsNone(merge_pdfs.prepare_merge(args, tmp, config=cfg))
+
+    def test_prepare_merge_no_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config(_DATA_PATTERN)
+            cfg["generation_targets"] = {"editions": [], "languages": [], "sizes": []}
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            args = mock.Mock(
+                config="cfg.yaml",
+                output_dir=out,
+                profile=None,
+                bleed_mm=None,
+                printers_marks=None,
+                edition=None,
+                language=None,
+                size=None,
+            )
+            self.assertIsNone(merge_pdfs.prepare_merge(args, tmp, config=cfg))
+
+    def test_prepare_merge_success(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["editions"] = {"demo": {}}
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"),
+            )
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            cfg_path = _write(os.path.join(tmp, "custom_cfg.yaml"), "paths:\n  output_dir: out\n")
+            args = mock.Mock(
+                config=cfg_path,
+                output_dir=out,
+                profile="main",
+                bleed_mm=3.0,
+                printers_marks=False,
+                edition=["demo"],
+                language=["en"],
+                size=["bridge"],
+            )
+            # Test when config=None so line 294 executes
+            with mock.patch("cornucopia_common.load_config", return_value=cfg):
+                res = merge_pdfs.prepare_merge(args, tmp, config=None)
+                self.assertIsNotNone(res)
+                c, o, bleed, marks, targets = res
+                self.assertEqual(bleed, 3.0)
+                self.assertFalse(marks)
+                self.assertEqual(len(targets), 1)
+
+    def test_prepare_merge_logs_warnings(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["editions"] = {"demo": {}}
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"),
+            )
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            args = mock.Mock(
+                config="cfg.yaml",
+                output_dir=out,
+                profile="main",
+                bleed_mm=3.0,
+                printers_marks=False,
+                edition=["demo", "unknown_edition"],
+                language=["en"],
+                size=["bridge"],
+            )
+            res = merge_pdfs.prepare_merge(args, tmp, config=cfg)
+            self.assertIsNotNone(res)
+
+
+class TestMergePdfsMain(unittest.TestCase):
+    def test_main_config_load_fail(self) -> None:
+        with mock.patch("sys.argv", ["merge_pdfs.py", "--config", "nonexistent.yaml"]):
+            with mock.patch("cornucopia_common.load_yaml", return_value=None):
+                self.assertEqual(merge_pdfs.main(), 1)
+
+    def test_main_base_dir_missing(self) -> None:
+        with mock.patch("sys.argv", ["merge_pdfs.py", "--base-dir", "/nonexistent/base/dir"]):
+            with mock.patch("cornucopia_common.load_yaml", return_value={"project": "test"}):
+                self.assertEqual(merge_pdfs.main(), 1)
+
+    def test_main_missing_pymupdf_without_dry_run(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg_path = _write(os.path.join(tmp, "pdf_config.yaml"), "project: test\n")
+            with mock.patch.object(merge_pdfs, "pymupdf", None):
+                with mock.patch("sys.argv", ["merge_pdfs.py", "--config", cfg_path, "--base-dir", tmp]):
+                    self.assertEqual(merge_pdfs.main(), 1)
+
+    def test_main_prepare_merge_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg_path = _write(os.path.join(tmp, "pdf_config.yaml"), "project: test\n")
+            with mock.patch.object(merge_pdfs, "pymupdf", mock.MagicMock()):
+                with mock.patch("merge_pdfs.prepare_merge", return_value=None):
+                    with mock.patch("sys.argv", ["merge_pdfs.py", "--config", cfg_path, "--base-dir", tmp]):
+                        self.assertEqual(merge_pdfs.main(), 1)
+
+    def test_main_dry_run_with_and_without_clean(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["editions"] = {"demo": {}}
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"),
+            )
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            cfg_path = _write(os.path.join(tmp, "pdf_config.yaml"), "project: test\n")
+
+            with mock.patch("cornucopia_common.load_yaml", return_value=cfg):
+                with mock.patch(
+                    "sys.argv",
+                    [
+                        "merge_pdfs.py",
+                        "--config",
+                        cfg_path,
+                        "--base-dir",
+                        tmp,
+                        "--output-dir",
+                        out,
+                        "--dry-run",
+                        "--clean",
+                    ],
+                ):
+                    self.assertEqual(merge_pdfs.main(), 0)
+
+    def test_main_success_flow(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["editions"] = {"demo": {}}
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"),
+            )
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            c1_name = cc.card_pdf_name(cfg, "demo", "AA1", "bridge", "en", 3.0, False)
+            _write(os.path.join(out, c1_name), "pdf")
+            cfg_path = _write(os.path.join(tmp, "pdf_config.yaml"), "project: test\n")
+
+            with mock.patch.object(merge_pdfs, "pymupdf", mock.MagicMock()):
+                with mock.patch("merge_pdfs.merge_deck", return_value=2):
+                    with mock.patch("cornucopia_common.load_yaml", return_value=cfg):
+                        with mock.patch(
+                            "sys.argv",
+                            [
+                                "merge_pdfs.py",
+                                "--config",
+                                cfg_path,
+                                "--base-dir",
+                                tmp,
+                                "--output-dir",
+                                out,
+                                "--clean",
+                                "--zip",
+                            ],
+                        ):
+                            self.assertEqual(merge_pdfs.main(), 0)
+
+    def test_run_as_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch(
+                "sys.argv",
+                [
+                    "merge_pdfs.py",
+                    "--dry-run",
+                    "--edition",
+                    "webapp",
+                    "--language",
+                    "en",
+                    "--size",
+                    "bridge",
+                    "--output-dir",
+                    tmp,
+                ],
+            ):
+                with self.assertRaises(SystemExit) as ctx:
+                    runpy.run_path(os.path.join(_PDF_GENERATION, "merge_pdfs.py"), run_name="__main__")
+                self.assertEqual(ctx.exception.code, 0)
+
+
+_MINIMAL_SLA = """<?xml version="1.0" encoding="utf-8"?>
+<SCRIBUSUTF8NEW Version="1.5.8">
+  <DOCUMENT>
+    <COLOR NAME="Data_Color" SPACE="CMYK" C="0" M="0" Y="0" K="50" />
+    <PAGEOBJECT ANNAME="special_text" PTYPE="4">
+      <ITEXT CH="text" />
+      <DefaultStyle />
+      <trail />
+      <para />
+    </PAGEOBJECT>
+    <PAGEOBJECT ANNAME="attack_text" PTYPE="4">
+      <ITEXT CH="text" />
+      <DefaultStyle />
+      <trail />
+      <para />
+    </PAGEOBJECT>
+    <PAGEOBJECT ANNAME="card_number" PTYPE="4">
+      <ITEXT CH="1" />
+      <DefaultStyle />
+      <trail />
+      <para />
+    </PAGEOBJECT>
+    <PAGEOBJECT ANNAME="suit_name" PTYPE="4" CSTYLE="old" PSTYLE="old">
+      <ITEXT CH="Suit" CSTYLE="old" PSTYLE="old" />
+      <DefaultStyle PARENT="old" />
+      <trail PARENT="old" />
+      <para CSTYLE="old" PSTYLE="old" />
+    </PAGEOBJECT>
+    <PAGEOBJECT ANNAME="url_text" PTYPE="4">
+      <ITEXT CH="https://example.com" />
+    </PAGEOBJECT>
+    <PAGEOBJECT ANNAME="Polygon1" PTYPE="6" PCOLOR="Fallback_Grey" TransBlend="1" TransBlendS="1" />
+    <PAGEOBJECT ANNAME="card_border" PTYPE="2" />
+    <PAGEOBJECT ANNAME="qr_code" PTYPE="2" />
+    <PAGEOBJECT ANNAME="card_back" PTYPE="2" />
+  </DOCUMENT>
+</SCRIBUSUTF8NEW>
+"""
+
+
+class TestGenerateDeckBuildLog(unittest.TestCase):
+    def test_build_log(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = os.path.join(tmp, "subdir", "build.log")
+            log = generate_deck.BuildLog(log_path)
+            self.assertTrue(os.path.exists(log_path))
+            log.info("info msg")
+            log.warn("warn msg")
+            self.assertIn("warn msg", log.warnings)
+            with open(log_path, "r", encoding="utf-8") as f:
+                content = f.read()
+                self.assertIn("info msg", content)
+                self.assertIn("WARNING: warn msg", content)
+
+
+class TestGenerateDeckXmlAndColorHelpers(unittest.TestCase):
+    def test_inject_color_definitions_document_fallback_and_missing_spec(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        root = ET.Element("SCRIBUSUTF8NEW")
+        # Add existing color
+        color_elem = ET.SubElement(root, "COLOR")
+        color_elem.set("NAME", "Existing")
+
+        log = generate_deck.BuildLog(os.path.join(tempfile.mkdtemp(), "b.log"))
+        config = {"color_definitions": {"ValidColor": {"c": 10, "m": 20, "y": 30, "k": 40}}}
+        added = generate_deck.inject_color_definitions(
+            root, config, ["", "Existing", "MissingColor", "ValidColor"], log
+        )
+        self.assertEqual(added, ["ValidColor"])
+        self.assertTrue(any("MissingColor" in w for w in log.warnings))
+
+    def test_move_sla_object_y_and_fill_card_number(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        frame = ET.Element("PAGEOBJECT")
+        frame.set("gYpos", "10.0")
+        generate_deck.move_sla_object_y(frame, 5.0)
+        self.assertEqual(frame.get("gYpos"), "15.0")
+
+        # fill_card_number with joker
+        frame_num = ET.fromstring("<PAGEOBJECT><ITEXT CH='1'/></PAGEOBJECT>")
+        style = {"joker": True, "joker_label": "Joker", "number_color": "Red"}
+        card = {"card_kind": "SpecialJoker"}
+        generate_deck.fill_card_number(frame_num, card, style)
+        self.assertEqual(frame_num.find("ITEXT").get("CH"), "SpecialJoker")
+
+    def test_recolour_suit_band_cleans_trans_blend(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        frame = ET.Element("PAGEOBJECT")
+        frame.set("TransBlend", "1")
+        frame.set("TransBlendS", "1")
+        generate_deck.recolour_suit_band(frame, "CustomRed")
+        self.assertEqual(frame.get("PCOLOR"), "CustomRed")
+        self.assertNotIn("TransBlend", frame.attrib)
+        self.assertNotIn("TransBlendS", frame.attrib)
+
+    def test_text_frame_handlers_handle_para_elements(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        style = {
+            "defaults": {
+                "special_text_color": "Black",
+                "special_text_shade": 70,
+                "body_text_color": "Black",
+                "body_text_shade": 100,
+            },
+            "profile": {"special_text_y_offset": 5.0},
+            "special_size": "8",
+            "special_font": "Noto Sans Medium",
+            "body_font": "Noto Sans Light",
+            "heading_font": "Noto Sans Medium",
+            "attack_size": "7",
+            "number_color": "Black",
+            "joker": False,
+        }
+        card = {
+            "misc_text": "Read more",
+            "attack_text": "Attack description",
+            "value": "A",
+            "suit_name": "Authentication",
+            "url": "https://owasp.org",
+        }
+
+        # special_text with para
+        frame_spec = ET.fromstring("<PAGEOBJECT><ITEXT /><DefaultStyle /><trail /><para /></PAGEOBJECT>")
+        generate_deck.fill_special_text(frame_spec, card, style)
+        self.assertEqual(frame_spec.find("para").get("FONT"), "Noto Sans Medium")
+
+        # attack_text with para
+        frame_att = ET.fromstring("<PAGEOBJECT><ITEXT /><DefaultStyle /><trail /><para /></PAGEOBJECT>")
+        generate_deck.fill_attack_text(frame_att, card, style)
+        self.assertEqual(frame_att.find("para").get("FONT"), "Noto Sans Light")
+
+        # suit_name with para
+        frame_suit = ET.fromstring("<PAGEOBJECT><ITEXT /><DefaultStyle /><trail /><para /></PAGEOBJECT>")
+        generate_deck.fill_suit_name(frame_suit, card, style)
+        self.assertEqual(frame_suit.find("para").get("FONT"), "Noto Sans Medium")
+
+    def test_populate_frame_ptype_6(self) -> None:
+        import xml.etree.ElementTree as ET
+
+        frame = ET.fromstring('<PAGEOBJECT PTYPE="6" PCOLOR="Data_Color" />')
+        style = {"suit_color": "Custom_Color"}
+        res = generate_deck.populate_frame(frame, {}, style, {}, {"Data_Color"})
+        self.assertFalse(res)
+        self.assertEqual(frame.get("PCOLOR"), "Custom_Color")
+
+
+class TestGenerateDeckQrAndArtwork(unittest.TestCase):
+    def test_create_qr_image_pypng_and_pillow_fallbacks(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            qr_file = os.path.join(tmp, "qr.png")
+            # Normal create
+            generate_deck.create_qr_image("https://owasp.org", qr_file, {})
+            self.assertTrue(os.path.exists(qr_file))
+
+            # Simulate png missing but Pillow present
+            original_import = __import__
+
+            def fake_import_pil_fallback(name, *args, **kwargs):
+                if name == "png":
+                    raise ImportError("No png module")
+                if name == "PIL":
+                    return mock.MagicMock()
+                return original_import(name, *args, **kwargs)
+
+            mock_img = mock.MagicMock()
+            with mock.patch("builtins.__import__", side_effect=fake_import_pil_fallback):
+                with mock.patch.object(
+                    generate_deck.qrcode.QRCode, "make_image", return_value=mock_img
+                ) as mock_make_image:
+                    qr_file2 = os.path.join(tmp, "qr2.png")
+                    generate_deck.create_qr_image("https://owasp.org", qr_file2, {})
+                    mock_make_image.assert_called_once_with(fill_color="black", back_color="transparent")
+                    mock_img.save.assert_called_once_with(qr_file2)
+
+            # Simulate both png and PIL missing
+            def fake_import_no_png_no_pil(name, *args, **kwargs):
+                if name in ("png", "PIL"):
+                    raise ImportError("Missing image library")
+                return original_import(name, *args, **kwargs)
+
+            with mock.patch("builtins.__import__", side_effect=fake_import_no_png_no_pil):
+                with self.assertRaises(ImportError) as ctx:
+                    generate_deck.create_qr_image("https://owasp.org", os.path.join(tmp, "qr3.png"), {})
+                self.assertIn("Cannot render QR codes", str(ctx.exception))
+
+    def test_card_artwork_missing_warnings(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = os.path.join(tmp, "build.log")
+            log = generate_deck.BuildLog(log_path)
+            cfg = _base_config(_DATA_PATTERN)
+            os.makedirs(cc.qr_dir(cfg, tmp), exist_ok=True)
+            card = {"card_id": "AA1", "suit_id": "aa", "value": "A", "url": "https://owasp.org"}
+            generate_deck.card_artwork(card, "demo", "en", "bridge", cfg, {}, tmp, log)
+            self.assertTrue(any("Card back missing" in w for w in log.warnings))
+            self.assertTrue(any("Artwork missing" in w for w in log.warnings))
+
+
+class TestGenerateDeckScribusExport(unittest.TestCase):
+    def test_apply_scribus_colours_and_failures(self) -> None:
+        mock_scribus = mock.MagicMock()
+        mock_log = mock.MagicMock()
+        cfg = _base_config(_DATA_PATTERN)
+        card = {"card_id": "AA1", "suit_id": "aa", "value": "A"}
+
+        with mock.patch.object(generate_deck, "scribus", mock_scribus, create=True):
+            # Success with Polygon1
+            generate_deck.apply_scribus_colours(card, "demo", "en", cfg, {}, mock_log)
+            mock_scribus.setTextColor.assert_any_call("Demo_AA", "card_number")
+            mock_scribus.setFillColor.assert_any_call("Demo_AA", "Polygon1")
+
+            # Failure on setTextColor warns
+            mock_scribus.setTextColor.side_effect = Exception("Scribus error")
+            generate_deck.apply_scribus_colours(card, "demo", "en", cfg, {}, mock_log)
+            mock_log.warn.assert_called()
+
+    def test_back_frame_name_and_place_artwork_frame(self) -> None:
+        mock_scribus = mock.MagicMock()
+        with mock.patch.object(generate_deck, "scribus", mock_scribus, create=True):
+            name = generate_deck.back_frame_name()
+            self.assertEqual(name, "card_back")
+            mock_scribus.gotoPage.assert_called_with(2)
+
+            generate_deck.place_artwork_frame("frame1", 68.0, 99.0, -6.0)
+            mock_scribus.sizeObject.assert_called_with(68.0, 99.0, "frame1")
+            mock_scribus.moveObjectAbs.assert_called_with(-6.0, -6.0, "frame1")
+
+    def test_write_pdf_options_and_icc_handling(self) -> None:
+        mock_scribus = mock.MagicMock()
+        mock_pdf = mock.MagicMock()
+        mock_scribus.PDFfile.return_value = mock_pdf
+        mock_log = mock.MagicMock()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            with mock.patch.object(generate_deck, "scribus", mock_scribus, create=True):
+                cfg = _base_config(_DATA_PATTERN)
+                card = {"card_id": "AA1"}
+
+                # Successful ICC profile setting
+                cfg["output"]["color_mode"] = "cmyk"
+                cfg["output"]["icc_profile"] = "Coated_FOGRA39"
+                generate_deck.write_pdf(
+                    {"bleed_mm": 3.0, "printers_marks": False},
+                    card,
+                    "demo",
+                    "en",
+                    "bridge",
+                    cfg,
+                    tmp,
+                    mock_log,
+                )
+                self.assertEqual(mock_pdf.profiles, 1)
+                self.assertEqual(mock_pdf.solidpr, "Coated_FOGRA39")
+                self.assertEqual(mock_pdf.imagepr, "Coated_FOGRA39")
+                self.assertEqual(mock_pdf.printprofc, "Coated_FOGRA39")
+
+                # Unknown color mode and failing ICC profile
+                cfg["output"]["color_mode"] = "invalid_mode"
+                cfg["output"]["icc_profile"] = "Coated_FOGRA39"
+                type(mock_pdf).solidpr = mock.PropertyMock(side_effect=Exception("ICC error"))
+
+                res = generate_deck.write_pdf(
+                    {"bleed_mm": 3.0, "printers_marks": True},
+                    card,
+                    "demo",
+                    "en",
+                    "bridge",
+                    cfg,
+                    tmp,
+                    mock_log,
+                )
+                self.assertEqual(res["bleed"], "3")
+                self.assertTrue(res["marks"])
+                self.assertEqual(mock_pdf.outdst, 1)  # CMYK fallback
+                self.assertEqual(mock_pdf.profiles, 0)
+                mock_log.warn.assert_any_call("Unknown color_mode 'invalid_mode'; using cmyk")
+                mock_pdf.save.assert_called()
+
+    def test_export_pdfs_flow_and_exception_handling(self) -> None:
+        # Scribus unavailable
+        with mock.patch.object(generate_deck, "SCRIBUS_AVAILABLE", False):
+            self.assertEqual(
+                generate_deck.export_pdfs("sla", {}, "demo", "en", "bridge", {}, {}, "", "", [], mock.MagicMock()),
+                [],
+            )
+
+        # Scribus available - success
+        mock_scribus = mock.MagicMock()
+        mock_log = mock.MagicMock()
+        cfg = _base_config(_DATA_PATTERN)
+        card = {"card_id": "AA1", "suit_id": "aa", "value": "A"}
+
+        with mock.patch.object(generate_deck, "SCRIBUS_AVAILABLE", True):
+            with mock.patch.object(generate_deck, "scribus", mock_scribus, create=True):
+                with mock.patch("generate_deck.write_pdf", return_value={"path": "out.pdf"}):
+                    with mock.patch("cornucopia_common.resolve_background", return_value=("bg.png", True)):
+                        res = generate_deck.export_pdfs(
+                            "sla.sla", card, "demo", "en", "bridge", cfg, {}, "", "", [{"bleed_mm": 3.0}], mock_log
+                        )
+                        self.assertEqual(len(res), 1)
+                        mock_scribus.openDoc.assert_called_once_with("sla.sla")
+                        mock_scribus.closeDoc.assert_called_once()
+
+                # loadImage failure
+                mock_scribus.reset_mock()
+                mock_scribus.loadImage.side_effect = Exception("Load image error")
+                with mock.patch("generate_deck.write_pdf", return_value={"path": "out.pdf"}):
+                    with mock.patch("cornucopia_common.resolve_background", return_value=("bg.png", True)):
+                        res = generate_deck.export_pdfs(
+                            "sla.sla", card, "demo", "en", "bridge", cfg, {}, "", "", [{"bleed_mm": 3.0}], mock_log
+                        )
+                        mock_log.warn.assert_any_call("loadImage failed for AA1: Load image error")
+
+                # Background not found
+                mock_scribus.reset_mock()
+                with mock.patch("generate_deck.write_pdf", return_value={"path": "out.pdf"}):
+                    with mock.patch("cornucopia_common.resolve_background", return_value=("bg.png", False)):
+                        res = generate_deck.export_pdfs(
+                            "sla.sla", card, "demo", "en", "bridge", cfg, {}, "", "", [{"bleed_mm": 3.0}], mock_log
+                        )
+                        mock_log.warn.assert_any_call("Artwork not found for AA1: bg.png")
+
+                # Export crash and closeDoc fails
+                mock_scribus.openDoc.side_effect = Exception("Fatal open error")
+                mock_scribus.closeDoc.side_effect = Exception("Fatal close error")
+                res = generate_deck.export_pdfs(
+                    "sla.sla", card, "demo", "en", "bridge", cfg, {}, "", "", [{"bleed_mm": 3.0}], mock_log
+                )
+                self.assertEqual(res, [])
+                mock_log.warn.assert_any_call("Export crashed on AA1: Fatal open error")
+                mock_log.warn.assert_any_call("Could not close document after that failure: Fatal close error")
+
+
+class TestGenerateDeckSelectionAndOrchestration(unittest.TestCase):
+    def test_parse_args(self) -> None:
+        argv = [
+            "generate_deck.py",
+            "--config",
+            "custom.yaml",
+            "--edition",
+            "demo",
+            "--language",
+            "en",
+            "--size",
+            "bridge",
+            "--cards",
+            "AA1,AA2",
+            "--profile",
+            "print",
+            "--output-dir",
+            "out",
+            "--dry-run",
+            "--skip-existing",
+            "--base-dir",
+            "/tmp/base",
+        ]
+        with mock.patch("sys.argv", argv):
+            args = generate_deck.parse_args()
+            self.assertEqual(args.config, "custom.yaml")
+            self.assertEqual(args.edition, ["demo"])
+            self.assertEqual(args.cards, "AA1,AA2")
+            self.assertTrue(args.dry_run)
+            self.assertTrue(args.skip_existing)
+
+    def test_select_deck_conditions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = os.path.join(tmp, "b.log")
+            log = generate_deck.BuildLog(log_path)
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["size_profiles"]["bridge"]["template"] = "missing_template.sla"
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+            args = mock.Mock(cards=None)
+
+            # Template missing
+            self.assertIsNone(generate_deck.select_deck(target, args, cfg, tmp, log))
+
+            # Template found in SCRIPT_DIR
+            cfg["size_profiles"]["bridge"]["template"] = "small_master.sla"
+            # No cards found at data path
+            self.assertIsNone(generate_deck.select_deck(target, args, cfg, tmp, log))
+
+            # Cards found and filtered by --cards
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml("  - id: AA\n    name: AA\n    cards:\n      - id: AA1\n      - id: AA2\n"),
+            )
+            _write(os.path.join(tmp, "tmpl.sla"), _MINIMAL_SLA)
+            cfg["size_profiles"]["bridge"]["template"] = "tmpl.sla"
+            args_cards = mock.Mock(cards="AA1")
+            res = generate_deck.select_deck(target, args_cards, cfg, tmp, log)
+            self.assertIsNotNone(res)
+            deck, suits, template = res
+            self.assertEqual(len(deck), 1)
+            self.assertEqual(deck[0]["card_id"], "AA1")
+
+            # Cards filtered by --cards but none match
+            args_nomatch = mock.Mock(cards="UNKNOWN")
+            self.assertIsNone(generate_deck.select_deck(target, args_nomatch, cfg, tmp, log))
+
+    def test_report_missing_artwork_and_already_exported(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = os.path.join(tmp, "b.log")
+            log = generate_deck.BuildLog(log_path)
+            cfg = _base_config(_DATA_PATTERN)
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+            deck = [{"card_id": "AA{0}".format(i), "suit_id": "aa"} for i in range(12)]
+
+            # report_missing_artwork with missing back and cards
+            generate_deck.report_missing_artwork(deck, target, cfg, {}, tmp, log)
+            self.assertTrue(any("artwork missing for 12 card(s)" in w for w in log.warnings))
+
+            # all artwork resolved
+            with mock.patch("cornucopia_common.resolve_card_back", return_value=("back.png", True)):
+                with mock.patch("cornucopia_common.resolve_background", return_value=("bg.png", True)):
+                    generate_deck.report_missing_artwork(deck, target, cfg, {}, tmp, log)
+
+            # already_exported
+            profiles = [{"bleed_mm": 3.0, "printers_marks": False}]
+            card = {"card_id": "AA1"}
+            self.assertFalse(generate_deck.already_exported(card, target, cfg, tmp, profiles))
+            c_name = cc.card_pdf_name(cfg, "demo", "AA1", "bridge", "en", 3.0, False)
+            _write(os.path.join(tmp, c_name), "pdf")
+            self.assertTrue(generate_deck.already_exported(card, target, cfg, tmp, profiles))
+
+    def test_build_target(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            log_path = os.path.join(tmp, "b.log")
+            log = generate_deck.BuildLog(log_path)
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["editions"] = {"demo": {}}
+            _write(os.path.join(tmp, "tmpl.sla"), _MINIMAL_SLA)
+            cfg["size_profiles"]["bridge"]["template"] = "tmpl.sla"
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml("  - id: AA\n    cards:\n      - id: AA1\n"),
+            )
+            out = os.path.join(tmp, "out")
+            os.makedirs(out, exist_ok=True)
+            target = {"edition": "demo", "language": "en", "size": "bridge"}
+            profiles = [{"name": "main", "bleed_mm": 3.0, "printers_marks": False}]
+            args_dry = mock.Mock(cards=None, dry_run=True, skip_existing=False)
+
+            # Select deck returns None
+            with mock.patch("generate_deck.select_deck", return_value=None):
+                self.assertIsNone(generate_deck.build_target(target, args_dry, cfg, {}, tmp, out, profiles, log))
+
+            # Dry run
+            rec_dry = generate_deck.build_target(target, args_dry, cfg, {}, tmp, out, profiles, log)
+            self.assertIsNotNone(rec_dry)
+            self.assertEqual(rec_dry["cards"], 1)
+
+            # Normal build with skip_existing
+            args_run = mock.Mock(cards=None, dry_run=False, skip_existing=True)
+            with mock.patch.object(generate_deck, "SCRIBUS_AVAILABLE", True):
+                with mock.patch("generate_deck.already_exported", return_value=True):
+                    rec = generate_deck.build_target(target, args_run, cfg, {}, tmp, out, profiles, log)
+                    self.assertEqual(rec["pdfs"], 0)
+
+            # Normal build executing generate_card
+            with mock.patch.object(generate_deck, "SCRIBUS_AVAILABLE", False):
+                args_build = mock.Mock(cards=None, dry_run=False, skip_existing=False)
+                rec = generate_deck.build_target(target, args_build, cfg, {}, tmp, out, profiles, log)
+                self.assertEqual(rec["cards"], 1)
+
+
+class TestGenerateDeckMain(unittest.TestCase):
+    def test_main_failures(self) -> None:
+        # Config missing
+        with mock.patch("sys.argv", ["generate_deck.py", "--config", "nonexistent.yaml"]):
+            with mock.patch("cornucopia_common.load_yaml", return_value=None):
+                self.assertEqual(generate_deck.main(), 1)
+
+        # Base dir missing
+        with mock.patch("sys.argv", ["generate_deck.py", "--base-dir", "/nonexistent/base"]):
+            with mock.patch("cornucopia_common.load_yaml", return_value={"project": "test"}):
+                self.assertEqual(generate_deck.main(), 1)
+
+        # No targets
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg_path = _write(os.path.join(tmp, "pdf_config.yaml"), "project: test\n")
+            with mock.patch("sys.argv", ["generate_deck.py", "--config", cfg_path, "--base-dir", tmp]):
+                with mock.patch("cornucopia_common.resolve_targets", return_value=([], ["No targets"])):
+                    self.assertEqual(generate_deck.main(), 1)
+
+            # Invalid profile
+            with mock.patch(
+                "sys.argv", ["generate_deck.py", "--config", cfg_path, "--base-dir", tmp, "--profile", "bad"]
+            ):
+                with mock.patch("cornucopia_common.resolve_targets", return_value=([{"edition": "demo"}], [])):
+                    with mock.patch(
+                        "cornucopia_common.get_export_profiles", side_effect=ValueError("Profile not found")
+                    ):
+                        self.assertEqual(generate_deck.main(), 1)
+
+    def test_main_success_dry_run_and_build(self) -> None:
+        import yaml
+
+        with tempfile.TemporaryDirectory() as tmp:
+            cfg = _base_config("source/%edition%-cards-%edition_version%-%language%.yaml")
+            cfg["editions"] = {"demo": {}}
+            _write(os.path.join(tmp, "tmpl.sla"), _MINIMAL_SLA)
+            cfg["size_profiles"]["bridge"]["template"] = "tmpl.sla"
+            _write(
+                os.path.join(tmp, "source", "demo-cards-1.0-en.yaml"),
+                _card_yaml(
+                    "  - id: AA\n"
+                    "    name: AA\n"
+                    "    cards:\n"
+                    "      - id: AA1\n"
+                    "        value: '1'\n"
+                    "        desc: atk\n"
+                    "        url: ''\n"
+                ),
+            )
+            cfg_path = os.path.join(tmp, "pdf_config.yaml")
+            with open(cfg_path, "w", encoding="utf-8") as f:
+                yaml.dump(cfg, f)
+            out = os.path.join(tmp, "out")
+
+            # Dry run
+            with mock.patch(
+                "sys.argv",
+                [
+                    "generate_deck.py",
+                    "--config",
+                    cfg_path,
+                    "--base-dir",
+                    tmp,
+                    "--output-dir",
+                    out,
+                    "--edition",
+                    "demo",
+                    "--language",
+                    "en",
+                    "--size",
+                    "bridge",
+                    "--dry-run",
+                ],
+            ):
+                self.assertEqual(generate_deck.main(), 0)
+
+            # Real build
+            with mock.patch(
+                "sys.argv",
+                [
+                    "generate_deck.py",
+                    "--config",
+                    cfg_path,
+                    "--base-dir",
+                    tmp,
+                    "--output-dir",
+                    out,
+                    "--edition",
+                    "demo",
+                    "--language",
+                    "en",
+                    "--size",
+                    "bridge",
+                ],
+            ):
+                self.assertEqual(generate_deck.main(), 0)
+
+    def test_module_import_fallbacks(self) -> None:
+        original_import = __import__
+
+        # cornucopia_common missing raises ImportError and writes to stderr
+        def fake_import_no_cc(name, *args, **kwargs):
+            if name == "cornucopia_common":
+                raise ImportError("mock cc missing")
+            return original_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=fake_import_no_cc):
+            with self.assertRaises(ImportError):
+                runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"))
+
+        # defusedxml missing sets XML_HARDENED = False
+        def fake_import_no_defusedxml(name, *args, **kwargs):
+            if name == "defusedxml.ElementTree":
+                raise ImportError("mock defusedxml missing")
+            return original_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=fake_import_no_defusedxml):
+            runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"))
+
+        # qrcode missing sets QR_AVAILABLE = False
+        def fake_import_no_qr(name, *args, **kwargs):
+            if name == "qrcode":
+                raise ImportError("mock qrcode missing")
+            return original_import(name, *args, **kwargs)
+
+        with mock.patch("builtins.__import__", side_effect=fake_import_no_qr):
+            runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"))
+
+    def test_main_fatal_exception_and_system_exit(self) -> None:
+        # SystemExit passes through
+        with mock.patch("sys.argv", ["generate_deck.py", "--config", "nonexistent.yaml"]):
+            with self.assertRaises(SystemExit) as ctx:
+                runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"), run_name="__main__")
+            self.assertEqual(ctx.exception.code, 1)
+
+        # Exception caught, logged to build_log.txt, and re-raised
+        with mock.patch("sys.argv", ["generate_deck.py", "--config", "nonexistent.yaml"]):
+            with mock.patch("cornucopia_common.find_config_path", side_effect=RuntimeError("Fatal deck crash")):
+                with self.assertRaises(RuntimeError):
+                    runpy.run_path(os.path.join(_PDF_GENERATION, "generate_deck.py"), run_name="__main__")
+                log_file = os.path.join(_PDF_GENERATION, "build_log.txt")
+                if os.path.exists(log_file):
+                    os.remove(log_file)
 
 
 if __name__ == "__main__":

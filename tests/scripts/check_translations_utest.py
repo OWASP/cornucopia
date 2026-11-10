@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 # Add scripts directory to path
-scripts_path = Path(__file__).parent
+scripts_path = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_path))
 
 from check_translations import TranslationChecker  # type: ignore[import-not-found]  # noqa: E402
@@ -23,9 +23,9 @@ class TestTranslationCheckerUnit(unittest.TestCase):
     def setUp(self) -> None:
         """Set up test fixtures."""
         # Use test_files directory for mock data
-        # Navigate from cornucopia/scripts -> cornucopia -> tests/test_files/source
+        # Navigate from cornucopia/tests/scripts -> cornucopia -> tests/test_files/source
         script_dir = Path(__file__).parent
-        cornucopia_dir = script_dir.parent
+        cornucopia_dir = script_dir.parent.parent
         self.test_source_dir = cornucopia_dir / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.test_source_dir)
 
@@ -166,7 +166,7 @@ class TestCompoundLocales(unittest.TestCase):
     def setUp(self) -> None:
         """Set up test fixtures."""
         script_dir = Path(__file__).parent
-        cornucopia_dir = script_dir.parent
+        cornucopia_dir = script_dir.parent.parent
         self.test_source_dir = cornucopia_dir / "tests" / "test_files" / "source"
         self.checker = TranslationChecker(self.test_source_dir, excluded_tags=["T00005"])
 
@@ -231,6 +231,31 @@ class TestCompoundLocales(unittest.TestCase):
 
         self.assertIn("Norwegian", report, "Norwegian display name should appear for no_nb")
         self.assertIn("Portuguese (Brazil)", report, "Portuguese (Brazil) display name should appear for pt_br")
+
+
+class TestLanguageDisplayNames(unittest.TestCase):
+    """Regression tests for locale display names in the markdown report."""
+
+    def setUp(self) -> None:
+        self.checker = TranslationChecker(Path("."))
+
+    def test_ukrainian_lang_name_in_report(self) -> None:
+        """Ukrainian issues should be labelled by language name, not by the 'uk' code."""
+        self.checker.results = {
+            "test-cards-1.0": {
+                "uk": {
+                    "missing": ["T00004"],
+                    "untranslated": [],
+                    "empty": [],
+                    "file": "test-cards-1.0-uk.yaml",
+                }
+            }
+        }
+
+        report = self.checker.generate_markdown_report()
+
+        self.assertIn("## Ukrainian", report)
+        self.assertNotIn("## uk", report)
 
 
 class TestCoverageBranches(unittest.TestCase):

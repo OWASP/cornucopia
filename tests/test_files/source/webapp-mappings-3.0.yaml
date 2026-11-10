@@ -5,7 +5,7 @@ meta:
   language: "ALL"
   version: "3.0"
   layouts: ["cards", "leaflet", "guide"]
-  templates: ["bridge_qr", "bridge", "tarot", "tarot_qr"]
+  templates: ["bridge", "tarot"]
   languages: ["en", "es"]
 suits:
 -

@@ -204,29 +204,29 @@ class TestGetValidLayouts(unittest.TestCase):
 
 class TestGetValidTemplateChoices(unittest.TestCase):
     def test_get_valid_style_choices_dynamic(self) -> None:
-        c.convert_vars.args = argparse.Namespace(template="bridge_qr", layout="cards")
-        want_template = ["bridge_qr"]
+        c.convert_vars.args = argparse.Namespace(template="bridge", layout="cards")
+        want_template = ["bridge"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
 
     def test_get_valid_style_choices_blank(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="", layout="")
-        want_template = ["bridge", "tarot_qr"]
+        want_template = ["bridge"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
 
     def test_get_valid_style_choices_all(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="cards")
-        want_template = ["bridge", "bridge_qr", "tarot", "tarot_qr"]
+        want_template = ["bridge", "tarot"]
 
         got_style = c.get_valid_templates()
         self.assertListEqual(want_template, got_style)
 
     def test_get_valid_style_choices_for_leaflet(self) -> None:
         c.convert_vars.args = argparse.Namespace(template="all", layout="leaflet")
-        want_template = ["bridge", "bridge_qr", "tarot", "tarot_qr"]
+        want_template = ["bridge", "tarot"]
 
         got_template = c.get_valid_templates()
         self.assertListEqual(want_template, got_template)
@@ -559,7 +559,7 @@ class TestValidMeta(unittest.TestCase):
             "version": "3.0",
             "languages": ["en"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
+            "templates": ["bridge", "tarot"],
         }
 
     def test_valid_meta(self) -> None:
@@ -760,7 +760,7 @@ class TestGetLanguageData(unittest.TestCase):
             "version": "3.0",
             "languages": ["en", "es"],
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
+            "templates": ["bridge", "tarot"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, "3.0", "webapp")
         self.assertEqual(want_meta, got_data["meta"])
@@ -1015,7 +1015,7 @@ class TestGetLanguageDataFor1dot30(unittest.TestCase):
             "language": "ALL",
             "version": "3.0",
             "layouts": ["cards", "leaflet", "guide"],
-            "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
+            "templates": ["bridge", "tarot"],
             "languages": ["en", "es"],
         }
         got_data = c.get_mapping_data_for_edition(self.input_yaml_files, self.input_language, self.input_version)
@@ -1540,7 +1540,7 @@ class TestGetMappingForEdition(unittest.TestCase):
                 "language": "ALL",
                 "version": "3.0",
                 "layouts": ["cards", "leaflet", "guide"],
-                "templates": ["bridge_qr", "bridge", "tarot", "tarot_qr"],
+                "templates": ["bridge", "tarot"],
                 "languages": ["en", "es"],
             },
             "${VE_VE2_id}": "VE2",

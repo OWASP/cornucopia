@@ -28,6 +28,8 @@ const bodyStart =
 
 const bodyEnd = "</channel>" + "</rss>";
 
+const MAX_DESCRIPTION_LENGTH = 200;
+
 export async function GET() {
   const json = await LocalCache(() => getBlogposts(), 20, "posts");
 
@@ -38,32 +40,32 @@ export async function GET() {
 
     // Title
     body += "<title>";
-    body += Text.Format(post.title);
+    body += escapeXml(Text.Format(post.title));
     body += "</title>";
    
     // Link
     body += "<link>";
-    body += generateLink(post);
+    body += escapeXml(generateLink(post));
     body += "</link>";
     // Description
     body += "<description>";
-    body += generateDescription(post);
+    body += escapeXml(generateDescription(post));
     body += "</description>";
 
     // Guid
     body += '<guid isPermaLink="true">';
-    body += generateLink(post);
+    body += escapeXml(generateLink(post));
     body += "</guid>";
 
-    // Guid
-    body += '<source url="https://cornucopia.owasp.org/rss">';
+    // Source
+    body += '<source url="https://cornucopia.owasp.org/rss.xml">';
     body += "OWASP Cornucopia";
     body += "</source>";
 
     // Category
     for (let j = 0; j < post.tags.length; j++) {
       body += "<category>";
-      body += post.tags[j].trim();
+      body += escapeXml(post.tags[j].trim());
       body += "</category>";
     }
 
@@ -80,23 +82,31 @@ export async function GET() {
 }
 
 function generateDescription(post: Blogpost) {
-  const desc: string = post.description?.slice(0, 200)+ "...";
-  return desc;
+  const description: string = post.description ?? "";
+  if (description.length <= MAX_DESCRIPTION_LENGTH) return description;
+  return description.slice(0, MAX_DESCRIPTION_LENGTH) + "...";
 }
 
 function generateDate(post: Blogpost): string {
+  // Blogpost dates use the YYYYMMDD format (for example 20231201).
   const date: string = post.date.toString();
-  const year = date.slice(0, 4);
-  const month = date.slice(4, 2);
-  const day = date.slice(6, 2);
+  const year = Number.parseInt(date.slice(0, 4), 10);
+  const month = Number.parseInt(date.slice(4, 6), 10);
+  const day = Number.parseInt(date.slice(6, 8), 10);
 
-  const d: Date = new Date();
-  d.setDate(Number.parseInt(day));
-  d.setMonth(Number.parseInt(month));
-  d.setFullYear(Number.parseInt(year));
+  const d: Date = new Date(Date.UTC(year, month - 1, day));
   return d.toUTCString();
 }
 
 function generateLink(post: Blogpost): string {
   return "https://cornucopia.owasp.org/news/" + post.path;
+}
+
+function escapeXml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
