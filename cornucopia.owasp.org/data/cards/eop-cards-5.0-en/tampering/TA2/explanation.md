@@ -1,11 +1,37 @@
-## Scenario: <name>'s ... scenario
+## Scenario: The Grand Bodge's keycards open every room and the minibar
 
 ### Example
+
+The Grand Bodge hotel's CTO rejected a commercial keycard system as too expensive, so he built BodgeLock. Each card held the room number, checkout date, and role (guest or staff), encrypted with a key derived by repeating those public values and XORing a salt printed in every lock's maintenance manual. A CRC-16 covered the card.
+
+Guest Sam read his card, derived the key, changed 412 to 999, flipped guest to staff, re-encrypted the card with the penthouse key, and recalculated the CRC with a free online tool. The penthouse and minibar opened. No encryption was broken; it was never protecting anything.
+
+WEP made the same mistake at scale. IEEE 802.11 combined RC4, a 24-bit IV, and a CRC-32 integrity check — standard primitives in a homemade protocol. CRC-32 is linear and unkeyed, so frames can be altered and the checksum repaired without the key; short IVs repeat and leak keystream. FMS (2001) broke WEP on paper, PTW (2007) recovered a 104-bit key from under 40,000 frames in about a minute, and the FBI demonstrated a three-minute 128-bit crack in 2005. WEP was deprecated in 2004, yet routers kept shipping it with a reassuring padlock.
+
+Sources: [FMS's RC4 key-scheduling analysis](https://www.cs.cornell.edu/people/egs/615/rc4_ksaproc.pdf), [the PTW attack paper](https://eprint.iacr.org/2007/120), [SmallNetBuilder's account of the FBI demonstration](https://www.smallnetbuilder.com/wireless/wireless-features/thefedscanownyourwlantoo/), and [IEEE 802.11i-2004, which deprecated WEP](https://doi.org/10.1109/ieeestd.2004.94585).
 
 ## Threat Modeling
 
 ### STRIDE
 
+The primary STRIDE category is **Tampering**. Sam changed the room number and role, re-encrypted the card, and recalculated the checksum, so the lock accepts modified data.  This may later lead to **Spoofing**, **Elevation of Privilege**, **Information Disclosure**, and **Repudiation**, but **Tampering** makes the others possible.
+
 ### What can go wrong?
 
+**CRC-16 and CRC-32 detect accidental corruption, but not deliberate modification. They are linear and unkeyed, so anyone can recompute them after changing the data. Use a standard MAC or AEAD and cryptographically verify data integrity. See [CWE-353](https://cwe.mitre.org/data/definitions/353.html), [CWE-345](https://cwe.mitre.org/data/definitions/345.html), [NIST SP 800-38B](https://csrc.nist.gov/pubs/sp/800/38/b/upd1/final), and [OWASP ASVS 5.0 V11.3.3](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
+**Keys derived from public data are not secret.** The room number and checkout date were printed on the card or known to the guest, and the salt shipped with every lock repeated them into 128-bit lengths. A key must come from a secret with at least 128 bits of entropy, stored per device, and never hardcoded. See [CWE-321](https://cwe.mitre.org/data/definitions/321.html), [CWE-330](https://cwe.mitre.org/data/definitions/330.html), [NIST SP 800-57 Part 1 Rev. 5](https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final), and [OWASP ASVS 5.0 V11.5.1](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
+**Deterministic encryption and short IVs may leak patterns.** BodgeLock had no per-card randomness, so two cards with the same data produced the same ciphertext. WEP's 24-bit IV collides after a few thousand frames. When reusing a stream cypher, a nonce exposes the XOR of two plaintexts. Nonces must be unique per key, with a size and generation method that make collisions negligible. See [CWE-323](https://cwe.mitre.org/data/definitions/323.html), [NIST SP 800-38D §8.2](https://csrc.nist.gov/pubs/sp/800/38/d/final), and [OWASP ASVS 5.0 V11.3.4](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
+**A home-made protocol will hide a flaw on the surface. That is, until someone looks at it as an attacker.** BodgeLock passed every internal demo because the cards appeard to work. Custom designs rarely get the adversarial review standard protocols receive. See [CWE-327](https://cwe.mitre.org/data/definitions/327.html), the [OWASP Cryptographic Storage Cheat Sheet on custom algorithms](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html#custom-algorithms), and [OWASP ASVS 5.0 V11.2.1](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
 ### What are we going to do about it?
+
+**Use a vetted protocol instead of designing one.** For transport, use TLS 1.2-1.3. For access cards, use a current product with published cryptanalysis and proper key management. See [RFC 8446](https://www.rfc-editor.org/rfc/rfc8446), [NIST SP 800-52 Rev. 2](https://csrc.nist.gov/pubs/sp/800/52/r2/final), and [OWASP ASVS 5.0 V11.6.2](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
+**Use AEAD or a proper MAC, never a CRC.** AES-GCM or ChaCha20-Poly1305 for messages. See [NIST SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final), [NIST SP 800-38B](https://csrc.nist.gov/pubs/sp/800/38/b/upd1/final), [RFC 5116](https://www.rfc-editor.org/rfc/rfc5116), and [OWASP ASVS 5.0 V11.3.2 and V11.3.5](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
+**Derive keys with a standard KDF and manage them per device.** Use HKDF or a protocol's built-in key schedule, give each lock and card its own keys, rotate them, and keep the master key in an HSM or Key Vault. See [RFC 5869](https://www.rfc-editor.org/rfc/rfc5869), [NIST SP 800-108 Rev. 1](https://csrc.nist.gov/pubs/sp/800/108/r1/upd1/final), [NIST SP 800-57 Part 1 Rev. 5](https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final), and [OWASP ASVS 5.0 V11.1.1](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
+
+**Use vetted libraries and constant-time comparisons.** E.g: the target platform's own crypto library; compare MACs with a constant-time function. Prefer HMS and Key Vault for physical tokens. See [CWE-208](https://cwe.mitre.org/data/definitions/208.html), and [OWASP ASVS 5.0 V11.2.1 and V11.2.4](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md).
