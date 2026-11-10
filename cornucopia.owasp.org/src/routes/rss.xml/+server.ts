@@ -57,7 +57,7 @@ export async function GET() {
     body += escapeXml(generateLink(post));
     body += "</guid>";
 
-    // Guid
+    // Source
     body += '<source url="https://cornucopia.owasp.org/rss.xml">';
     body += "OWASP Cornucopia";
     body += "</source>";

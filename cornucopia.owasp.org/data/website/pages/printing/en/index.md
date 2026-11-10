@@ -1,6 +1,6 @@
 # Printing
 
-The primary source document is a Word document. You can find it named [owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).odt](https://github.com/OWASP/cornucopia/releases/tag/v3.5.10 'OWASP Cornucopia on GitHub [external]') as part of the latest release.
+The primary source document is an OpenDocument Text (ODT) document. You can find it named [owasp_cornucopia_webapp_n.nn_guide_bridge_(lang).odt](https://github.com/OWASP/cornucopia/releases/tag/v3.5.10 'OWASP Cornucopia on GitHub [external]') as part of the latest release.
 
 Pre-printed card decks may, however, be more useful. To get this, click on [webshop](/webshop) in the upper right corner.
 
@@ -31,7 +31,7 @@ In case the printing facility doesn't have the fonts at hand, you'll find the in
 
 ### The following fonts are used:
 - Leaflet: Noto Sans (Light/Regular/Italic/Medium (Italic)/SemiBoldItalic/Extra Bold)
-- Leaflet: Noto Sans (Thin/Light (Italic)/Italic/Medium//Extra Bold)
+- Leaflet: Noto Sans (Thin/Light (Italic)/Italic/Medium/Extra Bold)
 - Cases:
     - Noto Sans Condensed Bold
     - Noto Sans Condensed Extra Bold
@@ -77,7 +77,7 @@ DO NOT PRINT an 18 Page leaflet! It won't look good.
 
 #### Bleed:
 
-A standard bleed set to 3mm for all 4 sides.
+A standard bleed is set to 3 mm on all four sides.
 
 #### Paper:
 

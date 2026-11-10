@@ -21,7 +21,7 @@
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@sveltejs/adapter-auto": "^7.0.0",
-		"@sveltejs/adapter-cloudflare": "^7.2.9",
+		"@sveltejs/adapter-cloudflare": "^7.2.10",
 		"@sveltejs/kit": "^2.70.3",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@types/node": "^26.6.6",
@@ -29,12 +29,12 @@
 		"@vitest/coverage-v8": "^4.1.8",
 		"dotenv": "^18.0.8",
 		"eslint": "^10.14.0",
-		"eslint-plugin-svelte": "^3.23.1",
+		"eslint-plugin-svelte": "^3.24.0",
 		"globals": "^17.14.0",
 		"serve": "^14.2.6",
 		"svelte": "^5.57.3",
 		"svelte-check": "^4.7.8",
-		"svelte-eslint-parser": "^1.10.0",
+		"svelte-eslint-parser": "^1.10.1",
 		"svelte-sitemap": "^4.1.2",
 		"then-request": "^6.0.2",
 		"tslib": "^2.9.1",
@@ -43,11 +43,11 @@
 		"vite": "^7.3.7",
 		"vitest": "^4.1.8",
 		"wait-on": "^9.5.1",
-		"wrangler": "4.156.2"
+		"wrangler": "4.158.0"
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-static": "^3.0.10",
+		"@sveltejs/adapter-static": "^3.0.11",
 		"@types/js-yaml": "^4.0.9",
 		"front-matter": "^4.0.2",
 		"js-yaml": "^5.5.0",
