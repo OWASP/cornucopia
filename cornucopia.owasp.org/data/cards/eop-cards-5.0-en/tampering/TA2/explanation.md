@@ -14,7 +14,7 @@ Sources: [FMS's RC4 key-scheduling analysis](https://www.cs.cornell.edu/people/e
 
 ### STRIDE
 
-**Tampering** is primary: Sam changed the room number and role, re-encrypted the card, and recalculated the checksum, so the lock accepts modified data. **Spoofing** follows because a forged `staff` card lets him act as an employee, and a cloned card lets him act as another guest. **Elevation of Privilege** is the same edit one field later, from `guest` to `staff`. **Information Disclosure** covers the derivable key: the lock's "secret" is built from data printed on the card and a salt shipped in every lock, so anyone who reads the manual can decrypt any card. **Repudiation** is weak because the lock log records the room number from the card, which the attacker controls. **Denial of Service** is possible by writing malformed cards that crash the lock, or by reusing an old checkout date to lock a guest out.
+The primary STRIDE category is **Tampering**. Sam changed the room number and role, re-encrypted the card, and recalculated the checksum, so the lock accepts modified data.  This may later lead to **Spoofing**, **Elevation of Privilege**, **Information Disclosure**, and **Repudiation**, but **Tampering** makes the others possible.
 
 ### What can go wrong?
 
