@@ -405,9 +405,8 @@ defmodule Copi.Cornucopia do
     Enum.reduce(game.players, [], fn player, cards -> (player.dealt_cards |> played_cards) ++ cards end) # Combine all played cards from all players
       |> lead_suit_cards # Filter to just the lead suit cards
       |> scoring_cards(Enum.count(game.players)) # Filter to just the cards that scored
-      |> special_lead_cards # Filter to just the special lead cards (jokers, trump cards, or lead suit cards)
       |> Enum.group_by(fn card -> card.played_in_round end) # Convert to map where {round, [scoring_cards]}
-      |> Enum.flat_map(fn {_, cards} -> highest_card(cards) end) # Back to a list of just the highest scoring card in each round
+      |> Enum.flat_map(fn {_, cards} -> cards |> special_lead_cards() |> highest_card() end) # Back to a list of just the highest scoring card in each round
   end
 
   def highest_scoring_cards_for_player(player, game) do
@@ -444,14 +443,10 @@ defmodule Copi.Cornucopia do
       if trumps != [] do
         trumps
       else
-        case List.first(ordered_played_cards) do
-        nil -> []
-        first_card ->
-          lead_suit = first_card.card.category
-          Enum.filter(ordered_played_cards, fn card ->
-            card.card.category == lead_suit
-          end)
-      end
+        lead_suit = List.first(ordered_played_cards).card.category
+        Enum.filter(ordered_played_cards, fn card ->
+          card.card.category == lead_suit
+        end)
       end
     end
 end
