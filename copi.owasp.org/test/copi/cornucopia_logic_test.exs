@@ -302,4 +302,40 @@ defmodule Copi.CornucopiaLogicTest do
     game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
     assert Cornucopia.highest_scoring_card_in_round(game, 1) == nil
   end
+
+  test "highest_scoring_card_in_round evaluates each round independently",
+       %{game: game, p1: p1, p2: p2} do
+    {:ok, r1_c1} = create_card("Authentication", "K")
+    {:ok, r1_c2} = create_card("Authentication", "5")
+    {:ok, r2_c1} = create_card("Cryptography", "Q")
+    {:ok, r2_c2} = create_card("Cryptography", "3")
+    {:ok, r3_trump} = create_card("Cornucopia", "10")
+    {:ok, r3_lead} = create_card("Data Validation & Encoding", "A")
+    {:ok, r4_joker} = create_card("Joker", "JokerA")
+    {:ok, r4_trump} = create_card("Cornucopia", "A")
+
+    d1 = play_card(p1, r1_c1, 1)
+    d2 = play_card(p2, r1_c2, 1)
+    d3 = play_card(p2, r2_c1, 2)
+    d4 = play_card(p1, r2_c2, 2)
+    d5 = play_card(p1, r3_lead, 3)
+    d6 = play_card(p2, r3_trump, 3)
+    d7 = play_card(p1, r4_joker, 4)
+    d8 = play_card(p2, r4_trump, 4)
+
+    for {card, voter} <- [{d1, p2}, {d2, p1}, {d3, p1}, {d4, p2}, {d5, p2}, {d6, p1}, {d7, p2}, {d8, p1}] do
+      Repo.insert!(%Copi.Cornucopia.Vote{dealt_card_id: card.id, player_id: voter.id})
+    end
+
+    game = Cornucopia.get_game!(game.id) |> Repo.preload(players: [dealt_cards: [:card, :votes]])
+
+    assert Cornucopia.highest_scoring_card_in_round(game, 1).id == d1.id
+    assert Cornucopia.highest_scoring_card_in_round(game, 2).id == d3.id
+    assert Cornucopia.highest_scoring_card_in_round(game, 3).id == d6.id
+    assert Cornucopia.highest_scoring_card_in_round(game, 4).id == d7.id
+    assert Enum.map(Cornucopia.highest_scoring_cards_for_player(p1, game), & &1.id) |> Enum.sort() ==
+             Enum.sort([d1.id, d7.id])
+    assert Enum.map(Cornucopia.highest_scoring_cards_for_player(p2, game), & &1.id) |> Enum.sort() ==
+             Enum.sort([d3.id, d6.id])
+  end
 end
