@@ -345,6 +345,183 @@ defmodule CopiWeb.PlayerLive.ShowTest do
       assert length(updated_game2.continue_votes) == 0
     end
 
+    test "rejects next_round before game starts (started_at is nil)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      assert is_nil(game.started_at)
+      assert is_nil(game.finished_at)
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      assert render(show_live) =~ "Game has not started yet"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+      assert updated_game.started_at == nil
+      assert updated_game.finished_at == nil
+    end
+
+    test "rejects next_round after game ends (finished_at is set)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: now, finished_at: now)
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "next_round", %{})
+
+      assert render(show_live) =~ "Game has already ended"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+    end
+
+    test "rejects next_round when game is finished before broadcast is processed (stale assigns)", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      {:ok, active_game} = Cornucopia.update_game(game, %{started_at: now})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Concurrently finish in DB without updating this LiveView's assigns
+      {:ok, _} = Cornucopia.update_game(active_game, %{finished_at: now})
+
+      render_click(show_live, "next_round", %{})
+
+      assert render(show_live) =~ "Game has already ended"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+    end
+
+    test "rejects toggle_continue_vote before game starts (started_at is nil)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      assert is_nil(game.started_at)
+      assert is_nil(game.finished_at)
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      assert render(show_live) =~ "Game has not started yet"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.continue_votes == []
+    end
+
+    test "rejects toggle_continue_vote after game ends (finished_at is set)", %{conn: conn, player: player} do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: now, finished_at: now)
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      assert render(show_live) =~ "Game has already ended"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.continue_votes == []
+    end
+
+    test "rejects toggle_continue_vote when game is finished before broadcast is processed (stale assigns)", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      {:ok, active_game} = Cornucopia.update_game(game, %{started_at: now})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Concurrently finish in DB without updating this LiveView's assigns
+      {:ok, _} = Cornucopia.update_game(active_game, %{finished_at: now})
+
+      render_click(show_live, "toggle_continue_vote", %{})
+
+      assert render(show_live) =~ "Game has already ended"
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.continue_votes == []
+    end
+
+    test "proceed_to_next_round message is ignored when game is unstarted", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      send(show_live.pid, :proceed_to_next_round)
+      _ = :sys.get_state(show_live.pid)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+      assert updated_game.started_at == nil
+      assert updated_game.finished_at == nil
+    end
+
+    test "proceed_to_next_round message is ignored when game is finished", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      Copi.Repo.update!(
+        Ecto.Changeset.change(game, started_at: now, finished_at: now)
+      )
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      send(show_live.pid, :proceed_to_next_round)
+      _ = :sys.get_state(show_live.pid)
+
+      {:ok, updated_game} = Cornucopia.Game.find(game_id)
+      assert updated_game.rounds_played == 0
+    end
+
+    test "proceed_to_next_round message is ignored when game is finished before delayed delivery (stale assigns)", %{
+      conn: conn,
+      player: player
+    } do
+      game_id = player.game_id
+      {:ok, game} = Cornucopia.Game.find(game_id)
+      now = DateTime.truncate(DateTime.utc_now(), :second)
+
+      # Mount view with an active game
+      {:ok, active_game} = Cornucopia.update_game(game, %{started_at: now})
+      {:ok, _cv} = Copi.Repo.insert(%Copi.Cornucopia.ContinueVote{player_id: player.id, game_id: game_id})
+
+      {:ok, show_live, _html} = live(conn, "/games/#{game_id}/players/#{player.id}")
+
+      # Concurrently finish game in DB
+      {:ok, _} = Cornucopia.update_game(active_game, %{finished_at: now})
+
+      # LiveView socket assigns still have finished_at: nil, but DB row lock catches it
+      send(show_live.pid, :proceed_to_next_round)
+      _ = :sys.get_state(show_live.pid)
+
+      {:ok, final_game} = Cornucopia.Game.find(game_id)
+      assert final_game.rounds_played == 0
+      assert length(final_game.continue_votes) == 1
+    end
+
     test "toggle_vote adds then removes a vote for a dealt card", %{conn: conn, player: player} do
       game_id = player.game_id
       {:ok, game} = Cornucopia.Game.find(game_id)
